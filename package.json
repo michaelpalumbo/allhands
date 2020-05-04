@@ -1,0 +1,22 @@
+{
+  "name": "wspd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelpalumbo/wspd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelpalumbo/wspd/issues"
+  },
+  "homepage": "https://github.com/michaelpalumbo/wspd#readme",
+  "dependencies": {
+    "ws": "^7.2.5"
+  }
+}
