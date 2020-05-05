@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/michaelpalumbo/wspd#readme",
   "dependencies": {
+    "node-osc": "^5.1.0",
+    "osc-min": "^1.1.2",
+    "reconnecting-websocket": "^4.4.0",
     "ws": "^7.2.5"
   }
 }
