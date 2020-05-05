@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const { Client, Server } = require('node-osc');
-
-const ws = new WebSocket('ws://localhost:8081');
+let ip = process.argv[2]
+const ws = new WebSocket('ws://' + ip + ':8081');
  
 ws.on('open', function open() {
   // ws.send('something');
