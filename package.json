@@ -2,9 +2,10 @@
   "name": "wspd",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,11 @@
   },
   "homepage": "https://github.com/michaelpalumbo/wspd#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
     "node-osc": "^5.1.0",
     "osc-min": "^1.1.2",
+    "progress": "^2.0.3",
     "reconnecting-websocket": "^4.4.0",
     "ws": "^7.2.5"
   }

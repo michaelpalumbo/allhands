@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScappleDocument Version="1.1" ID="3AAB74C6-BD5B-4398-A46F-49048647D6C2">
+    <Notes>
+        <Note ID="0" FontSize="17.0" Position="45.332031,198.496094" Width="141.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String> biosensing patch</String>
+            <ConnectedNoteIDs>1</ConnectedNoteIDs>
+            <PointsToNoteIDs>1</PointsToNoteIDs>
+        </Note>
+        <Note ID="1" FontSize="17.0" Position="369.765625,211.75" Width="263.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.561855 0.71062 0.779401</Border>
+                <Fill>0.702319 0.888276 0.974252</Fill>
+            </Appearance>
+            <String>nodejs app running in client mode</String>
+            <ConnectedNoteIDs>0, 2, 16</ConnectedNoteIDs>
+            <PointsToNoteIDs>2, 16</PointsToNoteIDs>
+        </Note>
+        <Note ID="2" FontSize="17.0" Position="848.261719,220.453125" Width="252.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.561855 0.71062 0.779401</Border>
+                <Fill>0.702319 0.888276 0.974252</Fill>
+            </Appearance>
+            <String>nodejs app running server mode</String>
+            <ConnectedNoteIDs>1, 3, 15</ConnectedNoteIDs>
+            <PointsToNoteIDs>1, 3</PointsToNoteIDs>
+        </Note>
+        <Note ID="3" FontSize="17.0" Position="1229.160156,200.992188" Width="74.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>pd patch</String>
+            <ConnectedNoteIDs>2</ConnectedNoteIDs>
+        </Note>
+        <Note ID="6" FontSize="17.0" Position="132.0,147.0" Width="130.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Erin’s Computer</String>
+        </Note>
+        <Note ID="8" FontSize="17.0" Position="869.261719,149.453125" Width="127.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>Jen’s Computer</String>
+        </Note>
+        <Note ID="15" FontSize="17.0" Position="1175.589844,306.238281" Width="102.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>pd controller</String>
+            <ConnectedNoteIDs>2</ConnectedNoteIDs>
+            <PointsToNoteIDs>2</PointsToNoteIDs>
+        </Note>
+        <Note ID="16" FontSize="17.0" Position="57.0,311.0" Width="249.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+            </Appearance>
+            <String>pd something, controlled by Jen</String>
+            <ConnectedNoteIDs>1</ConnectedNoteIDs>
+        </Note>
+    </Notes>
+    <BackgroundShapes>
+        <Shape ID="5" Sticky="No" Position="26.0,157.0" Width="638.0" Height="200.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="7" Sticky="No" Position="798.0,158.0" Width="563.0" Height="200.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+    </BackgroundShapes>
+    <Labels>
+        <Label IDs="1,16">UDP Port 7403</Label>
+        <Label IDs="1,2">websocket-over-ip</Label>
+        <Label IDs="2,15">UDP Port 7402</Label>
+        <Label IDs="2,3">UDP Port 7401</Label>
+        <Label IDs="0,1">UDP Port 7404</Label>
+    </Labels>
+    <AutoFit>0-3, 6, 8, 15-16</AutoFit>
+    <NoteStyles>
+        <Style Name="Bubble (Blue)" ID="94B20290-AA42-4D95-B2A6-403DB83F5731" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.561855 0.71062 0.779401</BorderColor>
+            <FillColor>0.702319 0.888276 0.974252</FillColor>
+        </Style>
+        <Style Name="Bubble (Green)" ID="54B112A4-EC5D-4964-9FEC-FCB17F7AEDED" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.572684 0.758969 0.558154</BorderColor>
+            <FillColor>0.715855 0.948712 0.697692</FillColor>
+        </Style>
+        <Style Name="Bubble (Pink)" ID="D812D775-713A-44C9-A924-2C29F1BB97D6" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.957566 0.766747 0.999616</FillColor>
+        </Style>
+        <Style Name="Bubble (Red)" ID="D28B61C2-46FF-421A-84BD-7836E77756D8" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.993495 0.701207 0.732587</FillColor>
+        </Style>
+        <Style Name="Bubble (Yellow)" ID="0A756535-53ED-4ADE-861D-C0B4F96B976C" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.798177 0.714184 0.522055</BorderColor>
+            <FillColor>0.997722 0.89273 0.652569</FillColor>
+        </Style>
+        <Style Name="Red Text" ID="5793D788-5B71-4CB4-BBB9-C6394EDBEAFF" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>0.985948 0.0 0.026951</TextColor>
+        </Style>
+        <Style Name="Title Text" ID="34E57AA1-4EF8-42DA-A596-F7C3F677D875" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999767 0.98837 0.949907</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+    </UISettings>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
