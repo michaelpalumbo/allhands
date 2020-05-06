@@ -41,9 +41,16 @@ npm start client localhost
 Click either of the toggles to confirm data is being sent from pd>nodejs>pd. You should be able to have both toggles clicked, this verifies bi-directionality. 
 
 ### Telematic setup
+
 1. whomever can configure their router with DMZ and port-forwarding should run the app in server mode. The diagram below assumes that Jen would be running the server (the code doesn't need to be modified if you choose to have Erin run the server instead)
 
 ![](wspd_schema_v2.png)
+
+What to change in your router (server-side only):
+
+- Enable DMZ & advanced DMZ if this is an option
+- Set your computer as the DMZ target
+- create a port forwarding rule where port 8081 is accessible on your machine and publicly
 
 ### OSC Syntax
 The nodejs app assumes that all incoming data on UDP follows the OSC format of an Address Pattern followed by Type Tag String. Examples:
