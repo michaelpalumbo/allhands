@@ -109,7 +109,8 @@ if (mode === "server"){
     });
 
     ws.on('close', function(code, reason) {
-        
+        localSend.close();
+        localReceive.close();
     })
     });
     // we can use this if we want to send to multiple clients!
@@ -159,6 +160,8 @@ if (mode === "server"){
     // on close:
     ws.addEventListener('close', () => {
         console.log("server connection closed");
+        localSend.close();
+        localReceive.close();
     });
     // handle messages
     ws.addEventListener('message', (data) => {
