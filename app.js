@@ -64,6 +64,7 @@ if (mode === "server"){
             // construct object to send over websocket
             message = {
                 // cmd allows us to send other types of messages, ask Michael for more info if curious!
+                sender: 'erin',
                 cmd: 'OSC',
                 date: new Date().toUTCString(),
                 addressPattern: ap,
@@ -74,7 +75,8 @@ if (mode === "server"){
             // console.log('sending to remote:\n', message)
             // package data for the web, send it!
             // if(ws){
-                ws.send(JSON.stringify(message))
+                // now using a broadcast server
+                broadcast(JSON.stringify(message))
             // }
 
         } else {
@@ -94,6 +96,15 @@ if (mode === "server"){
                 localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
                 });
+
+                // also need to send jen's data to the other clients
+                msg['sender']  = 'jen'
+                // inform user
+                // console.log('sending to remote:\n', message)
+                // package data for the web, send it!
+                // if(ws){
+                    // now using a broadcast server
+                broadcast(JSON.stringify(msg))
                 
             break;
 
@@ -166,14 +177,17 @@ if (mode === "server"){
     // handle messages
     ws.addEventListener('message', (data) => {
         let msg = JSON.parse(data.data);
-        // console.log(msg)
+        console.log(msg)
         switch (msg.cmd){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
                 // send formatted OSC message locally (i.e. a pd patch)
+
                 localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
-                });               
+                });  
+                
+             
             break;
 
             default:
