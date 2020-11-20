@@ -1,6 +1,6 @@
 {
   "name": "wspd",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data between, for example, two puredata patches.",
   "main": "app.js",
   "scripts": {
