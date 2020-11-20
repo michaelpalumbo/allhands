@@ -16,6 +16,9 @@ if(mode === 'server'){
 } else if (mode === 'client'){
     localReceivePort = 7404
     localSendPort = 7403
+} else if (mode === 'listener'){
+    // localReceivePort = 7404
+    localSendPort = 7403
 }
 
 // ***** Local UDP-Sender ******* //
