@@ -18,7 +18,7 @@ if(mode === 'server'){
     localSendPort = 7403
 } else if (mode === 'listener'){
     // localReceivePort = 7404
-    localSendPort = 7403
+    listenerModeSendPort = 7405
 }
 
 // ***** Local UDP-Sender ******* //
@@ -245,8 +245,8 @@ if (mode === "server"){
     });
 
 } else if (mode === 'listener'){
-    const localSend = new Client('127.0.0.1', localSendPort);
-    console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
+    const localSend = new Client('127.0.0.1', listenerModeSendPort);
+    console.log('Configure your local pd patch(es) to listen on UDP Port ' + listenerModeSendPort)
     // run the app in client mode
     // ***** Websocket ******* //
     // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
