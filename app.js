@@ -1,10 +1,24 @@
 // this script runs at either side
 // it's function as either a server or client is determined by a cli arg
-console.log(process.argv[2] + ' mode')
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv)).argv
+ 
 
-const mode = process.argv[2]
-if (mode === 'client' && !process.argv[3]){
-    console.log('error: client mode requires a 2nd argument to specify server IP address\nexample:\n\nnpm start client localhost')
+// now we specify mode using argv.mode, and --mode flag in cli
+const mode = argv.mode
+console.log(mode + ' mode')
+let host;
+if(argv.host){
+    host = argv.host
+}
+// we will now add a name to the address pattern of all local OSC messages that are to be sent over IP
+let name;
+if(argv.name){
+    name = argv.name
+}
+if (mode === 'client' && !argv.host){
+    console.log('error: client mode requires --host flag to specify server IP address\nexample:\n\nnode app.js --mode client --host localhost')
     process.exit()
 }
 // ***** Local UDP Send & Receive Config ******* //
@@ -47,6 +61,8 @@ if (mode === "server"){
     wss.on('connection', function connection(ws, req, client) {
 
     console.log('new connection established ')
+
+    /* in the clooud version we don't need to have the  server communicate with udp ports for OSC
     const localSend = new Client('127.0.0.1', localSendPort);
     console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
  
@@ -61,13 +77,13 @@ if (mode === "server"){
         // console.log(msg)
         if(msg[0].charAt(0) === '/'){
             // get the address pattern
-            ap = msg[0]
+            ap = '/' + name + msg[0]
             // trim the address pattern
             msg.shift()
             // construct object to send over websocket
             message = {
                 // cmd allows us to send other types of messages, ask Michael for more info if curious!
-                sender: 'erin',
+                sender: name,
                 cmd: 'OSC',
                 date: new Date().toUTCString(),
                 addressPattern: ap,
@@ -87,7 +103,7 @@ if (mode === "server"){
             console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
         }
     });
-
+    */
     
     ws.on('message', function incoming(message) {
         msg = JSON.parse(message)
@@ -96,12 +112,13 @@ if (mode === "server"){
         switch (msg.cmd){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
+                /* in the cloud version, we don't want to  send OSC data locally because there's nothing on heroku for it
                 localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
                 });
+                */
 
-                // also need to send jen's data to the other clients
-                msg['sender']  = 'jen'
+
                 // inform user
                 // console.log('sending to remote:\n', message)
                 // package data for the web, send it!
@@ -123,8 +140,10 @@ if (mode === "server"){
     });
 
     ws.on('close', function(code, reason) {
+        /* commented out foor cloud-based version
         localSend.close();
         localReceive.close();
+        */
     })
     });
     // we can use this if we want to send to multiple clients!
@@ -147,7 +166,7 @@ if (mode === "server"){
     // ***** Websocket ******* //
     // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
     const ReconnectingWebSocket = require('reconnecting-websocket');
-    const serverIP = process.argv[3]
+    const serverIP = host
     const serverPort = '8081';
     const serverWSAddress = `ws://${serverIP}:${serverPort}`;
     // options for the reconnecting websocket
@@ -185,10 +204,14 @@ if (mode === "server"){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
                 // send formatted OSC message locally (i.e. a pd patch)
-
-                localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
-                    if (err) console.error(err);
-                });  
+                console.log(msg.addressPattern.split('/')[1])
+                // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
+                if(msg.addressPattern.split('/')[1] != name){
+                    localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
+                        if (err) console.error(err);
+                    }); 
+                }
+ 
                 
              
             break;
@@ -219,7 +242,7 @@ if (mode === "server"){
         // console.log(msg)
         if(msg[0].charAt(0) === '/'){
             // get the address pattern
-            ap = msg[0]
+            ap = '/' + name + msg[0]
             // trim the address pattern
             msg.shift()
             // construct object to send over websocket
@@ -229,7 +252,7 @@ if (mode === "server"){
                 date: new Date().toUTCString(),
                 addressPattern: ap,
                 // this is the data!
-                typeTagString: msg
+                typeTagString: msg,
             }
             // inform user
             // console.log('sending to remote:\n', message)
@@ -251,7 +274,7 @@ if (mode === "server"){
     // ***** Websocket ******* //
     // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
     const ReconnectingWebSocket = require('reconnecting-websocket');
-    const serverIP = process.argv[3]
+    const serverIP = host
     const serverPort = '8081';
     const serverWSAddress = `ws://${serverIP}:${serverPort}`;
     // options for the reconnecting websocket
