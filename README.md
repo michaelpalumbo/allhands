@@ -9,8 +9,8 @@ Since first starting the code, it's become a lot more general than only being us
 
 ### Instructions
 1. install nodejs
-2. clone/download the wspd repository at https://github.com/michaelpalumbo/wspd
-3. Open terminal, cd into the folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
+2. Download the latest release of this code, making sure its the 'placeholder' version: https://github.com/michaelpalumbo/wspd/releases
+3. Open terminal, cd into the downloaded folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
 4. verify nodejs is installed:
 
 ```shell
@@ -21,24 +21,23 @@ node -v
 ```shell
 npm install
 ```
-### Test locally
-1. start the server
 
+### Usage
+
+1. in terminal, type 
 ```shell
-npm start server
+node app.js --mode client --name yournamewithnospaces
 ```
 
-2.. open a 2nd terminal window, cd into wspd
+and then hit enter to start the program
 
-3.. start the client
+2. If it is running correctly, the terminal should report the following:
 
 ```shell
-npm start client localhost
+Configure your local pd patch(es) to listen on UDP Port 7403
+Configure your local pd patch(es) to send on UDP Port 7404
+connected to server at ws://evening-retreat-29342.herokuapp.com/8081
 ```
-
-4.. open the tester.maxpat (or tester.pd)
-
-Click either of the toggles to confirm data is being sent from pd>nodejs>pd. You should be able to have both toggles clicked, this verifies bi-directionality. 
 
 ### Telematic setup
 

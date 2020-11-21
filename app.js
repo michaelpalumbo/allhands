@@ -1,5 +1,6 @@
-// this script runs at either side
-// it's function as either a server or client is determined by a cli arg
+// note: this version is for running wspd's server as a cloud instance on heroku, so to push updates, use:
+// git push heroku placeholder:master
+
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
@@ -8,7 +9,7 @@ const argv = yargs(hideBin(process.argv)).argv
 // now we specify mode using argv.mode, and --mode flag in cli
 const mode = argv.mode
 console.log(mode + ' mode')
-let host;
+let host = 'evening-retreat-29342.herokuapp.com'
 if(argv.host){
     host = argv.host
 }
@@ -17,23 +18,26 @@ let name;
 if(argv.name){
     name = argv.name
 }
+/* note: this removed for cloud version
 if (mode === 'client' && !argv.host){
     console.log('error: client mode requires --host flag to specify server IP address\nexample:\n\nnode app.js --mode client --host localhost')
     process.exit()
 }
+*/
+
 // ***** Local UDP Send & Receive Config ******* //
 let localReceivePort;
 let localSendPort;
-if(mode === 'server'){
-    localReceivePort = 7402
-    localSendPort = 7401
-} else if (mode === 'client'){
+
+
+if (mode === 'client'){
     localReceivePort = 7404
     localSendPort = 7403
 } else if (mode === 'listener'){
     // localReceivePort = 7404
     listenerModeSendPort = 7405
 }
+
 
 // ***** Local UDP-Sender ******* //
 // this is used by either mode!
@@ -168,7 +172,7 @@ if (mode === "server"){
     const ReconnectingWebSocket = require('reconnecting-websocket');
     const serverIP = host
     const serverPort = '8081';
-    const serverWSAddress = `ws://${serverIP}:${serverPort}`;
+    const serverWSAddress = `ws://${serverIP}/${serverPort}`;
     // options for the reconnecting websocket
     const rwsOptions = {
         // make rws use the webSocket module implementation
@@ -193,8 +197,8 @@ if (mode === "server"){
     // on close:
     ws.addEventListener('close', () => {
         console.log("server connection closed");
-        localSend.close();
-        localReceive.close();
+        // localSend.close();
+        // localReceive.close();
     });
     // handle messages
     ws.addEventListener('message', (data) => {
@@ -301,8 +305,8 @@ if (mode === "server"){
     // on close:
     ws.addEventListener('close', () => {
         console.log("server connection closed");
-        localSend.close();
-        localReceive.close();
+        // localSend.close();
+        // localReceive.close();
     });
     // handle messages
     ws.addEventListener('message', (data) => {
