@@ -12,6 +12,10 @@ Since first starting the code, it's become a lot more general than only being us
 1. Install nodejs
 2. Download the latest release of this code, making sure its the 'placeholder' version: https://github.com/michaelpalumbo/wspd/releases
 3. Open terminal, cd into the downloaded folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
+
+```shell
+cd /full/path/to/the/folder/named/wspd
+```
 4. verify nodejs is installed:
 
 ```shell
