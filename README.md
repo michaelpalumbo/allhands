@@ -1,4 +1,5 @@
 ## wspd (websocket 4 puredata)
+I recommend trying one of the recent releases of this project, see https://github.com/michaelpalumbo/wspd/releases
 
 **I highly recommend reading this document at https://github.com/michaelpalumbo/wspd/blob/master/README.md or opening [README.pdf](readme.pdf)**
 
