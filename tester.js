@@ -1,5 +1,4 @@
-localReceivePort = 7404
-localSendPort = 7404
+
 
 const { Client, Server } = require('node-osc');
 
