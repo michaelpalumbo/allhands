@@ -1,3 +1,5 @@
+*NOTE: If this is your first time using wspd, see the [releases](https://github.com/michaelpalumbo/wspd/releases) page*
+
 ## wspd (websocket 4 puredata)
 I recommend trying one of the recent releases of this project, see https://github.com/michaelpalumbo/wspd/releases
 
