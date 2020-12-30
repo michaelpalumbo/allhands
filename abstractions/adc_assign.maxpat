@@ -61,7 +61,7 @@
 					"patching_rect" : [ 390.5, 430.0, 241.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 58.0, 253.0, 22.0 ],
-					"text" : "/lfo_1 -0.009899"
+					"text" : "/lfo_1 0.056679"
 				}
 
 			}
@@ -72,8 +72,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 644.5, 323.0, 64.0, 22.0 ],
-					"text" : "snapshot~"
+					"patching_rect" : [ 644.5, 323.0, 74.0, 22.0 ],
+					"text" : "snapshot~ 1"
 				}
 
 			}
@@ -466,7 +466,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-1",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -579,9 +579,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ],
-		"autosave" : 0
+ ]
 	}
 
 }
