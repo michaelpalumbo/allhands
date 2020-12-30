@@ -40,6 +40,29 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"args" : [ 1 ],
+					"bgmode" : 0,
+					"border" : 0,
+					"clickthrough" : 0,
+					"enablehscroll" : 0,
+					"enablevscroll" : 0,
+					"id" : "obj-20",
+					"lockeddragscroll" : 0,
+					"maxclass" : "bpatcher",
+					"name" : "adc_assign.maxpat",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"offset" : [ 0.0, 0.0 ],
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 446.0, 800.0, 368.0, 84.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 755.5, 99.0, 369.0, 82.0 ],
+					"viewvisibility" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ 5 ],
 					"bgmode" : 0,
 					"border" : 0,
@@ -767,8 +790,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -780,7 +801,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
-					"order" : 5,
+					"order" : 1,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -788,7 +809,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-13", 0 ],
-					"order" : 4,
+					"order" : 2,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -804,7 +825,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-17", 0 ],
-					"order" : 2,
+					"order" : 4,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -820,7 +841,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"order" : 1,
+					"order" : 5,
 					"source" : [ "obj-1", 0 ]
 				}
 
@@ -867,6 +888,14 @@
 					"destination" : [ "obj-39", 0 ],
 					"midpoints" : [ 63.5, 896.0, 22.0, 896.0, 22.0, 720.0, 40.5, 720.0 ],
 					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-39", 0 ],
+					"midpoints" : [ 455.5, 894.0, 21.0, 894.0, 21.0, 720.0, 40.5, 720.0 ],
+					"source" : [ "obj-20", 0 ]
 				}
 
 			}
