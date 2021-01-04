@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScappleDocument Version="1.1" ID="3AAB74C6-BD5B-4398-A46F-49048647D6C2">
     <Notes>
-        <Note ID="0" FontSize="17.0" Position="35.878906,104.695312" Width="141.0">
+        <Note ID="0" FontSize="17.0" Position="36.0,105.0" Width="78.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
-            <String> biosensing patch</String>
+            <String> pd patch</String>
             <ConnectedNoteIDs>1</ConnectedNoteIDs>
             <PointsToNoteIDs>1</PointsToNoteIDs>
         </Note>
-        <Note ID="1" FontSize="17.0" Position="360.878906,118.695312" Width="263.0">
+        <Note ID="1" FontSize="17.0" Position="361.0,119.0" Width="263.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <Border Weight="1">0.561855 0.71062 0.779401</Border>
@@ -19,7 +19,7 @@
             <ConnectedNoteIDs>0, 2, 16</ConnectedNoteIDs>
             <PointsToNoteIDs>2, 16</PointsToNoteIDs>
         </Note>
-        <Note ID="2" FontSize="17.0" Position="692.617188,552.601562" Width="252.0">
+        <Note ID="2" FontSize="17.0" Position="693.0,553.0" Width="252.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <Border Weight="1">0.561855 0.71062 0.779401</Border>
@@ -29,27 +29,27 @@
             <ConnectedNoteIDs>1, 22</ConnectedNoteIDs>
             <PointsToNoteIDs>1, 22</PointsToNoteIDs>
         </Note>
-        <Note ID="6" FontSize="17.0" Position="122.878906,53.695312" Width="61.0">
+        <Note ID="6" FontSize="17.0" Position="123.0,54.0" Width="61.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
             <String>Artist 1</String>
         </Note>
-        <Note ID="8" FontSize="17.0" Position="928.652344,675.699219" Width="171.0">
+        <Note ID="8" FontSize="17.0" Position="929.0,676.0" Width="171.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
             <String>Server (Cloud-based)
 </String>
         </Note>
-        <Note ID="16" FontSize="17.0" Position="47.878906,217.695312" Width="249.0">
+        <Note ID="16" FontSize="17.0" Position="48.0,218.0" Width="249.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
             <String>pd something, controlled by Artist2</String>
             <ConnectedNoteIDs>1</ConnectedNoteIDs>
         </Note>
-        <Note ID="22" FontSize="17.0" Position="849.460938,164.605469" Width="245.0">
+        <Note ID="22" FontSize="17.0" Position="849.0,165.0" Width="245.0">
             <Appearance>
                 <Alignment>Left</Alignment>
                 <Border Weight="1">0.561855 0.71062 0.779401</Border>
@@ -59,7 +59,7 @@
             <ConnectedNoteIDs>2, 23, 25</ConnectedNoteIDs>
             <PointsToNoteIDs>2, 23</PointsToNoteIDs>
         </Note>
-        <Note ID="23" FontSize="17.0" Position="1230.441406,145.625" Width="74.0">
+        <Note ID="23" FontSize="17.0" Position="1230.0,146.0" Width="74.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
@@ -72,7 +72,7 @@
             </Appearance>
             <String>Artist 2</String>
         </Note>
-        <Note ID="25" FontSize="17.0" Position="1177.441406,250.625" Width="102.0">
+        <Note ID="25" FontSize="17.0" Position="1177.0,251.0" Width="102.0">
             <Appearance>
                 <Alignment>Left</Alignment>
             </Appearance>
@@ -82,17 +82,17 @@
         </Note>
     </Notes>
     <BackgroundShapes>
-        <Shape ID="5" Sticky="No" Position="16.878906,63.695312" Width="638.0" Height="227.0">
+        <Shape ID="5" Sticky="No" Position="17.0,64.0" Width="638.0" Height="227.0">
             <Appearance>
                 <Border Weight="1"></Border>
             </Appearance>
         </Shape>
-        <Shape ID="7" Sticky="No" Position="639.617188,490.601562" Width="566.0" Height="200.0">
+        <Shape ID="7" Sticky="No" Position="640.0,491.0" Width="566.0" Height="200.0">
             <Appearance>
                 <Border Weight="1"></Border>
             </Appearance>
         </Shape>
-        <Shape ID="21" Sticky="No" Position="796.441406,102.625" Width="566.0" Height="200.0">
+        <Shape ID="21" Sticky="No" Position="796.0,103.0" Width="566.0" Height="200.0">
             <Appearance>
                 <Border Weight="1"></Border>
             </Appearance>

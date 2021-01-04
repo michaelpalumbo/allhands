@@ -18,12 +18,16 @@
   },
   "homepage": "https://github.com/michaelpalumbo/wspd#readme",
   "dependencies": {
+    "Interval": "^1.0.7",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "node-osc": "^5.1.0",
     "osc-min": "^1.1.2",
     "progress": "^2.0.3",
     "reconnecting-websocket": "^4.4.0",
+    "simple-get": "^4.0.0",
     "ws": "^7.2.5",
     "yargs": "^16.1.1"
   }
