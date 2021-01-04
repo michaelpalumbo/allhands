@@ -4,7 +4,7 @@
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
- 
+ ,
 
 // now we specify mode using argv.mode, and --mode flag in cli
 const mode = argv.mode

@@ -215,6 +215,10 @@ if (mode === "server"){
             case 'OSC':
                 // send formatted OSC message locally (i.e. a pd patch)
                 console.log(msg.addressPattern.split('/')[1])
+                
+                Max.outlet(msg.addressPattern, msg.typeTagString)
+
+
                 // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
                 if(msg.addressPattern.split('/')[1] != name){
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
