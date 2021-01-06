@@ -72,6 +72,8 @@ if (mode === "server"){
 
     console.log('new connection established ')
 
+
+    
     /* in the clooud version we don't need to have the  server communicate with udp ports for OSC
     const localSend = new Client('127.0.0.1', localSendPort);
     console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)

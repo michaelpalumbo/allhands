@@ -10,15 +10,8 @@
 var vbox;
 var vx=200;
 var vy=200;
-outlets = 1
 
-function checkDirty(){
-	if(this.patcher.wind.dirty == 1){
-		outlet(0, this.patcher.wind.dirty)
-		post('\nUpdated settings file\n\n')
-		}
-	
-}
+
 function newdefault()
 {
 	var i;
@@ -95,4 +88,8 @@ function sendtobox()
 			post("doesn't understand " + arguments[0] + "\n");
 		}
 	}
+}
+
+function addSignalInput(){
+    
 }
