@@ -1,9 +1,9 @@
-*NOTE: If this is your first time using wspd, see the [releases](https://github.com/michaelpalumbo/wspd/releases) page*
+*NOTE As of Jan 6 2021: project name changed from wspd to 'allhands'. In the process of resolving any conflicts as result of the name change. for now, see the [releases](https://github.com/michaelpalumbo/allhands/releases) page*
 
-## wspd (websocket 4 puredata)
-I recommend trying one of the recent releases of this project, see https://github.com/michaelpalumbo/wspd/releases
+## allhands: send OSC data over the internet
+I recommend trying one of the recent releases of this project, see https://github.com/michaelpalumbo/allhands/releases
 
-**I highly recommend reading this document at https://github.com/michaelpalumbo/wspd/blob/master/README.md or opening [README.pdf](readme.pdf)**
+**I highly recommend reading this document at https://github.com/michaelpalumbo/allhands/blob/master/README.md or opening [README.pdf](readme.pdf)**
 
 This app acts as a bridge between two computers over the web, enables very fast transmission of controller data between, for example, two puredata patches. 
 
@@ -12,8 +12,8 @@ Since first starting the code, it's become a lot more general than only being us
 
 ### Instructions
 1. install nodejs
-2. clone/download the wspd repository at https://github.com/michaelpalumbo/wspd
-3. Open terminal, cd into the folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
+2. clone/download the wspd repository at https://github.com/michaelpalumbo/allhands
+3. Open terminal, cd into the folder 'allhands' (the rest of this readme assumes that you're working from this directory) 
 4. verify nodejs is installed:
 
 ```shell
@@ -31,7 +31,7 @@ npm install
 npm start server
 ```
 
-2.. open a 2nd terminal window, cd into wspd
+2.. open a 2nd terminal window, cd into allhands
 
 3.. start the client
 
