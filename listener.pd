@@ -1,0 +1,18 @@
+#N canvas 659 236 782 508 12;
+#X obj 72 106 oscparse;
+#X obj 72 78 netreceive -u -b;
+#X obj 72 130 list trim;
+#X floatatom 72 241 5 0 0 0 - - -;
+#X obj 72 21 loadbang;
+#X text 114 241 Erin's Data;
+#X obj 72 156 route fromServer fromClient;
+#X floatatom 279 241 5 0 0 0 - - -;
+#X text 321 241 Jen's Data;
+#X msg 72 52 listen 7405;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 6 0;
+#X connect 4 0 9 0;
+#X connect 6 0 3 0;
+#X connect 6 1 7 0;
+#X connect 9 0 1 0;
