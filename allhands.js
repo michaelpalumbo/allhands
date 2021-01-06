@@ -337,6 +337,16 @@ if (mode === "server"){
              
             break;
 
+            // respond to ping from server with a pong
+            case 'ping':
+                let pong = JSON.stringify({
+                    cmd: 'pong',
+                    data: msg.data,
+                    name: name
+                })
+                ws.send(pong)
+            break
+
             default:
                 // inform user that unknown message commang used
                 console.log('client sent message with unknown cmd: ' + msg)
