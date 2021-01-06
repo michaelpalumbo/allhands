@@ -20,10 +20,11 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
-    "node-osc": "^5.1.0",
+    "node-osc": "^5.2.1",
     "osc-min": "^1.1.2",
     "progress": "^2.0.3",
     "reconnecting-websocket": "^4.4.0",
-    "ws": "^7.2.5"
+    "ws": "^7.4.0",
+    "yargs": "^16.1.1"
   }
 }
