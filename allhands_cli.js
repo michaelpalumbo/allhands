@@ -219,13 +219,15 @@ if (mode === "server"){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
                 // send formatted OSC message locally (i.e. a pd patch)
-                console.log(msg.addressPattern.split('/')[1])
-                
+                // console.log(msg.addressPattern.split('/')[1])
+                let APRoot = msg.addressPattern.split('/')[1]
                 // Max.outlet(msg.addressPattern, msg.typeTagString)
 
-
+                if(APRoot == 'ping'){
+                    console.log('pingTime:', msg.typeTagString + 'ms')
+                }
                 // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
-                if(msg.addressPattern.split('/')[1] != name){
+                if(APRoot != name){
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                         if (err) console.error(err);
                     }); 
@@ -245,11 +247,6 @@ if (mode === "server"){
                 ws.send(pong)
                 // console.log(pong)
             break
-
-            case 'pingReport':
-                console.log(msg.data)
-            break
-
 
             default:
                 // inform user that unknown message commang used
@@ -342,7 +339,7 @@ if (mode === "server"){
     // handle messages
     ws.addEventListener('message', (data) => {
         let msg = JSON.parse(data.data);
-        console.log(msg)
+        // console.log(msg)
         switch (msg.cmd){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
@@ -363,12 +360,9 @@ if (mode === "server"){
                     name: name
                 })
                 ws.send(pong)
-                console.log(pong)
+                // console.log(pong)
             break
 
-            case 'pingReport':
-                console.log(msg.data)
-            break
             default:
                 // inform user that unknown message commang used
                 console.log('client sent message with unknown cmd: ' + msg.cmd)
