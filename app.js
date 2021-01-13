@@ -57,21 +57,21 @@ wss.on('connection', function connection(ws, req, client) {
 
             case 'pong':
                 let pongTime = Date.now() - msg.data
-                pings[msg.name] = {latency: pongTime, unit: 'ms'}
+                // pings[msg.name] = {latency: pongTime, unit: 'ms'}
                 // let pongUpdate = JSON.stringify({
                 //     cmd: 'pongTimes',
                 //     data: pings
                 // })
                 // broadcast(pongUpdate)
                 let ap = '/ping/' + msg.name + '/'
-                let pingTime = {
+                let pingTime = JSON.stringify({
                     // cmd allows us to send other types of messages, ask Michael for more info if curious!
                     cmd: 'OSC',
                     date: new Date().toUTCString(),
                     addressPattern: ap,
                     // this is the data!
                     typeTagString: pongTime,
-                }
+                })
                 broadcast(pingTime)
                 // console.log('pings @ pong msg:', pings)
             break
@@ -122,6 +122,7 @@ function broadcast(msg){
 
 
 // periodically send out the global ping/pong times
+// note: not using this as of our latest meeting. instead pingpong times are sent via osc
 function reportPings(){
     heart.createEvent(1, function(count, last){
         let pingReport = JSON.stringify({
