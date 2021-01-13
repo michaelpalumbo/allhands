@@ -13,7 +13,7 @@ let localsend = null;
 let localreceive = null;
 
 // now we specify mode using argv.mode, and --mode flag in cli
-const mode = argv.mode
+const mode = 'client'
 console.log(mode + ' mode')
 let host = 'allhandsjs.herokuapp.com'
 if(argv.host){
