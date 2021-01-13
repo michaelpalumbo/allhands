@@ -72,6 +72,7 @@ wss.on('connection', function connection(ws, req, client) {
                     // this is the data!
                     typeTagString: pongTime,
                 })
+                console.log(pingTime)
                 broadcast(pingTime)
                 // console.log('pings @ pong msg:', pings)
             break
