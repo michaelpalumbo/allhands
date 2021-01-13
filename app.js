@@ -10,11 +10,6 @@ var heartbeats = require('heartbeats');
 // a heart that beats every 1 second.
 var heart = heartbeats.createHeart(1000);
 
-
-// now we specify mode using argv.mode, and --mode flag in cli
-const mode = argv.mode
-console.log(mode + ' mode')
-let host = 'allhandsjs.herokuapp.com'
 if(argv.host){
     host = argv.host
 }
@@ -68,6 +63,7 @@ wss.on('connection', function connection(ws, req, client) {
                 //     data: pings
                 // })
                 // broadcast(pongUpdate)
+                console.log('pings @ pong msg:', pings)
             break
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
