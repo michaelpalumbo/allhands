@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-15",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 487.0, 339.0, 117.0, 22.0 ],
+					"text" : "sprintf /controller_%i"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-11",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -94,7 +106,8 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 74.0, 438.0, 234.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 2.0, 107.0, 174.0, 22.0 ]
+					"presentation_rect" : [ 2.0, 107.0, 174.0, 22.0 ],
+					"text" : "/controller_10 101"
 				}
 
 			}
@@ -106,7 +119,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 243.5, 184.0, 122.0, 22.0 ],
-					"restore" : [ "controller4" ],
+					"restore" : [ "<empty>" ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -125,7 +138,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 67.0, 184.0, 133.0, 22.0 ],
-					"restore" : [ 0 ],
+					"restore" : [ 10 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -457,7 +470,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 82.0, 174.0, 23.0 ],
 					"tabmode" : 0,
-					"text" : "controller4",
 					"varname" : "textedit"
 				}
 
@@ -509,7 +521,7 @@
 					"patching_rect" : [ 307.0, 64.0, 150.0, 33.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.0, 1.0, 176.0, 20.0 ],
-					"text" : "MIDI Control Input Channel #1"
+					"text" : "MIDI Control Input Channel 1"
 				}
 
 			}
@@ -692,6 +704,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-35", 0 ],
+					"source" : [ "obj-15", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
@@ -836,6 +855,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
 					"midpoints" : [ 9.5, 271.0, 133.5, 271.0 ],
+					"order" : 1,
+					"source" : [ "obj-73", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
 					"order" : 0,
 					"source" : [ "obj-73", 0 ]
 				}
@@ -844,20 +871,18 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-54", 0 ],
-					"order" : 1,
+					"order" : 2,
 					"source" : [ "obj-73", 0 ]
 				}
 
 			}
  ],
-		"dependency_cache" : [  ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "helpfile_label-1",
 				"default" : 				{
 					"fontname" : [ "Arial" ],
-					"fontsize" : [ 13 ],
-					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ]
+					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
+					"fontsize" : [ 13 ]
 				}
 ,
 				"parentstyle" : "",

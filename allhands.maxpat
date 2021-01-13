@@ -1062,7 +1062,8 @@
 					"patching_rect" : [ 127.5, 59.0, 174.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 4.5, 40.0, 174.0, 23.0 ],
-					"tabmode" : 0
+					"tabmode" : 0,
+					"text" : "michael"
 				}
 
 			}
@@ -1123,8 +1124,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -1344,7 +1343,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "allhands.js",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -1369,35 +1368,35 @@
 			}
 , 			{
 				"name" : "MIDI_in_assign.maxpat",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "adc_assign.maxpat",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "scripting.js",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "allhands.json",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "incoming_data_assign.maxpat",
-				"bootpath" : "~/wspd",
+				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -1429,8 +1428,8 @@
 				"name" : "helpfile_label-1",
 				"default" : 				{
 					"fontname" : [ "Arial" ],
-					"fontsize" : [ 13 ],
-					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ]
+					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
+					"fontsize" : [ 13 ]
 				}
 ,
 				"parentstyle" : "",
