@@ -355,7 +355,7 @@ if (mode === "server"){
             break
             default:
                 // inform user that unknown message commang used
-                console.log('client sent message with unknown cmd: ' + msg)
+                console.log('client sent message with unknown cmd: ' + msg.cmd)
             break;
         }
     });

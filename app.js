@@ -123,6 +123,7 @@ function reportPings(){
             data: pings
         })
         broadcast(pingReport)
+        console.log(pingReport)
     });
 }
 reportPings()
