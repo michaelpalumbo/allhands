@@ -6,7 +6,7 @@
 // const yargs = require('yargs/yargs')
 // const { hideBin } = require('yargs/helpers')
 // const argv = yargs(hideBin(process.argv)).argv
-// const Max = require('max-api')
+const Max = require('max-api')
 
 // UDP send/receive
 let localsend = null;
@@ -251,12 +251,19 @@ if (mode === "server"){
                 // console.log(msg.data)
                 let remotes = Object.keys(msg.data)
                 for(i=0;i<remotes.length;i++){
-                    console.log(remotes[i], msg.data[remotes[i]])
+                    Max.outlet('pingTimes', msg.data)
+                    // console.log(remotes[i], msg.data[remotes[i]])
                     let ap = '/latency/' + remotes[i]
                     let tts = msg.data[remotes[i]]
                     localSend.send(ap, tts, (err) => {
                         if (err) console.error(err);
                     }); 
+                    if(name == remotes[i]){
+                        Max.outlet('thisPing', tts)
+                    }
+                    
+                    
+                    
                 }
 
             break
