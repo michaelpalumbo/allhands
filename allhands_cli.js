@@ -214,7 +214,7 @@ if (mode === "server"){
     // handle messages
     ws.addEventListener('message', (data) => {
         let msg = JSON.parse(data.data);
-        console.log(msg)
+        // console.log(msg)
         switch (msg.cmd){
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
@@ -235,10 +235,25 @@ if (mode === "server"){
                 
              
             break;
+            // respond to ping from server with a pong
+            case 'ping':
+                let pong = JSON.stringify({
+                    cmd: 'pong',
+                    data: msg.data,
+                    name: name
+                })
+                ws.send(pong)
+                // console.log(pong)
+            break
+
+            case 'pingReport':
+                console.log(msg.data)
+            break
+
 
             default:
                 // inform user that unknown message commang used
-                console.log('client sent message with unknown cmd: ' + msg)
+                console.log('client sent message with unknown cmd: ' + msg.cmd)
             break;
         }
     });
@@ -348,6 +363,7 @@ if (mode === "server"){
                     name: name
                 })
                 ws.send(pong)
+                console.log(pong)
             break
 
             case 'pingReport':

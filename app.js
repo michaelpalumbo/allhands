@@ -63,7 +63,17 @@ wss.on('connection', function connection(ws, req, client) {
                 //     data: pings
                 // })
                 // broadcast(pongUpdate)
-                console.log('pings @ pong msg:', pings)
+                let ap = '/ping/' + msg.name + '/'
+                let pingTime = {
+                    // cmd allows us to send other types of messages, ask Michael for more info if curious!
+                    cmd: 'OSC',
+                    date: new Date().toUTCString(),
+                    addressPattern: ap,
+                    // this is the data!
+                    typeTagString: pongTime,
+                }
+                broadcast(pingTime)
+                // console.log('pings @ pong msg:', pings)
             break
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
@@ -122,5 +132,5 @@ function reportPings(){
         console.log(pingReport)
     });
 }
-reportPings()
+// reportPings()
 
