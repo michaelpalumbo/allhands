@@ -15,7 +15,7 @@ let localreceive = null;
 // now we specify mode using argv.mode, and --mode flag in cli
 const mode = argv.mode
 console.log(mode + ' mode')
-let host = 'evening-retreat-29342.herokuapp.com'
+let host = 'allhandsjs.herokuapp.com'
 if(argv.host){
     host = argv.host
 }
