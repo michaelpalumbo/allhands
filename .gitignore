@@ -18,3 +18,4 @@ node_modules/
 # information for Eclipse / Flash Builder.
 .env
 node_modules
+node_modules

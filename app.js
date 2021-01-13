@@ -63,11 +63,11 @@ wss.on('connection', function connection(ws, req, client) {
             case 'pong':
                 let pongTime = Date.now() - msg.data
                 pings[msg.name] = {latency: pongTime, unit: 'ms'}
-                let pongUpdate = JSON.stringify({
-                    cmd: 'pongTimes',
-                    data: pings
-                })
-                broadcast(pongUpdate)
+                // let pongUpdate = JSON.stringify({
+                //     cmd: 'pongTimes',
+                //     data: pings
+                // })
+                // broadcast(pongUpdate)
             break
             // in case you want to receive other data and route it elsewhere
             case 'OSC':

@@ -3,27 +3,30 @@
 // note: this version is for running wspd's server as a cloud instance on heroku, so to push updates, use:
 // git push heroku placeholder:master
 
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
-const argv = yargs(hideBin(process.argv)).argv
+// const yargs = require('yargs/yargs')
+// const { hideBin } = require('yargs/helpers')
+// const argv = yargs(hideBin(process.argv)).argv
 // const Max = require('max-api')
 
 // UDP send/receive
 let localsend = null;
 let localreceive = null;
 
-// now we specify mode using argv.mode, and --mode flag in cli
-const mode = 'client'
-console.log(mode + ' mode')
 let host = 'allhandsjs.herokuapp.com'
-if(argv.host){
-    host = argv.host
-}
+
 // we will now add a name to the address pattern of all local OSC messages that are to be sent over IP
 let name;
-if(argv.name){
-    name = argv.name
+if(process.argv[2]){
+    name = process.argv[2]
+}else{
+    console.log('error: need to specify your name (one string, no spaces. i.e. steve')
+    process.exit()
 }
+if(process.argv[3]){
+    console.log('error: client name cannot include spaces.')
+    process.exit()
+}
+
 /* note: this removed for cloud version
 if (mode === 'client' && !argv.host){
     console.log('error: client mode requires --host flag to specify server IP address\nexample:\n\nnode app.js --mode client --host localhost')
@@ -35,7 +38,7 @@ if (mode === 'client' && !argv.host){
 let localReceivePort;
 let localSendPort;
 
-
+const mode = 'client'
 if (mode === 'client'){
     localReceivePort = 7404
     localSendPort = 7403
@@ -347,6 +350,9 @@ if (mode === "server"){
                 ws.send(pong)
             break
 
+            case 'pingReport':
+                console.log(msg.data)
+            break
             default:
                 // inform user that unknown message commang used
                 console.log('client sent message with unknown cmd: ' + msg)
