@@ -4,7 +4,7 @@
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
-
+const satelize = require('satelize');
 // alternative to setInterval:
 var heartbeats = require('heartbeats');
 // a heart that beats every 1 second.
@@ -23,6 +23,9 @@ let pings = {
 
 }
 
+let locations = {
+
+}
 const WebSocket = require('ws');
 let ws; // keep this here
 
@@ -54,7 +57,18 @@ wss.on('connection', function connection(ws, req, client) {
 
         switch (msg.cmd){
             // gather returning 'pong' time
+            case 'thisMachine':
+                addresses[msg.name] = msg.publicIPv4
 
+                satelize.satelize({ip: msg.publicIPv4}, function(err, payload) {
+                    // if used with expressjs
+                    // res.send(payload);
+                    // res.json...
+                    locations[msg.name] = payload
+
+                    
+                  });
+            break
             case 'pong':
                 let pongTime = Date.now() - msg.data
                 pings[msg.name] = pongTime
@@ -128,3 +142,14 @@ function reportPings(){
 }
 reportPings()
 
+function reportLocations(){
+    heart.createEvent(1, function(count, last){
+        let locationReport = JSON.stringify({
+            cmd: 'locationReport',
+            data: locations
+        })
+        broadcast(locationReport)
+        console.log(locationReport)
+    });
+}
+reportLocations()
