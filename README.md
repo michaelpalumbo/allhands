@@ -1,20 +1,18 @@
 *NOTE As of Jan 6 2021: project name changed from wspd to 'allhands'. In the process of resolving any conflicts as result of the name change. for now, see the [releases](https://github.com/michaelpalumbo/allhands/releases) page*
 
-**For the sake of formatting, I highly recommend reading this document at** https://github.com/michaelpalumbo/wspd/blob/placeholder/README.md
+**This document is written in markdown, so I highly recommend reading it in the browser at this link:** https://github.com/michaelpalumbo/allhands/README.md
 
-This app acts as a bridge between multiple computers over the web, enables very fast transmission of controller data between, for example, two puredata patches. 
+This app acts as a bridge between multiple computers over the web, enables very fast transmission of controller data between, for example, a puredata patch on one computer, and touchdesigner on the other. 
 
-Basically, you run this program, and then with whatever software you're using to send/receive Open Sound Control messages, have it send on port 7404, and listen on port 7403.
-
-Since first starting the code, it's become a lot more general than only being used for puredata, but I didn't bother changing the name of the repository!
+Basically, you run this program, and then with whatever software you're using to send/receive Open Sound Control (OSC) messages, have it send on port 7404, and listen on port 7403.
 
 ### Instructions
-1. Install nodejs
-2. Download the latest release of this code, making sure its the 'placeholder' version: https://github.com/michaelpalumbo/wspd/releases
-3. Open terminal, cd into the downloaded folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
+1. Make sure nodejs is installed (use the 'LTS' version): https://nodejs.org/en/download/
+2. Download either the specific release you were asked to use, or download the latest version: https://github.com/michaelpalumbo/wspd/releases
+3. Open terminal, cd into the downloaded folder 'allhands-v0.0.x' (the rest of this readme assumes that you're working from this directory) 
 
 ```shell
-cd /full/path/to/the/folder/named/wspd
+cd /full/path/to/the/folder/named/allhands-v0.0.x
 ```
 4. verify nodejs is installed:
 
@@ -33,7 +31,7 @@ npm install
 
 1. in terminal, type 
 ```shell
-node app.js --mode client --name yournamewithnospaces
+node allhands.js --mode client --name yournamewithnospaces
 ```
 
 and then hit enter to start the program

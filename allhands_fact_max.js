@@ -199,7 +199,7 @@ if (mode === "server"){
 
     // if the server responds with an error
     ws.addEventListener('error', () => {
-        console.log(`connection error: ${serverIP}`);
+        console.log(`connection error: ${serverIP}\nNote: Please wait up to 20 seconds for the allhands server to wake up`);
     });
     // on successful connection to server:
     ws.addEventListener('open', () => {
@@ -343,7 +343,7 @@ if (mode === "server"){
 
     // if the server responds with an error
     ws.addEventListener('error', () => {
-        console.log(`connection error: ${serverIP}`);
+        console.log(`connection error: ${serverIP}\nNote: Please wait up to 20 seconds for the allhands server to wake up`);
     });
     // on successful connection to server:
     ws.addEventListener('open', () => {
