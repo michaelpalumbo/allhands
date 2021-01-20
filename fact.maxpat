@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1123.0, 937.0 ],
+		"rect" : [ 42.0, 85.0, 613.0, 825.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,175 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-61",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 200.0, 690.0, 80.0, 22.0 ],
+					"text" : "loadmess 0.9"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-56",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "float", "int" ],
+					"patching_rect" : [ 200.0, 724.0, 84.0, 22.0 ],
+					"text" : "minimum 0.96"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-55",
+					"maxclass" : "newobj",
+					"numinlets" : 6,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 383.0, 724.0, 97.0, 22.0 ],
+					"text" : "scale 0 100 0. 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Lato",
+					"fontsize" : 12.0,
+					"format" : 6,
+					"id" : "obj-14",
+					"maxclass" : "flonum",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 383.0, 757.0, 50.0, 23.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Lato",
+					"fontsize" : 12.0,
+					"format" : 6,
+					"id" : "obj-12",
+					"maxclass" : "flonum",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 200.0, 757.0, 50.0, 23.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Lato",
+					"fontsize" : 12.0,
+					"id" : "obj-52",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 383.0, 787.0, 59.0, 23.0 ],
+					"text" : "damp $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Lato",
+					"fontsize" : 12.0,
+					"id" : "obj-53",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 200.0, 787.0, 45.0, 23.0 ],
+					"text" : "fb1 $1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Lato",
+					"fontsize" : 12.0,
+					"id" : "obj-54",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 82.0, 853.0, 124.0, 23.0 ],
+					"text" : "gen~ @gen freeverb"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-51",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 0,
+					"patching_rect" : [ 82.0, 1065.0, 35.0, 22.0 ],
+					"text" : "dac~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-50",
+					"lastchannelcount" : 0,
+					"maxclass" : "live.gain~",
+					"numinlets" : 2,
+					"numoutlets" : 5,
+					"outlettype" : [ "signal", "signal", "", "float", "list" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 82.0, 894.5, 48.0, 136.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_longname" : "live.gain~",
+							"parameter_mmax" : 6.0,
+							"parameter_mmin" : -70.0,
+							"parameter_shortname" : "live.gain~",
+							"parameter_type" : 0,
+							"parameter_unitstyle" : 4
+						}
+
+					}
+,
+					"varname" : "live.gain~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-22",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "bang", "int" ],
+					"patching_rect" : [ 82.0, 651.0, 96.5, 22.0 ],
+					"text" : "t b i"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 82.0, 685.0, 39.0, 22.0 ],
+					"text" : "click~"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-21",
 					"maxclass" : "textbutton",
 					"numinlets" : 1,
@@ -66,7 +235,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -100,7 +269,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-30",
@@ -109,7 +277,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 621.0, 488.0, 261.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bgcolor 0.990416 0.500269 0.032866 0.411477"
 								}
 
@@ -122,7 +289,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 604.0, 455.0, 261.0, 22.0 ],
-									"presentation_linecount" : 2,
 									"text" : "bgcolor 0.990416 0.500269 0.032866 0.411477"
 								}
 
@@ -135,7 +301,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 337.0, 488.0, 221.0, 22.0 ],
-									"presentation_linecount" : 3,
 									"text" : "bgcolor 0.990416 0.500269 0.032866 1."
 								}
 
@@ -200,10 +365,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 31.0, 174.5, 488.0, 163.0 ],
+									"patching_rect" : [ 31.0, 174.5, 490.0, 167.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 10,
-									"presentation_rect" : [ 3.0, 90.0, 486.0, 163.0 ],
+									"presentation_rect" : [ 3.0, 90.0, 490.0, 167.0 ],
 									"text" : "This app acts as a bridge between multiple computers over the web, enables very fast transmission of controller data between, for example, a puredata patch on one computer, and touchdesigner on the other. \n\nBasically, you run this program, and then with whatever software you're using to send/receive Open Sound Control (OSC) messages, have it send on port 7404, and listen on port 7403.\n\nCaution: make sure your OSC messages begin with a properly formatted address pattern, i.e. /controller/1, or else the program will reject the message"
 								}
 
@@ -237,9 +402,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 604.0, 568.0, 187.0, 49.0 ],
-									"presentation_linecount" : 3,
-									"text" : ";\rmax launch_browser https://www.palumbomichael.com"
+									"patching_rect" : [ 604.0, 568.0, 187.0, 50.0 ],
+									"text" : ";\r\nmax launch_browser https://www.palumbomichael.com"
 								}
 
 							}
@@ -272,8 +436,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 314.0, 568.0, 216.0, 62.0 ],
-									"text" : ";\rmax launch_browser https://github.com/michaelpalumbo/allhands"
+									"patching_rect" : [ 314.0, 568.0, 216.0, 64.0 ],
+									"text" : ";\r\nmax launch_browser https://github.com/michaelpalumbo/allhands"
 								}
 
 							}
@@ -323,10 +487,10 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 31.0, 41.0, 488.0, 116.0 ],
+									"patching_rect" : [ 31.0, 41.0, 488.0, 119.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 6,
-									"presentation_rect" : [ 3.0, 3.0, 488.0, 116.0 ],
+									"presentation_rect" : [ 3.0, 3.0, 488.0, 119.0 ],
 									"text" : "Allhands\nCreated & Maintained by Michael Palumbo (May 2020)\n\n\n\n\n"
 								}
 
@@ -441,9 +605,9 @@
 						"styles" : [ 							{
 								"name" : "helpfile_label-1",
 								"default" : 								{
-									"fontname" : [ "Arial" ],
+									"fontsize" : [ 13 ],
 									"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
-									"fontsize" : [ 13 ]
+									"fontname" : [ "Arial" ]
 								}
 ,
 								"parentstyle" : "",
@@ -471,7 +635,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 420.0, 395.0, 150.0, 33.0 ],
+					"patching_rect" : [ 420.0, 395.0, 150.0, 34.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 323.0, 239.0, 20.0 ],
 					"text" : "Latency for each connected \"satellite\""
@@ -501,7 +665,7 @@
 					"patching_rect" : [ 282.0, 532.0, 231.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 554.0, 231.0, 22.0 ],
-					"text" : "convolution reverb delay time: 28"
+					"text" : "convolution reverb delay time: 25"
 				}
 
 			}
@@ -585,10 +749,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 151.0, -19.0, 150.0, 74.0 ],
+					"patching_rect" : [ 151.0, -19.0, 150.0, 75.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 2,
-					"presentation_rect" : [ 5.5, 32.0, 320.0, 33.0 ],
+					"presentation_rect" : [ 5.5, 32.0, 320.0, 34.0 ],
 					"text" : "1. Assign a name for your computer (i.e. your first name). Hint: Helps others if you keep this consistent with last time"
 				}
 
@@ -616,7 +780,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 5,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -947,6 +1111,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -986,6 +1152,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-53", 0 ],
+					"source" : [ "obj-12", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-52", 0 ],
+					"source" : [ "obj-14", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-18", 0 ]
 				}
@@ -1000,8 +1180,30 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-20", 0 ],
 					"source" : [ "obj-21", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-55", 0 ],
+					"midpoints" : [ 169.0, 683.0, 392.5, 683.0 ],
+					"source" : [ "obj-22", 1 ]
 				}
 
 			}
@@ -1029,9 +1231,76 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-51", 1 ],
+					"source" : [ "obj-50", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-51", 0 ],
+					"source" : [ "obj-50", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"midpoints" : [ 392.5, 842.0, 91.5, 842.0 ],
+					"source" : [ "obj-52", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"midpoints" : [ 209.5, 829.0, 91.5, 829.0 ],
+					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-50", 1 ],
+					"order" : 0,
+					"source" : [ "obj-54", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-50", 0 ],
+					"order" : 1,
+					"source" : [ "obj-54", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-14", 0 ],
+					"source" : [ "obj-55", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-12", 0 ],
+					"source" : [ "obj-56", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"midpoints" : [ 204.0, 216.0, 177.5, 216.0 ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-56", 0 ],
+					"source" : [ "obj-61", 0 ]
 				}
 
 			}
@@ -1046,6 +1315,15 @@
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 238.0, 316.0, 291.5, 316.0 ],
+					"order" : 0,
+					"source" : [ "obj-8", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"order" : 1,
 					"source" : [ "obj-8", 1 ]
 				}
 
@@ -1065,9 +1343,18 @@
 
 			}
  ],
+		"parameters" : 		{
+			"obj-50" : [ "live.gain~", "live.gain~", 0 ],
+			"parameterbanks" : 			{
+
+			}
+,
+			"inherited_shortname" : 1
+		}
+,
 		"dependency_cache" : [ 			{
 				"name" : "allhands_fact_max.js",
-				"bootpath" : "~/allhands",
+				"bootpath" : "D:/github/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -1090,14 +1377,50 @@
 				"type" : "TEXT",
 				"implicit" : 1
 			}
+, 			{
+				"name" : "freeverb.gendsp",
+				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "freeverb_allpass.gendsp",
+				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "freeverb_comb.gendsp",
+				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
  ],
 		"autosave" : 0,
 		"styles" : [ 			{
+				"name" : "AudioStatus_Menu",
+				"default" : 				{
+					"bgfillcolor" : 					{
+						"type" : "color",
+						"color" : [ 0.294118, 0.313726, 0.337255, 1 ],
+						"color1" : [ 0.454902, 0.462745, 0.482353, 0.0 ],
+						"color2" : [ 0.290196, 0.309804, 0.301961, 1.0 ],
+						"angle" : 270.0,
+						"proportion" : 0.39,
+						"autogradient" : 0
+					}
+
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
+			}
+, 			{
 				"name" : "helpfile_label-1",
 				"default" : 				{
-					"fontname" : [ "Arial" ],
+					"fontsize" : [ 13 ],
 					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
-					"fontsize" : [ 13 ]
+					"fontname" : [ "Arial" ]
 				}
 ,
 				"parentstyle" : "",
