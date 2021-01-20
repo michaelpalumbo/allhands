@@ -29,8 +29,10 @@
     "node-osc": "^5.1.0",
     "osc-min": "^1.1.2",
     "progress": "^2.0.3",
+    "public-ip": "^4.0.3",
     "reconnecting-websocket": "^4.4.0",
     "repeat": "^2.0.3",
+    "satelize": "^0.2.0",
     "simple-get": "^4.0.0",
     "ws": "^7.2.5",
     "yargs": "^16.1.1"

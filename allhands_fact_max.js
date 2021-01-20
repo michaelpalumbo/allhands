@@ -27,6 +27,17 @@ if(process.argv[3]){
     process.exit()
 }
 
+
+const publicIp = require('public-ip');
+let publicIPv4;
+let publicIPv6;
+(async () => {
+	publicIPv4 = await publicIp.v4()
+	//=> '46.5.21.123'
+
+	// publicIPv6 = await publicIp.v6()
+	//=> 'fe80::200:f8ff:fe21:67cf'
+})();
 /* note: this removed for cloud version
 if (mode === 'client' && !argv.host){
     console.log('error: client mode requires --host flag to specify server IP address\nexample:\n\nnode app.js --mode client --host localhost')
@@ -204,6 +215,15 @@ if (mode === "server"){
     // on successful connection to server:
     ws.addEventListener('open', () => {
         console.log (`connected to server at ${serverWSAddress}`)
+
+        let thisMachineMsg = JSON.stringify({
+            cmd: 'thisMachine',
+            name: name,
+            publicIPv4: publicIPv4,
+            // publicIPv6: publicIPv6
+        })
+
+        ws.send(thisMachineMsg)
     });
     // on close:
     ws.addEventListener('close', () => {
