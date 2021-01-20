@@ -58,7 +58,7 @@ wss.on('connection', function connection(ws, req, client) {
         switch (msg.cmd){
             // gather returning 'pong' time
             case 'thisMachine':
-                addresses[msg.name] = msg.publicIPv4
+                locations[msg.name] = msg.publicIPv4
 
                 satelize.satelize({ip: msg.publicIPv4}, function(err, payload) {
                     // if used with expressjs
