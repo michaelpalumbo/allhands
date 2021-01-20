@@ -237,6 +237,23 @@ if (mode === "server"){
         // console.log(msg)
         switch (msg.cmd){
             // in case you want to receive other data and route it elsewhere
+            case 'locationReport':
+                let points = Object.keys(msg.data)
+                // Max.post(points)
+                for(i=0;i<points.length;i++){
+                    let thisPoint = points[i]
+                    let point = msg.data[thisPoint]
+                    let newTTS = [thisPoint, point.ip, point.latitude, point.longitude, point.timezone, point.continent_code, point.country.en]
+                    //let newAP = points[i]
+                    localSend.send('/iplocation', newTTS, (err) => {
+                        if (err) console.error(err);
+                    }); 
+                    // Max.post(newTTS)
+                }
+                
+
+            break
+            
             case 'OSC':
                 // send formatted OSC message locally (i.e. a pd patch)
                 // console.log(msg.addressPattern.split('/')[1])
