@@ -231,7 +231,7 @@ if (mode === "server"){
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                         if (err) console.error(err);
                     }); 
-                    // Max.outlet(msg.addressPattern, msg.typeTagString)
+                    Max.outlet(msg.addressPattern, msg.typeTagString)
                 }
  
                 
