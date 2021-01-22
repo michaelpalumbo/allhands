@@ -10,4 +10,5 @@ satelize.satelize({ip:'46.19.37.108'}, function(err, payload) {
   // res.send(payload);
   // res.json...
   console.log(payload)
+  let locationMsg = [msg.name, payload.ip, payload.latitude, payload.longitude, payload.timezone, payload.continent_code, payload.country.en, payload.country_code]
 });
