@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 451.0, 873.0 ],
+		"rect" : [ 34.0, 79.0, 837.0, 598.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,88 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 232.0, 659.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 422.5, 325.0, 150.0, 20.0 ],
+					"text" : "Incoming message history"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-30",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 217.0, 644.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.5, 325.0, 150.0, 20.0 ],
+					"text" : "Outgoing message history"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-28",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 759.0, 649.0, 282.0, 33.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.5, 347.0, 400.0, 20.0 ],
+					"text" : "These are your outgoing OSC messages (must be sent on port 7404)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-22",
+					"maxclass" : "dict.view",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 682.0, 677.0, 401.0, 115.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.5, 369.0, 400.0, 197.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 682.0, 614.0, 72.0, 22.0 ],
+					"text" : "prepend set"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-16",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 4,
+					"outlettype" : [ "dictionary", "", "", "" ],
+					"patching_rect" : [ 682.0, 649.0, 50.5, 22.0 ],
+					"saved_object_attributes" : 					{
+						"embed" : 0,
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
+					}
+,
+					"text" : "dict"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-63",
 					"maxclass" : "newobj",
@@ -435,7 +517,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 270.0, 581.0, 150.0, 47.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.5, 548.0, 331.0, 20.0 ],
+					"presentation_rect" : [ 422.5, 347.0, 331.0, 20.0 ],
 					"text" : "Incoming OSC Addresses and Data: Listen on Port 7403"
 				}
 
@@ -466,7 +548,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 168.0, 581.0, 100.0, 100.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.5, 570.0, 400.0, 197.0 ]
+					"presentation_rect" : [ 422.5, 369.0, 400.0, 197.0 ]
 				}
 
 			}
@@ -913,7 +995,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 214.0, 419.5, 150.0, 33.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.5, 323.0, 239.0, 20.0 ],
+					"presentation_rect" : [ 422.5, 73.0, 239.0, 20.0 ],
 					"text" : "Latency for each connected performer"
 				}
 
@@ -922,11 +1004,11 @@
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 168.0, 283.0, 169.0, 22.0 ],
-					"text" : "route OSC pingTimes thisPing"
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 168.0, 283.0, 225.0, 22.0 ],
+					"text" : "route OSC pingTimes thisPing localSend"
 				}
 
 			}
@@ -938,7 +1020,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 218.0, 319.0, 100.0, 100.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 5.5, 345.0, 400.0, 197.0 ]
+					"presentation_rect" : [ 422.5, 95.0, 400.0, 220.0 ]
 				}
 
 			}
@@ -1330,7 +1412,7 @@
 					"numoutlets" : 1,
 					"offset" : [ 0.0, 0.0 ],
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 391.0, 254.0, 400.0, 220.0 ],
+					"patching_rect" : [ 413.0, 254.0, 400.0, 220.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 95.0, 400.0, 220.0 ],
 					"viewvisibility" : 1
@@ -1348,6 +1430,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -1355,11 +1439,75 @@
 				}
 
 			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.713725490196078, 0.698039215686274, 1.0, 0.49 ],
+					"id" : "obj-33",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 912.0, 461.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ -1.5, 319.0, 416.0, 263.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.698039215686274, 0.831372549019608, 1.0, 0.49 ],
+					"id" : "obj-35",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 927.0, 476.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 413.5, 319.0, 416.0, 263.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.905882352941176, 0.372549019607843, 0.372549019607843, 0.36 ],
+					"id" : "obj-37",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 942.0, 491.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 413.5, 28.0, 416.0, 291.0 ],
+					"proportion" : 0.5
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.0, 0.776470588235294, 0.317647058823529, 0.47 ],
+					"id" : "obj-36",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 927.0, 476.0, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ -1.5, 28.0, 416.0, 291.0 ],
+					"proportion" : 0.5
+				}
+
+			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 400.5, 251.0, 400.5, 251.0 ],
+					"midpoints" : [ 400.5, 251.0, 422.5, 251.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -1394,6 +1542,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-22", 0 ],
+					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-18", 0 ]
 				}
@@ -1413,6 +1568,13 @@
 					"midpoints" : [ 204.0, 180.5, -9.5, 180.5 ],
 					"order" : 1,
 					"source" : [ "obj-18", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"source" : [ "obj-19", 0 ]
 				}
 
 			}
@@ -1466,6 +1628,13 @@
 					"destination" : [ "obj-12", 0 ],
 					"order" : 0,
 					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-8", 3 ]
 				}
 
 			}

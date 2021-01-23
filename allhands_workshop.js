@@ -166,6 +166,8 @@ localReceive.on('message', (msg) => {
         // if(ws){
             ws.send(JSON.stringify(message))
         // }
+        let displayMsg = msg.toString()
+        Max.outlet('localSend', ap, displayMsg)
 
     } else {
         // if incoming OSC message does not have an address pattern, refuse to handle it
