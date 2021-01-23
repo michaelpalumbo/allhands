@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1123.0, 937.0 ],
+		"rect" : [ 34.0, 79.0, 421.0, 779.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,62 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-15",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 515.0, 153.0, 150.0, 47.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.5, 548.0, 331.0, 20.0 ],
+					"text" : "Incoming OSC Addresses and Data: Listen on Port 7403"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-14",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 4,
+					"outlettype" : [ "dictionary", "", "", "" ],
+					"patching_rect" : [ 168.0, 543.0, 57.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"embed" : 0,
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
+					}
+,
+					"text" : "dict OSC"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "dict.view",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 168.0, 581.0, 100.0, 100.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.5, 570.0, 400.0, 197.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-12",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 168.0, 506.0, 72.0, 22.0 ],
+					"text" : "prepend set"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-21",
 					"maxclass" : "textbutton",
@@ -437,9 +493,9 @@
 						"styles" : [ 							{
 								"name" : "helpfile_label-1",
 								"default" : 								{
-									"fontname" : [ "Arial" ],
+									"fontsize" : [ 13 ],
 									"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
-									"fontsize" : [ 13 ]
+									"fontname" : [ "Arial" ]
 								}
 ,
 								"parentstyle" : "",
@@ -467,49 +523,10 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 420.0, 395.0, 150.0, 33.0 ],
+					"patching_rect" : [ 480.0, 38.0, 150.0, 33.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 323.0, 239.0, 20.0 ],
-					"text" : "Latency for each connected \"satellite\""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-15",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 515.0, 532.0, 341.0, 20.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 238.5, 554.0, 341.0, 20.0 ],
-					"text" : "<<< Joel: this is the number you need for the reverb time!"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-13",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 282.0, 532.0, 231.0, 22.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 5.5, 554.0, 231.0, 22.0 ],
-					"text" : "convolution reverb delay time: 28"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-10",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 282.0, 502.0, 235.0, 22.0 ],
-					"text" : "prepend set convolution reverb delay time:"
+					"text" : "Latency for each connected performer"
 				}
 
 			}
@@ -517,11 +534,11 @@
 				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 168.0, 283.0, 140.0, 22.0 ],
-					"text" : "route pingTimes thisPing"
+					"numinlets" : 4,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "", "", "" ],
+					"patching_rect" : [ 168.0, 283.0, 169.0, 22.0 ],
+					"text" : "route OSC pingTimes thisPing"
 				}
 
 			}
@@ -531,7 +548,7 @@
 					"maxclass" : "dict.view",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 168.0, 324.0, 100.0, 100.0 ],
+					"patching_rect" : [ 218.0, 319.0, 100.0, 100.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 345.0, 400.0, 197.0 ]
 				}
@@ -881,7 +898,8 @@
 					"patching_rect" : [ 127.5, 59.0, 174.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 67.0, 174.0, 23.0 ],
-					"tabmode" : 0
+					"tabmode" : 0,
+					"text" : "michael"
 				}
 
 			}
@@ -938,7 +956,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 168.0, 222.0, 239.0, 22.0 ],
+					"patching_rect" : [ 168.0, 222.0, 242.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
@@ -947,7 +965,7 @@
 						"watch" : 1
 					}
 ,
-					"text" : "node.script allhands_fact_max.js @watch 1"
+					"text" : "node.script allhands_workshop.js @watch 1"
 				}
 
 			}
@@ -955,7 +973,7 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
-					"midpoints" : [ 397.5, 251.0, 360.5, 251.0 ],
+					"midpoints" : [ 400.5, 251.0, 360.5, 251.0 ],
 					"source" : [ "obj-1", 1 ]
 				}
 
@@ -969,15 +987,22 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
-					"source" : [ "obj-10", 0 ]
+					"destination" : [ "obj-24", 0 ],
+					"source" : [ "obj-11", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-24", 0 ],
-					"source" : [ "obj-11", 0 ]
+					"destination" : [ "obj-14", 0 ],
+					"source" : [ "obj-12", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-13", 0 ],
+					"source" : [ "obj-14", 0 ]
 				}
 
 			}
@@ -1041,16 +1066,15 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-10", 0 ],
-					"midpoints" : [ 238.0, 316.0, 291.5, 316.0 ],
-					"source" : [ "obj-8", 1 ]
+					"destination" : [ "obj-12", 0 ],
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
-					"source" : [ "obj-8", 0 ]
+					"source" : [ "obj-8", 1 ]
 				}
 
 			}
@@ -1063,7 +1087,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "allhands_fact_max.js",
+				"name" : "allhands_workshop.js",
 				"bootpath" : "~/allhands",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
@@ -1092,9 +1116,9 @@
 		"styles" : [ 			{
 				"name" : "helpfile_label-1",
 				"default" : 				{
-					"fontname" : [ "Arial" ],
+					"fontsize" : [ 13 ],
 					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
-					"fontsize" : [ 13 ]
+					"fontname" : [ "Arial" ]
 				}
 ,
 				"parentstyle" : "",
