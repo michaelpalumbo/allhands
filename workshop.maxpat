@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 837.0, 598.0 ],
+		"rect" : [ 34.0, 79.0, 1199.0, 937.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,11 +40,23 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-38",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 413.0, 506.0, 58.0, 22.0 ],
+					"text" : "loadbang"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-31",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 232.0, 659.0, 150.0, 20.0 ],
+					"patching_rect" : [ 484.0, 659.0, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 422.5, 325.0, 150.0, 20.0 ],
 					"text" : "Incoming message history"
@@ -57,7 +69,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 217.0, 644.0, 150.0, 20.0 ],
+					"patching_rect" : [ 469.0, 644.0, 150.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 325.0, 150.0, 20.0 ],
 					"text" : "Outgoing message history"
@@ -137,7 +149,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 59.0, 104.0, 640.0, 480.0 ],
+						"rect" : [ 85.0, 172.0, 1376.0, 761.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -167,13 +179,25 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 539.0, 269.0, 517.0, 22.0 ],
+									"text" : "/Gabrielle/Phedre/ dictionary u940005797"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-48",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 101.0, 405.0, 50.0, 22.0 ],
-									"text" : "/3"
+									"patching_rect" : [ 101.0, 405.0, 155.0, 22.0 ],
+									"text" : "/Gabrielle/Phedre/"
 								}
 
 							}
@@ -232,7 +256,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 101.0, 191.0, 342.0, 22.0 ]
+									"patching_rect" : [ 101.0, 191.0, 342.0, 22.0 ],
+									"text" : "/Gabrielle/Phedre/ /Gabrielle/echo/ /Gabrielle/pyre/"
 								}
 
 							}
@@ -296,7 +321,7 @@
 									"patching_rect" : [ 256.0, 550.0, 790.0, 47.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 32.0, 51.0, 804.0, 61.0 ],
-									"text" : "/3"
+									"text" : "/Gabrielle/pyre/"
 								}
 
 							}
@@ -489,6 +514,15 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
+									"order" : 1,
+									"source" : [ "obj-62", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-3", 1 ],
+									"order" : 0,
 									"source" : [ "obj-62", 0 ]
 								}
 
@@ -515,7 +549,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 270.0, 581.0, 150.0, 47.0 ],
+					"patching_rect" : [ 522.0, 581.0, 150.0, 47.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 422.5, 347.0, 331.0, 20.0 ],
 					"text" : "Incoming OSC Addresses and Data: Listen on Port 7403"
@@ -546,9 +580,9 @@
 					"maxclass" : "dict.view",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 168.0, 581.0, 100.0, 100.0 ],
+					"patching_rect" : [ 168.0, 581.0, 260.0, 278.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 422.5, 369.0, 400.0, 197.0 ]
+					"presentation_rect" : [ 422.5, 369.0, 400.0, 513.0 ]
 				}
 
 			}
@@ -963,8 +997,8 @@
 						"styles" : [ 							{
 								"name" : "helpfile_label-1",
 								"default" : 								{
-									"fontsize" : [ 13 ],
 									"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
+									"fontsize" : [ 13 ],
 									"fontname" : [ "Arial" ]
 								}
 ,
@@ -1430,8 +1464,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -1610,6 +1642,22 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-14", 0 ],
+					"order" : 1,
+					"source" : [ "obj-38", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-16", 0 ],
+					"order" : 0,
+					"source" : [ "obj-38", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"midpoints" : [ 204.0, 214.5, 177.5, 214.5 ],
 					"source" : [ "obj-6", 0 ]
@@ -1692,8 +1740,8 @@
 		"styles" : [ 			{
 				"name" : "helpfile_label-1",
 				"default" : 				{
-					"fontsize" : [ 13 ],
 					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1 ],
+					"fontsize" : [ 13 ],
 					"fontname" : [ "Arial" ]
 				}
 ,
