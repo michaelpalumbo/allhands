@@ -7,6 +7,7 @@ node_modules/
 # Other files and folders
 .settings/
 .DS_Store
+.log
 # Executables
 *.swf
 *.air
