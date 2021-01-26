@@ -8,6 +8,7 @@
 // const argv = yargs(hideBin(process.argv)).argv
 const Max = require('max-api')
 
+const sortArray = require('sort-array')
 // UDP send/receive
 let localsend = null;
 let localreceive = null;
@@ -248,7 +249,7 @@ if (mode === "server"){
                     localSend.send('/iplocation', newTTS, (err) => {
                         if (err) console.error(err);
                     }); 
-                    // Max.post(newTTS)
+                    Max.outlet('/iplocation', newTTS)
                 }
                 
 
@@ -268,7 +269,7 @@ if (mode === "server"){
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                         if (err) console.error(err);
                     }); 
-                    // Max.outlet(msg.addressPattern, msg.typeTagString)
+                    Max.outlet(msg.addressPattern, msg.typeTagString)
                 }
  
                 
@@ -287,8 +288,23 @@ if (mode === "server"){
             case 'pingReport':
                 // console.log(msg.data)
                 let remotes = Object.keys(msg.data)
+                let pingDict = []
+                Max.outlet('pings', msg.data)
+                let delayTap = ''
+                let counter = 60
                 for(i=0;i<remotes.length;i++){
                     Max.outlet('pingTimes', msg.data)
+                    // delayTap = delayTap + '-' + remotes[i] + '-' + msg.data[remotes[i]] 
+                    counter++
+                    counter++
+                    counter++
+                    counter++
+                    let thisPing = {
+                        name: remotes[i],
+                        latency: msg.data[remotes[i]],
+                        MIDI: counter
+                    }
+                    pingDict.push(thisPing)
                     // console.log(remotes[i], msg.data[remotes[i]])
                     let ap = '/latency/' + remotes[i]
                     let tts = msg.data[remotes[i]]
@@ -298,10 +314,28 @@ if (mode === "server"){
                     if(name == remotes[i]){
                         Max.outlet('thisPing', tts)
                     }
+                    sortArray(pingDict, {
+                        by: 'latency',
+                        order: 'desc'
+                      })
+                      
+
                     
                     
                     
                 }
+
+                sortArray(pingDict, {
+                    by: 'latency',
+                    order: 'desc'
+                  })
+                  
+                  for(i=0;i<pingDict.length;i++){
+                    delayTap = delayTap + '-' + pingDict[i].name + '-' +  pingDict[i].latency + '-' +  pingDict[i].MIDI
+                    
+                  }
+                //delayTap = delayTap.toString()
+                Max.outlet('delayTap', delayTap)
 
             break
             default:
