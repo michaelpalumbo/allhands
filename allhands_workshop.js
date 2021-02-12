@@ -65,7 +65,8 @@ function init(){
     
 }
 
-
+// store the names of players
+let players = {}
 
 // both modes require these libs
 const { Client, Server } = require('node-osc');
@@ -255,8 +256,7 @@ if (mode === "server"){
             break
             
             case 'OSC':
-                // send formatted OSC message locally (i.e. a pd patch)
-                // console.log(msg.addressPattern.split('/')[1])
+                
                 let APRoot = msg.addressPattern.split('/')[1]
                 // Max.outlet(msg.addressPattern, msg.typeTagString)
 
@@ -265,11 +265,20 @@ if (mode === "server"){
                 // }
                 // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
                 if(APRoot != name){
+
+                    // add performer name to the array and pass out to max for mapping
+                    // console.log(msg.addressPattern.split('/')[1])
+                    
+                    let oscroot = '/' + APRoot
+                    if(!players[oscroot]){
+                        players[oscroot] = {}
+                    }
+
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
-                        if (err) console.error(err);
+                        if (err) console.error(err);    
                     }); 
                     Max.outlet(msg.addressPattern, msg.typeTagString)
-                    Max.outlet('rootName', APRoot)
+                    Max.outlet('players', players)
                     Max.outlet('ap', msg.addressPattern.split('/'))
                 }
  

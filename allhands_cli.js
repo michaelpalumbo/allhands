@@ -35,24 +35,10 @@ if (mode === 'client' && !argv.host){
 */
 
 // ***** Local UDP Send & Receive Config ******* //
-let localReceivePort;
-let localSendPort;
 
-const mode = 'client'
-if (mode === 'client'){
-    localReceivePort = 7404
-    localSendPort = 7403
-} else if (mode === 'listener'){
-    // localReceivePort = 7404
-    listenerModeSendPort = 7405
-}
+const localReceivePort = 7401
+const localSendPort = 7403
 
-
-// ***** Local UDP-Sender ******* //
-// this is used by either mode!
-function init(){
-    
-}
 
 
 
@@ -61,459 +47,134 @@ const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
 let ws; // keep this here
 
-if (mode === "server"){
-    
-    // run the serverconst WebSocket = require('ws');
-    const app = require('express')()
-    const http = require('http').createServer(app);;
+localSend = new Client('127.0.0.1', localSendPort);
+console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
+// run the app in client mode
+// ***** Websocket ******* //
+// WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
+const ReconnectingWebSocket = require('reconnecting-websocket');
+const serverIP = host
+const serverPort = '8081';
+const serverWSAddress = `ws://${serverIP}/${serverPort}`;
+// options for the reconnecting websocket
+const rwsOptions = {
+    // make rws use the webSocket module implementation
+    WebSocket: WebSocket, 
+    // ms to try reconnecting:
+    connectionTimeout: 1000,
+    //debug:true, 
+}
 
-    let listenPort = (process.env.PORT || 8081)
-    const wss = new WebSocket.Server({ 'server': http, clientTracking: true });
-    http.listen(listenPort, function(){
-    })
-    wss.on('connection', function connection(ws, req, client) {
+// create a websocket
+// console.log(`attempting to connect to server at ${serverWSAddress}`)
+ws = new ReconnectingWebSocket(serverWSAddress, [], rwsOptions);
 
-    console.log('new connection established ')
+// if the server responds with an error
+ws.addEventListener('error', () => {
+    console.log(`connection error: ${serverIP}`);
+});
+// on successful connection to server:
+ws.addEventListener('open', () => {
+    console.log (`connected to server at ${serverWSAddress}`)
+});
+// on close:
+ws.addEventListener('close', () => {
+    console.log("server connection closed");
+    // localSend.close();
+    // localReceive.close();
+});
+// handle messages
+ws.addEventListener('message', (data) => {
+    let msg = JSON.parse(data.data);
+    // console.log(msg)
+    switch (msg.cmd){
+        // in case you want to receive other data and route it elsewhere
+        case 'OSC':
+            // send formatted OSC message locally (i.e. a pd patch)
+            // console.log(msg.addressPattern.split('/')[1])
+            let APRoot = msg.addressPattern.split('/')[1]
+            // Max.outlet(msg.addressPattern, msg.typeTagString)
 
-
-    
-    /* in the clooud version we don't need to have the  server communicate with udp ports for OSC
-    const localSend = new Client('127.0.0.1', localSendPort);
-    console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
- 
-    const localReceive = new Server(localReceivePort, '0.0.0.0');
-    // once running, inform user
-    localReceive.on('listening', () => {    
-        console.log('Configure your local pd patch(es) to send on UDP Port ' + localReceivePort)
-    })
-    // handle message:  
-    localReceive.on('message', (msg) => {
-        // validate correct OSC address pattern syntax
-        // console.log(msg)
-        if(msg[0].charAt(0) === '/'){
-            // get the address pattern
-            ap = '/' + name + msg[0]
-            // trim the address pattern
-            msg.shift()
-            // construct object to send over websocket
-            message = {
-                // cmd allows us to send other types of messages, ask Michael for more info if curious!
-                sender: name,
-                cmd: 'OSC',
-                date: new Date().toUTCString(),
-                addressPattern: ap,
-                // this is the data!
-                typeTagString: msg
-            }
-            // inform user
-            // console.log('sending to remote:\n', message)
-            // package data for the web, send it!
-            // if(ws){
-                // now using a broadcast server
-                broadcast(JSON.stringify(message))
+            // if(APRoot == 'ping'){
+            //     console.log('pingTime:', msg.typeTagString + 'ms')
             // }
-
-        } else {
-            // if incoming OSC message does not have an address pattern, refuse to handle it
-            console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
-        }
-    });
-    */
-    
-    ws.on('message', function incoming(message) {
-        msg = JSON.parse(message)
-        // console.log(msg)
-
-        switch (msg.cmd){
-            // in case you want to receive other data and route it elsewhere
-            case 'OSC':
-                /* in the cloud version, we don't want to  send OSC data locally because there's nothing on heroku for it
+            // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
+            if(APRoot != name){
                 localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
-                });
-                */
-
-
-                // inform user
-                // console.log('sending to remote:\n', message)
-                // package data for the web, send it!
-                // if(ws){
-                    // now using a broadcast server
-                broadcast(JSON.stringify(msg))
-                
-            break;
-
-        
-            default:
-                console.log('client sent message with unknown cmd: ' + msg)
-                // ws.send('server received message but did not understand: ' +  msg)
-            break;
-
-        
-
-        }
-    });
-
-    ws.on('close', function(code, reason) {
-        /* commented out foor cloud-based version
-        localSend.close();
-        localReceive.close();
-        */
-    })
-    });
-    // we can use this if we want to send to multiple clients!
-    function broadcast(msg){
-        wss.clients.forEach(function each(client) {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(msg);
-        }
-        });
-    }
-
-   
-
-
-
-} else if (mode === 'client'){
-    localSend = new Client('127.0.0.1', localSendPort);
-    console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
-    // run the app in client mode
-    // ***** Websocket ******* //
-    // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
-    const ReconnectingWebSocket = require('reconnecting-websocket');
-    const serverIP = host
-    const serverPort = '8081';
-    const serverWSAddress = `ws://${serverIP}/${serverPort}`;
-    // options for the reconnecting websocket
-    const rwsOptions = {
-        // make rws use the webSocket module implementation
-        WebSocket: WebSocket, 
-        // ms to try reconnecting:
-        connectionTimeout: 1000,
-        //debug:true, 
-    }
-    
-    // create a websocket
-    // console.log(`attempting to connect to server at ${serverWSAddress}`)
-    ws = new ReconnectingWebSocket(serverWSAddress, [], rwsOptions);
-
-    // if the server responds with an error
-    ws.addEventListener('error', () => {
-        console.log(`connection error: ${serverIP}`);
-    });
-    // on successful connection to server:
-    ws.addEventListener('open', () => {
-        console.log (`connected to server at ${serverWSAddress}`)
-    });
-    // on close:
-    ws.addEventListener('close', () => {
-        console.log("server connection closed");
-        // localSend.close();
-        // localReceive.close();
-    });
-    // handle messages
-    ws.addEventListener('message', (data) => {
-        let msg = JSON.parse(data.data);
-        // console.log(msg)
-        switch (msg.cmd){
-            // in case you want to receive other data and route it elsewhere
-            case 'OSC':
-                // send formatted OSC message locally (i.e. a pd patch)
-                // console.log(msg.addressPattern.split('/')[1])
-                let APRoot = msg.addressPattern.split('/')[1]
+                }); 
                 // Max.outlet(msg.addressPattern, msg.typeTagString)
-
-                // if(APRoot == 'ping'){
-                //     console.log('pingTime:', msg.typeTagString + 'ms')
-                // }
-                // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
-                if(APRoot != name){
-                    localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
-                        if (err) console.error(err);
-                    }); 
-                    // Max.outlet(msg.addressPattern, msg.typeTagString)
-                }
- 
-                
-             
-            break;
-            // respond to ping from server with a pong
-            case 'ping':
-                let pong = JSON.stringify({
-                    cmd: 'pong',
-                    data: msg.data,
-                    name: name
-                })
-                ws.send(pong)
-                // console.log(pong)
-            break
-            case 'pingReport':
-                // console.log(msg.data)
-                let remotes = Object.keys(msg.data)
-                for(i=0;i<remotes.length;i++){
-                    console.log(remotes[i], msg.data[remotes[i]])
-                    let ap = '/latency/' + remotes[i]
-                    let tts = msg.data[remotes[i]]
-                    localSend.send(ap, tts, (err) => {
-                        if (err) console.error(err);
-                    }); 
-                }
-
-            break
-            default:
-                // inform user that unknown message commang used
-                console.log('client sent message with unknown cmd: ' + msg.cmd)
-            break;
-        }
-    });
-
-     // ***** Local UDP-Receiver ******* //
-    // this is used by either mode!
-    let localReceivePort;
-    if(mode === 'server'){
-        localReceivePort = 7402
-    } else if (mode === 'client'){
-        localReceivePort = 7404
-    }
-    const localReceive = new Server(localReceivePort, '0.0.0.0');
-    // once running, inform user
-    localReceive.on('listening', () => {    
-        console.log('Configure your local pd patch(es) to send on UDP Port ' + localReceivePort)
-    })
-
-    console.log('')
-    // handle message:  
-    localReceive.on('message', (msg) => {
-        // validate correct OSC address pattern syntax
-        // console.log(msg)
-        if(msg[0].charAt(0) === '/'){
-            // get the address pattern
-            ap = '/' + name + msg[0]
-            // trim the address pattern
-            msg.shift()
-            // construct object to send over websocket
-            message = {
-                // cmd allows us to send other types of messages, ask Michael for more info if curious!
-                cmd: 'OSC',
-                date: new Date().toUTCString(),
-                addressPattern: ap,
-                // this is the data!
-                typeTagString: msg,
             }
-            // inform user
-            // console.log('sending to remote:\n', message)
-            // package data for the web, send it!
-            // if(ws){
-                ws.send(JSON.stringify(message))
-            // }
 
-        } else {
-            // if incoming OSC message does not have an address pattern, refuse to handle it
-            console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
-        }
-    });
-
-} else if (mode === 'listener'){
-    const localSend = new Client('127.0.0.1', listenerModeSendPort);
-    console.log('Configure your local pd patch(es) to listen on UDP Port ' + listenerModeSendPort)
-    // run the app in client mode
-    // ***** Websocket ******* //
-    // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
-    const ReconnectingWebSocket = require('reconnecting-websocket');
-    const serverIP = host
-    const serverPort = '8081';
-    const serverWSAddress = `ws://${serverIP}:${serverPort}`;
-    // options for the reconnecting websocket
-    const rwsOptions = {
-        // make rws use the webSocket module implementation
-        WebSocket: WebSocket, 
-        // ms to try reconnecting:
-        connectionTimeout: 1000,
-        //debug:true, 
-    }
-
-    // create a websocket
-    // console.log(`attempting to connect to server at ${serverWSAddress}`)
-    ws = new ReconnectingWebSocket(serverWSAddress, [], rwsOptions);
-
-    // if the server responds with an error
-    ws.addEventListener('error', () => {
-        console.log(`connection error: ${serverIP}\nNote: Please wait up to 20 seconds for the allhands server to wake up`);
-    });
-    // on successful connection to server:
-    ws.addEventListener('open', () => {
-        console.log (`connected to server at ${serverWSAddress}`)
-    });
-    // on close:
-    ws.addEventListener('close', () => {
-        console.log("server connection closed");
-        // localSend.close();
-        // localReceive.close();
-    });
-    // handle messages
-    ws.addEventListener('message', (data) => {
-        let msg = JSON.parse(data.data);
-        // console.log(msg)
-        switch (msg.cmd){
-            // in case you want to receive other data and route it elsewhere
-            case 'OSC':
-                // send formatted OSC message locally (i.e. a pd patch)
-
-                localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
+            
+            
+        break;
+        // respond to ping from server with a pong
+        case 'ping':
+            let pong = JSON.stringify({
+                cmd: 'pong',
+                data: msg.data,
+                name: name
+            })
+            ws.send(pong)
+            // console.log(pong)
+        break
+        case 'pingReport':
+            // console.log(msg.data)
+            let remotes = Object.keys(msg.data)
+            for(i=0;i<remotes.length;i++){
+                console.log(remotes[i], msg.data[remotes[i]])
+                let ap = '/latency/' + remotes[i]
+                let tts = msg.data[remotes[i]]
+                localSend.send(ap, tts, (err) => {
                     if (err) console.error(err);
-                });  
-                
-             
-            break;
+                }); 
+            }
 
-            // respond to ping from server with a pong
-            case 'ping':
-                let pong = JSON.stringify({
-                    cmd: 'pong',
-                    data: msg.data,
-                    name: name
-                })
-                ws.send(pong)
-                // console.log(pong)
-            break
+        break
+        default:
+            // inform user that unknown message commang used
+            console.log('client sent message with unknown cmd: ' + msg.cmd)
+        break;
+    }
+});
 
-            default:
-                // inform user that unknown message commang used
-                console.log('client sent message with unknown cmd: ' + msg.cmd)
-            break;
+
+const localReceive = new Server(localReceivePort, '0.0.0.0');
+// once running, inform user
+localReceive.on('listening', () => {    
+    console.log('Configure your local pd patch(es) to send on UDP Port ' + localReceivePort)
+})
+
+console.log('')
+// handle message:  
+localReceive.on('message', (msg) => {
+    // validate correct OSC address pattern syntax
+    // console.log(msg)
+    if(msg[0].charAt(0) === '/'){
+        // get the address pattern
+        ap = '/' + name + msg[0]
+        // trim the address pattern
+        msg.shift()
+        // construct object to send over websocket
+        message = {
+            // cmd allows us to send other types of messages, ask Michael for more info if curious!
+            cmd: 'OSC',
+            date: new Date().toUTCString(),
+            addressPattern: ap,
+            // this is the data!
+            typeTagString: msg,
         }
-    });
+        // inform user
+        // console.log('sending to remote:\n', message)
+        // package data for the web, send it!
+        // if(ws){
+            ws.send(JSON.stringify(message))
+        // }
 
+    } else {
+        // if incoming OSC message does not have an address pattern, refuse to handle it
+        console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
+    }
+});
 
-    // Commented this out so that the 'listener' doesn't send data back into the network. we can revisit this another time, oc. 
-    //  // ***** Local UDP-Receiver ******* //
-    // // this is used by either mode!
-    // let localReceivePort;
-    // if(mode === 'server'){
-    //     localReceivePort = 7402
-    // } else if (mode === 'client'){
-    //     localReceivePort = 7404
-    // }
-    // const localReceive = new Server(localReceivePort, '0.0.0.0');
-    // // once running, inform user
-    // localReceive.on('listening', () => {    
-    //     console.log('Configure your local pd patch(es) to send on UDP Port ' + localReceivePort)
-    // })
-    // // handle message:  
-    // localReceive.on('message', (msg) => {
-    //     // validate correct OSC address pattern syntax
-    //     // console.log(msg)
-    //     if(msg[0].charAt(0) === '/'){
-    //         // get the address pattern
-    //         ap = msg[0]
-    //         // trim the address pattern
-    //         msg.shift()
-    //         // construct object to send over websocket
-    //         message = {
-    //             // cmd allows us to send other types of messages, ask Michael for more info if curious!
-    //             cmd: 'OSC',
-    //             date: new Date().toUTCString(),
-    //             addressPattern: ap,
-    //             // this is the data!
-    //             typeTagString: msg
-    //         }
-    //         // inform user
-    //         // console.log('sending to remote:\n', message)
-    //         // package data for the web, send it!
-    //         // if(ws){
-    //             ws.send(JSON.stringify(message))
-    //         // }
-
-    //     } else {
-    //         // if incoming OSC message does not have an address pattern, refuse to handle it
-    //         console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
-    //     }
-    // });
-
-}
-
-
-
-    else {
-    // app needs to know what mode to run in
-    console.log('error! first argument must be either \'client\' or \'server\'')
-    // stop node process
-    process.exit()
-}
-
-// TODO:
-// Max.addHandler('sendMSG', (OSC_AP, OSC_Data) => {
-
-// })
-
-
-
-if(process.argv[2] == 'michael'){
-    // console.log('running twitch spy')
-    // const get = require('simple-get')
-    // var Interval = require('Interval');
-    // // auth
-    // require('dotenv').config()
-
-    // const clientId = process.env.TWITCH_ID
-    // const twitchLogin = process.env.TWITCH_LOGIN
-    // const clientSecret = process.env.TWITCH_SECRET
-    // const bearerRequest = 'https://id.twitch.tv/oauth2/token?client_id=' + clientId + '&client_secret=' + clientSecret + '&grant_type=client_credentials'
-    // const axios = require('axios');
-
-    // // get the Bearer access token
-    // let accessToken
-    // let runner;
-    // let intervalLength = 2500
-    // axios({
-    // method: 'POST',
-    // url: bearerRequest
-    // })
-    // .then(function (response) {
-    // accessToken = response.data.access_token
-
-    // //get an initial stream stats before running at an interval
-    // getStreamStats(clientId, accessToken)
-    // // create an Interval runner
-    // // see https://www.npmjs.com/package/Interval
-    // runner = Interval.run(function() {
-    //     getStreamStats(clientId, accessToken)
-    // }, intervalLength);
-    // })
-    // .catch(function (error) {
-    // console.log(error);
-    // });
-
-
-
-    
-
-    // function getStreamStats(){
-    // get({
-    //     url: 'https://api.twitch.tv/helix/streams?user_login=' + twitchLogin,
-    //     method: 'GET',
-    //     headers: {
-    //     'Authorization': `Bearer ` + accessToken,
-    //     'Client-Id': clientId
-    //     },
-    //     json: true
-    // }, function (err, res) {
-    //     if (err) throw err
-    //     res.setTimeout(4500)    
-    //     res.on('data', function (chunk) {
-    //     let result = JSON.parse(chunk).data[0]
-    //     delete result['tag_ids'];
-    //     delete result['thumbnail_url'];
-    //     delete result['id'];
-    //     delete result['user_id'];
-    //     delete result['game_id'];
-    //     delete result['game_name'];
-    //     result['poll_interval'] = intervalLength
-    //     // delete result['game_name'];
-    //     console.log(result)
-    //     })
-        
-    // })
-    // }
-
-}
