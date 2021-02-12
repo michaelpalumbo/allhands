@@ -686,8 +686,7 @@
 					"patching_rect" : [ 127.5, 59.0, 174.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 4.5, 40.0, 174.0, 23.0 ],
-					"tabmode" : 0,
-					"text" : "michael"
+					"tabmode" : 0
 				}
 
 			}
@@ -748,8 +747,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
