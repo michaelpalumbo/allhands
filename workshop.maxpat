@@ -63,7 +63,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1199.0, 1574.0, 50.0, 35.0 ],
-					"text" : "0.01507"
+					"text" : "0.266713"
 				}
 
 			}
@@ -170,7 +170,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 637.0, 1000.0, 237.833333333333371, 22.0 ],
-					"text" : "/knob_1 73.842484"
+					"text" : "/knob_2 33.872578"
 				}
 
 			}
@@ -219,7 +219,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 460.5, 1182.333333333333258, 50.0, 35.0 ],
-					"text" : "54.024543"
+					"text" : "47.648005"
 				}
 
 			}
@@ -232,7 +232,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 472.0, 1105.499999999999773, 50.0, 35.0 ],
-					"text" : "1.913929"
+					"text" : "33.872578"
 				}
 
 			}
@@ -278,7 +278,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 13.0,
 					"id" : "obj-69",
-					"items" : [ "none", ",", "/jorgen", ",", "/jia" ],
+					"items" : [ "none", ",", "/hryso", ",", "/racelar" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -320,7 +320,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 13.0,
 					"id" : "obj-63",
-					"items" : [ "none", ",", "/jorgen", ",", "/jia" ],
+					"items" : [ "none", ",", "/hryso", ",", "/racelar" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -437,7 +437,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 13.0,
 					"id" : "obj-71",
-					"items" : [ "none", ",", "/jorgen", ",", "/jia" ],
+					"items" : [ "none", ",", "/hryso", ",", "/racelar" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2015,7 +2015,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 1518.0, 1311.5, 68.0, 23.0 ],
-					"sig" : 54.0
+					"sig" : 47.0
 				}
 
 			}
@@ -2268,7 +2268,7 @@
 					"patching_rect" : [ 1582.0, 1557.5, 68.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 639.0, 511.5, 68.0, 23.0 ],
-					"sig" : 0.015070310727818
+					"sig" : 0.266713209978239
 				}
 
 			}
@@ -2912,7 +2912,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 275.0, 186.0, 153.0, 22.0 ],
+					"patching_rect" : [ 281.0, 175.5, 153.0, 22.0 ],
 					"text" : "loadmess script npm install"
 				}
 

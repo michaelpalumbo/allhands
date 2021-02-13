@@ -1,6 +1,8 @@
-*NOTE As of Jan 6 2021: project name changed from wspd to 'allhands'. In the process of resolving any conflicts as result of the name change. for now, see the [releases](https://github.com/michaelpalumbo/allhands/releases) page*
+*allhands*, Michael Palumbo, February 2021
 
-**This document is written in markdown, so I highly recommend reading it in the browser at this link:** https://github.com/michaelpalumbo/allhands/README.md
+*See most-recent version(s) on the allhands [releases](https://github.com/michaelpalumbo/allhands/releases) page*
+
+**This document is written in markdown, so instead of reading the raw text, I highly recommend reading it in the browser at this link:** https://github.com/michaelpalumbo/allhands/README.md
 
 This app acts as a bridge between multiple computers over the web, enables very fast transmission of controller data between, for example, a puredata patch on one computer, and touchdesigner on the other. 
 
@@ -41,7 +43,7 @@ and then hit enter to start the program
 ```shell
 Configure your local program(s) to listen on UDP Port 7403
 Configure your local program(s) to send on UDP Port 7404
-connected to server at ws://evening-retreat-29342.herokuapp.com/8081
+connected to server at ws://allhands.herokuapp.com/8081
 ```
 
 3. You should test to make sure the program is sending/receiving data. Open a second terminal window, and make sure it is also pointed at the wspd directory. Then run 
