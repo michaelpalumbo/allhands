@@ -1,73 +1,58 @@
-*NOTE As of Jan 6 2021: project name changed from wspd to 'allhands'. In the process of resolving any conflicts as result of the name change. for now, see the [releases](https://github.com/michaelpalumbo/allhands/releases) page*
+<h1 align="center">Welcome to allhands 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.27-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/michaelpalumbo/allhands#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/michaelpalumbo/allhands/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/michaelpalumbo/allhands/blob/master/LICENSE" target="_blank">
+    <img alt="License: ISC" src="https://img.shields.io/github/license/michaelpalumbo/allhands" />
+  </a>
+</p>
 
-**For the sake of formatting, I highly recommend reading this document at** https://github.com/michaelpalumbo/wspd/blob/placeholder/README.md
+> This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.
 
-This app acts as a bridge between multiple computers over the web, enables very fast transmission of controller data between, for example, two puredata patches. 
+### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
 
-Basically, you run this program, and then with whatever software you're using to send/receive Open Sound Control messages, have it send on port 7404, and listen on port 7403.
+## Install
 
-Since first starting the code, it's become a lot more general than only being used for puredata, but I didn't bother changing the name of the repository!
-
-### Instructions
-1. Install nodejs
-2. Download the latest release of this code, making sure its the 'placeholder' version: https://github.com/michaelpalumbo/wspd/releases
-3. Open terminal, cd into the downloaded folder 'wspd' (the rest of this readme assumes that you're working from this directory) 
-
-```shell
-cd /full/path/to/the/folder/named/wspd
-```
-4. verify nodejs is installed:
-
-```shell
-node -v
-```
-
-5. might need to install dependencies:
-
-```shell
-npm install
+```sh
+npm install -g allhands
 ```
 
+## Usage
 
-### Usage
-
-1. in terminal, type 
-```shell
-node app.js --mode client --name yournamewithnospaces
+```sh
+allhands yourname
 ```
 
-and then hit enter to start the program
+## Run tests
 
-2. If it is running correctly, the terminal should report the following:
-
-```shell
-Configure your local program(s) to listen on UDP Port 7403
-Configure your local program(s) to send on UDP Port 7404
-connected to server at ws://evening-retreat-29342.herokuapp.com/8081
+```sh
+npm test
 ```
 
-3. You should test to make sure the program is sending/receiving data. Open a second terminal window, and make sure it is also pointed at the wspd directory. Then run 
+## Author
 
-```shell
-node tester.js
-```
+👤 **Michael Palumbo**
 
-This program will send data over the UDP port 7404 to the app.js program, which will then send data over the internet to the server. The server is currently written to broadcast all received messages back to each app.js instance. So, check the first terminal window where youu're running app.js and make sure it is printing data. It should look something like this:
+* Website: www.palumbomichael.com
+* Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
 
-```JSON
-{
-  cmd: 'OSC',
-  date: 'Sat, 21 Nov 2020 22:59:45 GMT',
-  addressPattern: '/michael/testmsg',
-  typeTagString: [ 0.01821008510887623 ]
-}
-```
+## 🤝 Contributing
 
-### OSC Syntax
-The nodejs app assumes that all incoming data on UDP follows the OSC format of an Address Pattern followed by Type Tag String. Examples:
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/michaelpalumbo/allhands/issues). 
 
-- /index 3
-- /position 0.3 0.6 0.8
-- /msg hello world
+## Show your support
 
-If you do not supply an address pattern using the '/', the app will ignore the message. Address patterns can have multiple routes, i.e. /sound/adsr/a
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2021 [Michael Palumbo](https://github.com/michaelpalumbo).<br />
+This project is [ISC](https://github.com/michaelpalumbo/allhands/blob/master/LICENSE) licensed.
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
