@@ -14,6 +14,7 @@
 
 > With allhands, you can send Open Sound Control (OSC) data over the web, without needing to the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
 
+
 ### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
 
 ## Install
@@ -22,6 +23,7 @@
 npm install -g allhands
 ```
 
+> If you get an error when installing related to permissions, visit this [tutorial for how to install packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 ## Usage
 
 ```sh
