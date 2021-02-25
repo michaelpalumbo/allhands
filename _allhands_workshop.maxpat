@@ -40,6 +40,34 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-37",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 417.5, 132.0, 66.0, 22.0 ],
+					"text" : "npm install"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-16",
+					"maxclass" : "textbutton",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 377.0, 106.0, 100.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 115.5, 6.0, 100.0, 20.0 ],
+					"text" : "INSTALL",
+					"texton" : "INSTALL"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontname" : "Lato",
 					"fontsize" : 12.0,
 					"hidden" : 1,
@@ -660,7 +688,7 @@
 					"patching_rect" : [ 168.0, 564.0, 151.0, 114.0 ],
 					"presentation" : 1,
 					"presentation_linecount" : 5,
-					"presentation_rect" : [ 948.0, 642.5, 228.140014000000519, 87.0 ],
+					"presentation_rect" : [ 948.0, 642.5, 230.0, 87.0 ],
 					"text" : "make the UI not clickable until something is mapped into it and data comes in?\n\nbut also watch to see if they click it (might be useful)\n"
 				}
 
@@ -1279,8 +1307,8 @@
 			}
 , 			{
 				"box" : 				{
-					"addpoints_with_curve" : [ 0.0, 0.0, 0, 0.0, 15.973404255319116, 0.986666666666667, 0, -0.8, 44.117021276595707, 0.0, 0, 0.75 ],
-					"domain" : 143.0,
+					"addpoints_with_curve" : [ 0.0, 0.0, 0, 0.0, 55.851063829787122, 0.986666666666667, 0, -0.8, 154.255319148936053, 0.0, 0, 0.75 ],
+					"domain" : 500.0,
 					"id" : "obj-146",
 					"maxclass" : "function",
 					"mode" : 1,
@@ -1750,7 +1778,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 408.0, 1347.5, 68.0, 23.0 ],
-					"sig" : 41.0
+					"sig" : 45.0
 				}
 
 			}
@@ -2001,7 +2029,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 469.660004000000072, 1619.5, 68.0, 23.0 ],
-					"sig" : 0.875984251968504
+					"sig" : 0.75
 				}
 
 			}
@@ -2020,7 +2048,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 440.0, 1567.5, 68.0, 23.0 ],
-					"sig" : 879.999999507248162
+					"sig" : 987.766601866970404
 				}
 
 			}
@@ -2948,8 +2976,7 @@
 					"patching_rect" : [ 127.5, 59.0, 174.0, 23.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 5.5, 67.0, 174.0, 23.0 ],
-					"tabmode" : 0,
-					"text" : "michael"
+					"tabmode" : 0
 				}
 
 			}
@@ -3010,8 +3037,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 1
 					}
 ,
@@ -3197,6 +3222,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-146", 0 ],
 					"source" : [ "obj-159", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-37", 0 ],
+					"source" : [ "obj-16", 1 ]
 				}
 
 			}
@@ -3478,6 +3510,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-150", 0 ],
 					"source" : [ "obj-36", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-37", 0 ]
 				}
 
 			}
