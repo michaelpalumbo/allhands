@@ -18,6 +18,7 @@
 ### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
 
 ## Install
+Open a terminal window, type the following and hit enter.
 
 ```sh
 npm install -g allhands
@@ -25,6 +26,7 @@ npm install -g allhands
 
 > If you get an error when installing related to permissions, visit this [tutorial for how to install packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 ## Usage
+In a terminal window, type the following and hit enter:
 
 ```sh
 allhands yourname
