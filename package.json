@@ -1,12 +1,11 @@
 {
   "name": "allhands",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
   "main": "app.js",
-  "preferGlobal": true,
+  "preferGlobal": false,
   "scripts": {
-    "test": "node ./bin/tester.js",
-    "start": "node ./bin/allhands.js"
+    "test": "node ./bin/tester.js"
   },
   "repository": {
     "type": "git",
@@ -23,20 +22,7 @@
   "homepage": "https://github.com/michaelpalumbo/allhands#readme",
   "dependencies": {
     "cli-progress": "^3.9.0",
-    "node-osc": "^5.1.0",
-<<<<<<< HEAD
-    "osc-min": "^1.1.2",
-    "progress": "^2.0.3",
-    "public-ip": "^4.0.3",
     "reconnecting-websocket": "^4.4.0",
-    "repeat": "^2.0.3",
-    "satelize": "^0.2.0",
-    "simple-get": "^4.0.0",
-=======
-    "readme-md-generator": "^1.0.0",
-    "reconnecting-websocket": "^4.4.0",
->>>>>>> nodemodule
-    "ws": "^7.2.5",
-    "yargs": "^16.1.1"
+    "ws": "^7.2.5"
   }
 }

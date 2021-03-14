@@ -1,0 +1,10 @@
+npm ERR! code EJSONPARSE
+npm ERR! file /Users/michaelpalumbo/allhands/package.json
+npm ERR! Merge conflict detected in your package.json.
+npm ERR! 
+npm ERR! Please resolve the package.json conflict and retry the command:
+npm ERR! 
+npm ERR! $ /Applications/Ableton Live 11 Suite.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/Node For Max/source/bin/osx/node/node /Applications/Ableton Live 11 Suite.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/Node For Max/source/bin/npm/bin/npm-cli.js install --scripts-prepend-node-path=true
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/michaelpalumbo/.npm/_logs/2021-03-14T21_26_56_469Z-debug.log
