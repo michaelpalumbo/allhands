@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *NOTE As of Jan 6 2021: project name changed from wspd to 'allhands'. In the process of resolving any conflicts as result of the name change. for now, see the [releases](https://github.com/michaelpalumbo/allhands/releases) page*
 
 **This document is written in markdown, so I highly recommend reading it in the browser at this link:** https://github.com/michaelpalumbo/allhands/README.md
@@ -13,59 +14,74 @@ Basically, you run this program, and then with whatever software you're using to
 
 ```shell
 cd /full/path/to/the/folder/named/allhands-v0.0.x
+=======
+<h1 align="center">Welcome to allhands 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.27-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/michaelpalumbo/allhands#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/michaelpalumbo/allhands/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/michaelpalumbo/allhands/blob/master/LICENSE" target="_blank">
+    <img alt="License: ISC" src="https://img.shields.io/github/license/michaelpalumbo/allhands" />
+  </a>
+</p>
+
+> With allhands, you can send Open Sound Control (OSC) data over the web, without needing to the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
+
+
+### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
+
+## Install
+Open a terminal window, type the following and hit enter.
+
+```sh
+npm install -g allhands
+>>>>>>> nodemodule
 ```
-4. verify nodejs is installed:
 
-```shell
-node -v
+> If you get an error when installing related to permissions, visit this [tutorial for how to install packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+## Usage
+In a terminal window, type the following and hit enter:
+
+```sh
+allhands yourname
 ```
 
-5. might need to install dependencies:
+Send OSC messsages to your friends (and anyone else running allhands) on **port 7404** (localhost).
 
-```shell
-npm install
-```
-
-
+<<<<<<< HEAD
 ### Usage
 
 1. in terminal, type 
 ```shell
 node allhands.js --mode client --name yournamewithnospaces
 ```
+=======
+Receive OSC messages from the allhands network on **port 7403**.
+>>>>>>> nodemodule
 
-and then hit enter to start the program
+## Author
 
-2. If it is running correctly, the terminal should report the following:
+👤 **Michael Palumbo**
 
-```shell
-Configure your local program(s) to listen on UDP Port 7403
-Configure your local program(s) to send on UDP Port 7404
-connected to server at ws://evening-retreat-29342.herokuapp.com/8081
-```
+* Website: www.palumbomichael.com
+* Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
 
-3. You should test to make sure the program is sending/receiving data. Open a second terminal window, and make sure it is also pointed at the wspd directory. Then run 
+## 🤝 Contributing
 
-```shell
-node tester.js
-```
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/michaelpalumbo/allhands/issues). 
 
-This program will send data over the UDP port 7404 to the app.js program, which will then send data over the internet to the server. The server is currently written to broadcast all received messages back to each app.js instance. So, check the first terminal window where youu're running app.js and make sure it is printing data. It should look something like this:
+## Show your support
 
-```JSON
-{
-  cmd: 'OSC',
-  date: 'Sat, 21 Nov 2020 22:59:45 GMT',
-  addressPattern: '/michael/testmsg',
-  typeTagString: [ 0.01821008510887623 ]
-}
-```
+Give a ⭐️ if this project helped you!
 
-### OSC Syntax
-The nodejs app assumes that all incoming data on UDP follows the OSC format of an Address Pattern followed by Type Tag String. Examples:
+## 📝 License
 
-- /index 3
-- /position 0.3 0.6 0.8
-- /msg hello world
+Copyright © 2021 [Michael Palumbo](https://github.com/michaelpalumbo).<br />
+This project is [ISC](https://github.com/michaelpalumbo/allhands/blob/master/LICENSE) licensed.
 
-If you do not supply an address pattern using the '/', the app will ignore the message. Address patterns can have multiple routes, i.e. /sound/adsr/a
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
