@@ -3,13 +3,21 @@ const cliProgress = require('cli-progress');
 const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
+const {argv} = require('yargs')
 
+if(argv.options){
+    console.log('allhands help\n\ncli args:\n\n     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they\'re being received by allhands)\n\n      --log=true  : print all incoming messages to the terminal ')
+    process.exit()
+}
 let host = 'allhandsjs.herokuapp.com'
 
 // we will now add a name to the address pattern of all local OSC messages that are to be sent over IP
 let name;
 
 if(!process.argv[2]){
+    console.log('error: need to specify your name when running the app (one string, no spaces. i.e. sakamoto)\n\nrun:\n\nallhands sakamoto')
+    process.exit()
+} else if (process.argv[2] == '--local=true' || process.argv[2] == '--local=false' || process.argv[2] == '--log=true' || process.argv[2] == '--log=false'){
     console.log('error: need to specify your name when running the app (one string, no spaces. i.e. sakamoto)\n\nrun:\n\nallhands sakamoto')
     process.exit()
 } else {
@@ -23,7 +31,7 @@ let localSendPort = 7404
 let ws; // keep this here
 
 localSend = new Client('127.0.0.1', localSendPort);
-console.log('Configure your local pd patch(es) to listen on UDP Port ' + localSendPort)
+
 // run the app in client mode
 // ***** Websocket ******* //
 // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
@@ -49,17 +57,23 @@ ws = new ReconnectingWebSocket(serverWSAddress, [], rwsOptions);
 
 // start the progress bar with a total value of 200 and start value of 0
 herokuWakeProgress.start(100, 0);
-
+let progCount = 0
 // if the server responds with an error
 ws.addEventListener('error', () => {
-    console.log(`connection error: ${serverIP}`);
+    console.log(`contacting allhands cloud host, progress:`);
     herokuWakeProgress.update(10);
+    progCount = progCount + 5
 });
 // on successful connection to server:
 ws.addEventListener('open', () => {
     // stop the progress bar
+    let finalCount = 100 - progCount
+    herokuWakeProgress.update(finalCount);
     herokuWakeProgress.stop();
-    console.log (`connected to server at ${serverWSAddress}`)
+    console.log (`connected to allhands network!`)
+
+    console.log('\nlisten for OSC messages from allhands on port ' + localSendPort+ '\nsend OSC to allhands on port ' + localReceivePort)
+    console.log('\nto view startup options, quit and run again using:\nallhands --options')
 });
 // on close:
 ws.addEventListener('close', () => {
@@ -84,7 +98,9 @@ ws.addEventListener('message', (data) => {
 
             }
 
-            
+            if(argv.log == 'true'){
+                console.log(msg.addressPattern, msg.typeTagString)
+            }   
             
         break;
 
@@ -103,23 +119,14 @@ ws.addEventListener('message', (data) => {
     }
 });
 
-    // ***** Local UDP-Receiver ******* //
-// this is used by either mode!
-// let localReceivePort;
-// if(mode === 'server'){
-//     localReceivePort = 7402
-// } else if (mode === 'client'){
-//     localReceivePort = 7404
-// }
 const localReceive = new Server(localReceivePort, '0.0.0.0');
 // once running, inform user
 localReceive.on('listening', () => {    
-    console.log('Configure your local pd patch(es) to send on UDP Port ' + localReceivePort)
 })
 // handle message:  
 localReceive.on('message', (msg) => {
     // validate correct OSC address pattern syntax
-    // console.log(msg)
+    
     if(msg[0].charAt(0) === '/'){
         // get the address pattern
         ap = '/' + name + msg[0]
@@ -140,10 +147,12 @@ localReceive.on('message', (msg) => {
         // if(ws){
             ws.send(JSON.stringify(message))
         // }
-
+        if(argv.local == 'true'){
+            console.log(ap, msg)
+        }  
     } else {
         // if incoming OSC message does not have an address pattern, refuse to handle it
-        console.log('error, OSC Message must lead with an addressPattern\n\ni.e. /bioData')
+        console.log('error, outgoing OSC Message must lead with an addressPattern\n\ni.e. /bioData')
     }
 });
 
