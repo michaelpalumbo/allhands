@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const cliProgress = require('cli-progress');
 const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
