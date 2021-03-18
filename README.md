@@ -25,6 +25,7 @@ npm install -g allhands
 ```
 
 > If you get an error when installing related to permissions, visit this [tutorial for how to install packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
 ## Usage
 In a terminal window, type the following and hit enter:
 
@@ -36,12 +37,18 @@ Send OSC messsages to your friends (and anyone else running allhands) on **port 
 
 Receive OSC messages from the allhands network on **port 7403**.
 
+CLI Options:
+    --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they're being received by allhands)
+
+    --log=true    : print all incoming messages to the terminal 
+
 ## Author
 
 👤 **Michael Palumbo**
 
 * Website: www.palumbomichael.com
 * Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
+* Music: www.thispatcher.github.com
 
 ## 🤝 Contributing
 
