@@ -60,7 +60,7 @@ herokuWakeProgress.start(100, 0);
 let progCount = 0
 // if the server responds with an error
 ws.addEventListener('error', () => {
-    console.log(`contacting allhands cloud host, progress:`);
+    console.log(`\ncontacting allhands cloud host, progress:`);
     progCount = progCount + 5
     herokuWakeProgress.update(progCount);
 
