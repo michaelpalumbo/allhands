@@ -14,6 +14,9 @@
 
 > With allhands, you can send Open Sound Control (OSC) data over the web, without needing to the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
 
+## Caveats:
+If on OSX Catalina, and using zsh as your terminal, you'll need to make sure that nodejs is in your PATH. See [this page](https://www.kevinhooke.com/2020/03/22/macos-catalina-npm-global-installs-and-zsh/)
+
 
 ### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
 

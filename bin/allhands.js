@@ -61,8 +61,9 @@ let progCount = 0
 // if the server responds with an error
 ws.addEventListener('error', () => {
     console.log(`contacting allhands cloud host, progress:`);
-    herokuWakeProgress.update(10);
     progCount = progCount + 5
+    herokuWakeProgress.update(progCount);
+
 });
 // on successful connection to server:
 ws.addEventListener('open', () => {
