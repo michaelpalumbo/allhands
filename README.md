@@ -12,7 +12,7 @@
   </a>
 </p>
 
-> With allhands, you can send Open Sound Control (OSC) data over the web, without needing to the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
+> With allhands, you can send Open Sound Control (OSC) data over the web, without needing to know the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
 
 
 ### 🏠 [Homepage](https://github.com/michaelpalumbo/allhands#readme)
