@@ -5,6 +5,7 @@ const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 const {argv} = require('yargs')
 
+
 if(argv.options){
     console.log('allhands help\n\ncli args:\n\n     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they\'re being received by allhands)\n\n      --log=true  : print all incoming messages to the terminal ')
     process.exit()

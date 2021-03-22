@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>allhands Client</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+  </head>
+  <body>
+
+    <main class="app">
+        Enter your name, then click Connect<br>
+        <input type="text" id="myText" value="">
+        <button onclick="myFunction()">Connect</button>
+        <br>
+        
+        <!-- this is where outgoing messages will appear -->
+        <div id="localOSC"></div><br>
+
+        <!-- this is where incoming messages will appear -->
+        Incoming Messages from allhands network:<br>
+        <ul id="console">
+        </ul>
+
+
+          
+
+        <!-- <button onclick="window.app.setFullscreen(true)">Enter fullscreen</button>
+        <button onclick="window.app.setFullscreen(false)">Exit fullscreen</button> -->
+    </main>
+  </body>
+
+
+
+    <script>
+    function myFunction() {
+        var x = document.getElementById("myText").value
+        // replace spaces with underscores
+        x = x.split(' ').join('_')
+        document.getElementById("myText").value = x; 
+
+        // if (x.indexOf(' ') && x.indexOf(' ') !== -1){
+        //     x = x.split(' ').join('_')
+
+        // }
+        window.app.connect(x)
+    }
+    
+    let socket = new WebSocket("ws://127.0.0.1:8082");
+
+    socket.onopen = function(e) {
+        
+    };
+
+    socket.onmessage = function(event) {
+        
+
+        let msg = JSON.parse(event.data)
+        switch (msg.cmd){
+            case 'localOSC':
+                document.getElementById('localOSC').innerHTML = 'Outgoing message: ' + msg.data[0] + ' ' + msg.data[1];
+            break
+
+            case 'OSC':
+                // remove 10th element
+                var ul = document.getElementById('console');
+                if(ul.childNodes.length > 9){
+                    var liToKill = ul.childNodes[0];
+                    liToKill.parentNode.removeChild( liToKill );
+                }
+
+                // add incoming OSC to list
+                var node = document.createElement("LI");                 // Create a <li> node
+                var textnode = document.createTextNode(msg.data[0] + ' ' + msg.data[1]);         // Create a text node
+                node.appendChild(textnode);                              // Append the text to <li>
+                document.getElementById("console").appendChild(node);   
+                // document.getElementById('OSC').innerHTML = 'Outgoing message: ' + msg.data[0] + ' ' + msg.data[1];
+            break
+        }
+    };
+
+    socket.onclose = function(event) {
+        if (event.wasClean) {
+            alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+        } else {
+            // e.g. server process killed or network down
+            // event.code is usually 1006 in this case
+            alert('[close] Connection died');
+        }
+    };
+
+    socket.onerror = function(error) {
+        alert(`[error] ${error.message}`);
+    };
+    </script>
+
+</html>
