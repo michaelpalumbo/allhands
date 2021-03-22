@@ -100,14 +100,12 @@ function createWindow () {
         //herokuWakeProgress.start(100, 0);
 
         let progCount = 0
-        sendToApp("connectProgress", progCount)
 
         // if the server responds with an error
         ws.addEventListener('error', () => {
             console.log(`\ncontacting allhands cloud host, progress:`);
             progCount = progCount + 5
             herokuWakeProgress.update(progCount);
-            sendToApp("connectProgress", progCount)
         });
         // on successful connection to server:
         ws.addEventListener('open', () => {
@@ -116,13 +114,15 @@ function createWindow () {
             //herokuWakeProgress.update(finalCount);
             //herokuWakeProgress.stop();
             //console.log (`connected to allhands network!`)
-            sendToApp("toConsole", "connected to allhands network!")
+            sendToApp("connectProgress", 'Connected to allhands network!')
             //console.log('\nlisten for OSC messages from allhands on port ' + localSendPort+ '\nsend OSC to allhands on port ' + localReceivePort)
             //console.log('\nto view startup options, quit and run again using:\nallhands --options')
         });
         // on close:
         ws.addEventListener('close', () => {
             console.log("server connection closed");
+            sendToApp("connectProgress", 'Disconnected from allhands network!')
+
             // start the progress bar with a total value of 200 and start value of 0
             herokuWakeProgress.start(100, 0);
             // localSend.close();

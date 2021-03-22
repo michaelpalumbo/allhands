@@ -12,12 +12,13 @@
         <input type="text" id="myText" value="">
         <button onclick="myFunction()">Connect</button>
         <br>
+        <div id="connectProgress"></div>
         
         <!-- this is where outgoing messages will appear -->
         <div id="localOSC"></div><br>
 
         <!-- this is where incoming messages will appear -->
-        Incoming Messages from allhands network:<br>
+        Control messages from other allhands users will display here:<br>
         <ul id="console">
         </ul>
 
@@ -43,6 +44,8 @@
 
         // }
         window.app.connect(x)
+        document.getElementById('connectProgress').innerHTML = 'Connecting to network, please wait up to 20 seconds';
+
     }
     
     let socket = new WebSocket("ws://127.0.0.1:8082");
@@ -75,6 +78,12 @@
                 document.getElementById("console").appendChild(node);   
                 // document.getElementById('OSC').innerHTML = 'Outgoing message: ' + msg.data[0] + ' ' + msg.data[1];
             break
+
+            case 'connectProgress':
+                document.getElementById('connectProgress').innerHTML = msg.data
+
+
+            break
         }
     };
 
@@ -91,6 +100,8 @@
     socket.onerror = function(error) {
         alert(`[error] ${error.message}`);
     };
+
+    
     </script>
 
 </html>
