@@ -6,7 +6,7 @@ const ReconnectingWebSocket = require('reconnecting-websocket');
 const {argv} = require('yargs')
 
 if(argv.options){
-    console.log('allhands help\n\ncli args:\n\n     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they\'re being received by allhands)\n\n      --log=true  : print all incoming messages to the terminal ')
+    console.log('allhands help\n\ncli args:\n\n     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they\'re being received by allhands)\n\n      --log=true  : print all incoming messages to the terminal \n\n       --frogs=true : ping each other as frogs by a river    \n\n --croakTime : croaking frequency')
     process.exit()
 }
 let host = 'allhandsjs.herokuapp.com'
@@ -120,6 +120,28 @@ ws.addEventListener('message', (data) => {
     }
 });
 
+if(argv.frogs == 'true'){
+
+    var myVar = setInterval(myTimer, argv.croakTime);
+
+    function myTimer() {
+        
+        message = {
+            // cmd allows us to send other types of messages, ask Michael for more info if curious!
+            cmd: 'OSC',
+            date: new Date().toUTCString(),
+            addressPattern: 'frog',
+            // this is the data!
+            typeTagString: name,
+        }
+        // inform user
+        // console.log('sending to remote:\n', message)
+        // package data for the web, send it!
+        // if(ws){
+            ws.send(JSON.stringify(message))
+        // }
+    }
+}   
 const localReceive = new Server(localReceivePort, '0.0.0.0');
 // once running, inform user
 localReceive.on('listening', () => {    
