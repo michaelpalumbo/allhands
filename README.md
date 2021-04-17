@@ -39,7 +39,7 @@ allhands typeYourNameHereWithNoSpaces
 Send OSC messsages to your friends (and anyone else running allhands) on **port 7403** (localhost).
 
 Receive OSC messages from the allhands network on **port 7404**:
-```127.0.0.1 7403```
+```127.0.0.1 7404```
 
 CLI Options:
     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they're being received by allhands)
