@@ -33,12 +33,13 @@ npm install -g allhands
 In a terminal window, type the following and hit enter:
 
 ```sh
-allhands yourname
+allhands typeYourNameHereWithNoSpaces
 ```
 
-Send OSC messsages to your friends (and anyone else running allhands) on **port 7404** (localhost).
+Send OSC messsages to your friends (and anyone else running allhands) on **port 7403** (localhost).
 
-Receive OSC messages from the allhands network on **port 7403**.
+Receive OSC messages from the allhands network on **port 7404**:
+```127.0.0.1 7403```
 
 CLI Options:
     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they're being received by allhands)

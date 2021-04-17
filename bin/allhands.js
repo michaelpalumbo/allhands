@@ -27,6 +27,15 @@ if(!process.argv[2]){
 let localReceivePort = 7403
 let localSendPort = 7404
 
+if(argv.inPort){
+    localReceivePort = argv.inPort
+}   
+
+if(argv.outPort){
+    localSendPort = argv.outPort
+}   
+
+
 
 let ws; // keep this here
 
@@ -115,7 +124,7 @@ ws.addEventListener('message', (data) => {
 
         default:
             // inform user that unknown message commang used
-            //console.log('client sent message with unknown cmd: ' + JSON.stringify(msg))
+            console.log('other messages: ' + JSON.stringify(msg))
         break;
     }
 });
