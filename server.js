@@ -8,9 +8,7 @@ var heartbeats = require('heartbeats');
 // a heart that beats every 1 second.
 var heart = heartbeats.createHeart(1000);
 
-if(argv.host){
-    host = argv.host
-}
+
 // we will now add a name to the address pattern of all local OSC messages that are to be sent over IP
 let name;
 if(argv.name){
@@ -21,24 +19,9 @@ let pings = {
 
 }
 
-let locations = {
-
-}
-
-let names = {
-
-}
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 8081 });
-
-// wss.on('connection', function connection(ws) {
-//   ws.on('message', function incoming(message) {
-//     console.log('received: %s', message);
-//   });
-
-//   ws.send('something');
-// });
 
 wss.on('connection', function connection(ws, req, client) {
     let thisName
