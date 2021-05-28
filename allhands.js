@@ -9,19 +9,25 @@ if(argv.options){
     console.log('allhands help\n\ncli args:\n\n     --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they\'re being received by allhands)\n\n      --log=true  : print all incoming messages to the terminal ')
     process.exit()
 }
-let host = 'allhandsjs.herokuapp.com'
+
+let host;
+if(argv.server){
+    host = argv.server
+} else {
+    console.log('error: need to specify host IP. i.e.\nnpm start --name yourname --server localhost')
+    
+    process.exit()
+}
+
 
 // we will now add a name to the address pattern of all local OSC messages that are to be sent over IP
 let name;
 
-if(!process.argv[2]){
-    console.log('error: need to specify your name when running the app (one string, no spaces. i.e. sakamoto)\n\nrun:\n\nallhands sakamoto')
-    process.exit()
-} else if (process.argv[2] == '--local=true' || process.argv[2] == '--local=false' || process.argv[2] == '--log=true' || process.argv[2] == '--log=false'){
-    console.log('error: need to specify your name when running the app (one string, no spaces. i.e. sakamoto)\n\nrun:\n\nallhands sakamoto')
+if(!argv.name){
+    console.log('error: need to provide your name so that others can route your specific data (one string, no spaces. i.e. "sakamoto")\n\nrun:\n\nnpm start --name sakamoto --server hostIPAddress')
     process.exit()
 } else {
-    name = process.argv[2]
+    name = argv.name
 }
 // ***** Local UDP Send & Receive Config ******* //
 let localReceivePort = 7403
@@ -37,8 +43,8 @@ localSend = new Client('127.0.0.1', localSendPort);
 // WebSocket that will automatically attempt to reconnect if the connection is closed, or if the remote server goes down
 
 const serverIP = host
-const serverPort = '8081';
-const serverWSAddress = `ws://${serverIP}/${serverPort}`;
+const serverPort = 8081;
+const serverWSAddress = `ws://${serverIP}:${serverPort}`;
 // options for the reconnecting websocket
 const rwsOptions = {
     // make rws use the webSocket module implementation
@@ -60,7 +66,7 @@ herokuWakeProgress.start(100, 0);
 let progCount = 0
 // if the server responds with an error
 ws.addEventListener('error', () => {
-    console.log(`\ncontacting allhands cloud host, progress:`);
+    console.log(`\ncontacting allhands server, progress:`);
     progCount = progCount + 5
     herokuWakeProgress.update(progCount);
 
@@ -74,7 +80,7 @@ ws.addEventListener('open', () => {
     console.log (`connected to allhands network!`)
 
     console.log('\nlisten for OSC messages from allhands on port ' + localSendPort+ '\nsend OSC to allhands on port ' + localReceivePort)
-    console.log('\nto view startup options, quit and run again using:\nallhands --options')
+    //console.log('\nto view startup options, quit and run again using:\nallhands --options')
 });
 // on close:
 ws.addEventListener('close', () => {
@@ -95,13 +101,14 @@ ws.addEventListener('message', (data) => {
             if(msg.addressPattern.split('/')[1] != name){
                 localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
+                    console.log('\nincoming data from others',msg.addressPattern, msg.typeTagString)
                 }); 
 
             }
 
-            if(argv.log == 'true'){
-                console.log(msg.addressPattern, msg.typeTagString)
-            }   
+            // if(argv.log == 'true'){
+                
+            // }   
             
         break;
 
@@ -148,12 +155,12 @@ localReceive.on('message', (msg) => {
         // if(ws){
             ws.send(JSON.stringify(message))
         // }
-        if(argv.local == 'true'){
-            console.log(ap, msg)
-        }  
+        // if(argv.local == 'true'){
+            console.log('\nYour outgoing data:', ap, msg)
+        // }  
     } else {
         // if incoming OSC message does not have an address pattern, refuse to handle it
-        console.log('error, outgoing OSC Message must lead with an addressPattern\n\ni.e. /bioData')
+        console.log('error, outgoing OSC Message must lead with a routing address\n\ni.e. /bioData')
     }
 });
 

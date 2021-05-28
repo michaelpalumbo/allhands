@@ -1,10 +1,8 @@
-// note: this version is for running wspd's server as a cloud instance on heroku, so to push updates, use:
-// git push heroku placeholder:master
+// note: this version is for running allhands' server locally
 
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
-const satelize = require('satelize');
 // alternative to setInterval:
 var heartbeats = require('heartbeats');
 // a heart that beats every 1 second.
@@ -31,16 +29,17 @@ let names = {
 
 }
 const WebSocket = require('ws');
-let ws; // keep this here
 
-// run the serverconst WebSocket = require('ws');
-const app = require('express')()
-const http = require('http').createServer(app);;
+const wss = new WebSocket.Server({ port: 8081 });
 
-let listenPort = (process.env.PORT || 8081)
-const wss = new WebSocket.Server({ 'server': http, clientTracking: true });
-http.listen(listenPort, function(){
-})
+// wss.on('connection', function connection(ws) {
+//   ws.on('message', function incoming(message) {
+//     console.log('received: %s', message);
+//   });
+
+//   ws.send('something');
+// });
+
 wss.on('connection', function connection(ws, req, client) {
     let thisName
     
@@ -71,16 +70,7 @@ wss.on('connection', function connection(ws, req, client) {
             // gather returning 'pong' time
             case 'thisMachine':
                 thisName = name
-                locations[msg.name] = msg.publicIPv4
 
-                satelize.satelize({ip: msg.publicIPv4}, function(err, payload) {
-                    // if used with expressjs
-                    // res.send(payload);
-                    // res.json...
-                    locations[msg.name] = payload
-
-                    
-                  });
             break
             case 'pong':
                 let pongTime = Date.now() - msg.data
@@ -100,6 +90,7 @@ wss.on('connection', function connection(ws, req, client) {
                 // names[name][msg.addressPattern] = []
 
                     // now using a broadcast server
+                console.log(msg)
                 broadcast(JSON.stringify(msg))
                 
             break;
@@ -132,28 +123,3 @@ function broadcast(msg){
 }
 
 
-// periodically send out the global ping/pong times
-//// note: not using this as of our latest meeting. instead pingpong times are sent via osc
-function reportPings(){
-    heart.createEvent(1, function(count, last){
-        let pingReport = JSON.stringify({
-            cmd: 'pingReport',
-            data: pings
-        })
-        broadcast(pingReport)
-        console.log(pingReport)
-    });
-}
-reportPings()
-
-function reportLocations(){
-    heart.createEvent(1, function(count, last){
-        let locationReport = JSON.stringify({
-            cmd: 'locationReport',
-            data: locations
-        })
-        broadcast(locationReport)
-        console.log(locationReport)
-    });
-}
-reportLocations()
