@@ -17,6 +17,3 @@ node_modules/
 # information for Eclipse / Flash Builder.
 .env
 node_modules
-
-.png
-.scap
