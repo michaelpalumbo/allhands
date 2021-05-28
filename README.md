@@ -52,7 +52,7 @@ CLI Options:
 
 * Website: www.palumbomichael.com
 * Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
-* Music: www.thispatcher.github.com
+* Music: www.thispatcher.bandcamp.com
 
 ## 🤝 Contributing
 
