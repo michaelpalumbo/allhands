@@ -1,0 +1,32 @@
+{
+  "name": "allhands",
+  "version": "0.0.41",
+  "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
+  "main": "app.js",
+  "preferGlobal": true,
+  "scripts": {
+    "test": "node ./bin/tester.js",
+    "start": "node ./bin/allhands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelpalumbo/allhands.git"
+  },
+  "bin": {
+    "allhands": "./bin/allhands.js"
+  },
+  "author": "Michael Palumbo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelpalumbo/allhands/issues"
+  },
+  "homepage": "https://github.com/michaelpalumbo/allhands#readme",
+  "dependencies": {
+    "cli-progress": "^3.9.0",
+    "node-osc": "^5.1.0",
+    "readme-md-generator": "^1.0.0",
+    "reconnecting-websocket": "^4.4.0",
+    "ws": "^7.4.4",
+    "yargs": "^16.2.0"
+  }
+}
