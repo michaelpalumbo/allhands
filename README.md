@@ -53,6 +53,9 @@ Next you'll be prompted with some configuration:
 
 6. Print Outgoing Data: If you want to display your outgoing controller data (sent from whichever application you're using, i.e. pd, ableton, etc), choose *Yes*
 
+
+allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to a server, you should open your preferred program and try sending/receiving data. Example code for puredata, max/msp, etc, can be found at https://github.com/michaelpalumbo/allhands-examples
+
 ## Author
 
 👤 **Michael Palumbo**
