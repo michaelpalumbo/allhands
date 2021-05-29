@@ -12,7 +12,7 @@
   </a>
 </p>
 
-> With allhands, you can send Open Sound Control (OSC) data over the web, without needing to know the destination IP address(es). Simply install allhands as a global package, run it, and then send OSC data to port 7404 (localhost)  and listen on port 7403. 
+> With allhands, you can send Open Sound Control (OSC) data over the web, without needing to know the destination IP address(es) of each person you are collaborating with. Simply install allhands as a global package, run it, and then from your chosen application (i.e. Max/MSP, pd, Ableton, Touchdesigner, etc) send OSC data to port 7404 and listen on port 7403. 
 
 ## Caveats:
 If on OSX Catalina, and using zsh as your terminal, you'll need to make sure that nodejs is in your PATH. See [this step-by-step before proceeding](https://medium.com/@andrewjaykeller/how-to-install-node-js-and-npm-with-macoss-new-terminal-zsh-e39b4a62d3d4)
@@ -23,7 +23,7 @@ If on OSX Catalina, and using zsh as your terminal, you'll need to make sure tha
 ## Install
 Open a terminal window, type the following and hit enter.
 
-```sh
+```shell
 npm install -g allhands
 ```
 
@@ -32,27 +32,34 @@ npm install -g allhands
 ## Usage
 In a terminal window, type the following and hit enter:
 
-```sh
-allhands typeYourNameHereWithNoSpaces
+```shell
+allhands
 ```
 
-Send OSC messsages to your friends (and anyone else running allhands) on **port 7403** (localhost).
+Next you'll be prompted with some configuration:
 
-Receive OSC messages from the allhands network on **port 7404**:
-```127.0.0.1 7404```
+1. Enter your name. 
+2. Choose the server type. 
 
-CLI Options:
-    --local=true  : This will print any messages you send to the allhands network in the terminal console (to verify they're being received by allhands)
+    1. Public: This will connect you to the main allhands network. Use this if you don't want to run your own allhands server, or if you want to send and receive controller data to/from strangers :)
+    2. Cloud: This is to connect to a specific cloud-based allhands server. You'll need the url of the cloud instance. 
+    3. Self-hosted: Choose this if you or someone in your group is running an allhands server on their own computer. If connecting to someone's server, you'll need their public IP address. 
 
-    --log=true    : print all incoming messages to the terminal 
+3. Outgoing Port: This is the port that you will use to *send data from your application* (i.e. Pd, Max, Ableton, etc) to an allhands network. The default is 7403 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
+
+4. Incoming Port: This is the port that your application should listen on for data coming from an allhands network. The default is 7404 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
+
+5. Print Incoming Data: If you want to display controller data coming in from someone else, choose *Yes*
+
+6. Print Outgoing Data: If you want to display your outgoing controller data (sent from whichever application you're using, i.e. pd, ableton, etc), choose *Yes*
 
 ## Author
 
 👤 **Michael Palumbo**
 
-* Website: www.palumbomichael.com
+* Website: [www.palumbomichael.com](www.palumbomichael.com)
 * Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
-* Music: www.thispatcher.bandcamp.com
+* Music: [thispatcher.bandcamp.com](https://thispatcher.bandcamp.com)
 
 ## 🤝 Contributing
 
