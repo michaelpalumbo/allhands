@@ -3,10 +3,7 @@ const cliProgress = require('cli-progress');
 const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
-const {argv} = require('yargs')
-
 const inquirer = require('inquirer');
-
 console.log('allhands client startup sequence:');
 
 const questions = [
