@@ -157,15 +157,15 @@ inquirer.prompt(questions).then((answers) => {
     // opt-in to tracking and sharing GPS data
     if(answers.transmitJSON == 'Yes'){
       thisNode.privacy = false
-      console.log(ip)
+      
       satelize.satelize({ip: ip}, function(err, payload) {
 
         // no need to keep track of the ip
         delete payload.ip
-
+        ip = null
         
         thisNode.location = payload
-        console.log(thisNode)
+        
       });
 
       // ipLocation(ip, function (err, data) {
@@ -285,6 +285,11 @@ function tryConnect(){
               
             break
 
+            // these are here to be ignored (lazy, i need to update the server to stop sending this)
+            case "locationReport":
+            case "pingReport":
+            break
+            
             default:
                 // inform user that unknown message commang used
                 console.log('other messages: ' + JSON.stringify(msg))
