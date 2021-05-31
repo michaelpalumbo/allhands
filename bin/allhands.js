@@ -4,6 +4,14 @@ const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 const inquirer = require('inquirer');
+const publicIp = require('public-ip');
+var satelize = require('satelize');
+let wss
+let ip
+(async () => {
+  ip = await publicIp.v4()
+})();
+
 console.log('allhands client startup sequence:');
 
 const questions = [
@@ -26,12 +34,12 @@ const questions = [
     type: 'rawlist',
     name: 'serverType',
     message: 'Choose the server type (type the number + hit Enter)',
-    choices: ['Public', 'Cloud', 'Self-Hosted'],
+    choices: ['Public', 'Cloud', 'Self-Hosted', 'localhost'],
   },
   {
     type: 'input',
     name: 'cloudAddress',
-    message: "type the cloud server url",
+    message: "type the cloud server url. i.e. servername.herokuapp.com",
     when(answers) {
       return answers.serverType == 'Cloud';
     },
@@ -76,13 +84,25 @@ const questions = [
     type: 'rawlist',
     name: 'logIncoming',
     message: 'Display incoming data from other users?',
-    choices: ['No', 'Yes'],
+    choices: ['No (Default)', 'Yes'],
   },
   {
     type: 'rawlist',
     name: 'logOutgoing',
     message: 'Display outgoing data (what you are sending)?',
-    choices: ['No', 'Yes'],
+    choices: ['No (Default)', 'Yes'],
+  },
+  {
+    type: 'rawlist',
+    name: 'transmitJSON',
+    message: 'Transmit JSON data locally?',
+    choices: ['No (Default)', 'Yes'],
+  },
+  {
+    type: 'rawlist',
+    name: 'shareGPS',
+    message: 'Opt-in to track and share GPS data with network?',
+    choices: ['No (Default)', 'Yes'],
   },
 ];
 let host;
@@ -91,9 +111,16 @@ let printIncoming;
 let printOutgoing;
 let localReceivePort = 7403
 let localSendPort = 7404
-
+let localWS;
+let thisNode = {
+  name: null,
+  privacy: true,
+  location: {}
+}
 inquirer.prompt(questions).then((answers) => {
 
+  name = answers.name
+  thisNode.name = name
     // configure server address
     if(answers.serverType == 'Cloud'){
         host = `ws://${answers.cloudAddress}/8081`
@@ -102,6 +129,8 @@ inquirer.prompt(questions).then((answers) => {
         console.log(host)
     } else if(answers.serverType == 'Public'){
         host = `ws://allhandsjs.herokuapp.com/8081`
+    } else if(answers.serverType == 'localhost'){
+      host = `ws://localhost:8081`
     }
 
     // configure local OSC UDP ports
@@ -119,8 +148,41 @@ inquirer.prompt(questions).then((answers) => {
     if(answers.logIncoming == 'Yes'){
         printIncoming = true
     }
-    name = answers.name
-    
+
+    // Run local ws server to pass all data via JSON
+    if(answers.transmitJSON == 'Yes'){
+        localWebsocket()
+    }
+
+    // opt-in to tracking and sharing GPS data
+    if(answers.transmitJSON == 'Yes'){
+      thisNode.privacy = false
+      console.log(ip)
+      satelize.satelize({ip: ip}, function(err, payload) {
+
+        // no need to keep track of the ip
+        delete payload.ip
+
+        
+        thisNode.location = payload
+        console.log(thisNode)
+      });
+
+      // ipLocation(ip, function (err, data) {
+      //   console.log(err,data)
+      //   // thisNode.lon = data.longitude
+      //   // thisNode.lat = data.latitude
+      // })
+      
+
+
+
+      
+
+
+    }
+
+
     tryConnect()
 });
 
@@ -171,7 +233,14 @@ function tryConnect(){
         console.log (`connected to an allhands network!`)
 
         console.log('\nlisten for OSC messages from allhands on port ' + localSendPort+ '\nsend OSC to allhands on port ' + localReceivePort)
-
+      
+      // send thisNode object to the server for tracking
+      let handShake = JSON.stringify({
+        cmd: 'thisNode',
+        date: Date.now(),
+        data: thisNode
+      })
+      ws.send(handShake)
     });
     // on close:
     ws.addEventListener('close', () => {
@@ -203,16 +272,17 @@ function tryConnect(){
             break;
 
             case "ping":
-                ws.send(JSON.stringify({
-                    cmd: 'pong',
-                    date: Date.now(),
-                    data: name
-                }))
+              ws.send(JSON.stringify({
+                  cmd: 'pong',
+                  date: Date.now(),
+                  data: name
+              }))
             break
 
-            case "locationReport":
-            case "pingReport":
-                // ignore these for now. 
+            case "network":
+              
+              localBroadcast(data.data)
+              
             break
 
             default:
@@ -261,4 +331,21 @@ function tryConnect(){
         }
     });
 
+}
+
+function localWebsocket(){
+  wss = new WebSocket.Server({ port: 8080 });
+
+  wss.on('connection', function connection(localWS) {
+    console.log('local websocket connected to an app on this machine')
+  });
+}
+
+
+function localBroadcast(msg){
+  wss.clients.forEach(function each(client) {
+  if (client.readyState === WebSocket.OPEN) {
+      client.send(msg);
+  }
+  });
 }
