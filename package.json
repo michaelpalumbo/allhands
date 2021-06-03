@@ -28,6 +28,7 @@
     "public-ip": "^4.0.4",
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",
+    "satelize": "^0.2.0",
     "ws": "^7.4.4"
   }
 }
