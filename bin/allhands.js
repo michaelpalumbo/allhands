@@ -161,6 +161,7 @@ inquirer.prompt(questions).then((answers) => {
       satelize.satelize({ip: ip}, function(err, payload) {
 
         // no need to keep track of the ip
+        console.log(payload)
         delete payload.ip
         delete payload.continent_code
         delete payload.continent.de
@@ -178,10 +179,11 @@ inquirer.prompt(questions).then((answers) => {
         delete payload.country['pt-BR']
         delete payload.country.ru
         delete payload.country['zh-CN']
+
         ip = null
         
         thisNode.location = payload
-        continent (en)
+        
         
       });
 
