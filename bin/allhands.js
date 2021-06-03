@@ -297,7 +297,7 @@ function tryConnect(){
             break
 
             case "network":
-              console.log('network data', data.data)
+              
               localBroadcast(data.data)
               
             break
