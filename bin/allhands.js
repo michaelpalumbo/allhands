@@ -162,9 +162,26 @@ inquirer.prompt(questions).then((answers) => {
 
         // no need to keep track of the ip
         delete payload.ip
+        delete payload.continent_code
+        delete payload.continent.de
+        delete payload.continent.es
+        delete payload.continent.fr
+        delete payload.continent.ja
+        delete payload.continent['pt-BR']
+        delete payload.continent.ru
+        delete payload.continent['zh-CN']
+        delete payload.country_code
+        delete payload.country.de
+        delete payload.country.es
+        delete payload.country.fr
+        delete payload.country.ja
+        delete payload.country['pt-BR']
+        delete payload.country.ru
+        delete payload.country['zh-CN']
         ip = null
         
         thisNode.location = payload
+        continent (en)
         
       });
 
@@ -280,7 +297,7 @@ function tryConnect(){
             break
 
             case "network":
-              
+              console.log('network data', data.data)
               localBroadcast(data.data)
               
             break

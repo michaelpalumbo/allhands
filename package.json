@@ -23,18 +23,10 @@
   "homepage": "https://github.com/michaelpalumbo/allhands#readme",
   "dependencies": {
     "cli-progress": "^3.9.0",
-    "enquirer": "^2.3.6",
     "inquirer": "^8.1.0",
-    "ip-location": "^1.0.1",
-    "longitude": "^0.1.2",
-    "multiselect": "^0.9.12",
     "node-osc": "^5.1.0",
-    "prompt": "^1.1.0",
-    "public-ip": "^4.0.4",
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",
-    "satelize": "^0.2.0",
-    "ws": "^7.4.4",
-    "yargs": "^16.2.0"
+    "ws": "^7.4.4"
   }
 }
