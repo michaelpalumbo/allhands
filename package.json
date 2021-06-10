@@ -1,6 +1,6 @@
 {
   "name": "allhands",
-  "version": "0.0.56",
+  "version": "0.0.55",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
   "preferGlobal": true,
   "scripts": {
@@ -28,5 +28,6 @@
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",
     "satelize": "^0.2.0",
-     "ws": "^7.4.4" }
+    "ws": "^7.4.4"
+  }
 }
