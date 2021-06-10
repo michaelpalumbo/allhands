@@ -111,7 +111,7 @@ let printIncoming;
 let printOutgoing;
 let localReceivePort = 7403
 let localSendPort = 7404
-let localWS;
+let localWS = false;
 let thisNode = {
   name: null,
   privacy: true,
@@ -151,6 +151,7 @@ inquirer.prompt(questions).then((answers) => {
 
     // Run local ws server to pass all data via JSON
     if(answers.transmitJSON == 'Yes'){
+      localWS = true
         localWebsocket()
     }
 
@@ -161,7 +162,7 @@ inquirer.prompt(questions).then((answers) => {
       satelize.satelize({ip: ip}, function(err, payload) {
 
         // no need to keep track of the ip
-        console.log(payload)
+        
         delete payload.ip
         delete payload.continent_code
         delete payload.continent.de
@@ -278,12 +279,49 @@ function tryConnect(){
 
                 // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
                 if(msg.addressPattern.split('/')[1] != name){
+                  // send via osc
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                         if (err) console.error(err);
                     }); 
                     if(printIncoming == true){
                         console.log(msg.addressPattern, msg.typeTagString)
                     }   
+                    // if the local ws server is enabled at startup, pack the OSC message as a json object
+                    if(localWS == true){
+                      let apSplit = msg.addressPattern.split('/')
+                      apSplit.shift()
+                      
+                      let oscObject = {
+                        cmd: "OSC",
+                        data: {},
+                        date: Date.now(),
+                      }
+                      
+                      // create a nested path from the addressPattern 
+                      var createNestedObject = function( base, names, value ) {
+                          // If a value is given, remove the last name and keep it for later:
+                          var lastName = arguments.length === 3 ? names.pop() : false;
+                      
+                          // Walk the hierarchy, creating new objects where needed.
+                          // If the lastName was removed, then the last object is not set yet:
+                          for( var i = 0; i < names.length; i++ ) {
+                              base = base[ names[i] ] = base[ names[i] ] || {};
+                          }
+                      
+                          // If a value was given, set it to the last name:
+                          if( lastName ) base = base[ lastName ] = value;
+                      
+                          // Return the last object in the hierarchy:
+                          return base;
+                      };
+                      
+                      let obj = {}; 
+                      createNestedObject( obj, apSplit, msg.typeTagString )
+                      // add nested path to outgoing osc object
+                      oscObject.data = obj    
+                      // send it to local apps!        
+                      localBroadcast(JSON.stringify(oscObject))
+                    }
                 }
 
 
@@ -299,8 +337,10 @@ function tryConnect(){
             break
 
             case "network":
+              if(localWS == true){
+                localBroadcast(data.data)
+              }
               
-              localBroadcast(data.data)
               
             break
 
