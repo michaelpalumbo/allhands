@@ -346,7 +346,13 @@ function tryConnect(){
 
             // these are here to be ignored (lazy, i need to update the server to stop sending this)
             case "locationReport":
-            case "pingReport":
+            case 'pingReport':
+              break;
+            case "pong":
+              console.log(data.data)
+              if(localWS == true){
+                localBroadcast(data.data)
+              }
             break
             
             default:
