@@ -23,7 +23,7 @@
   "dependencies": {
     "cli-progress": "^3.9.0",
     "inquirer": "^8.1.0",
-    "node-osc": "^5.1.0",
+    "node-osc": "^5.2.3",
     "public-ip": "^4.0.4",
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",
