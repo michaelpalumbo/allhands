@@ -43,9 +43,11 @@ Next you'll be prompted with some configuration:
 1. Enter your name. 
 2. Choose the server type. 
 
-    1. Public: This will connect you to the main allhands network. Use this if you don't want to run your own allhands server, or if you want to send and receive controller data to/from strangers :)
-    2. Cloud: This is to connect to a specific cloud-based allhands server. You'll need the url of the cloud instance. 
-    3. Self-hosted: Choose this if you or someone in your group is running an allhands server on their own computer. If connecting to someone's server, you'll need their public IP address. 
+    1. Public: This will connect you to the main allhands network. Use this if you want to send and receive controller data to/from everyone else connected :)
+    2. Secret Handshake: Useful for ensembles, connect only to others who have the secret handshake name, like a private chat room. 
+    3. Cloud: This is to connect to a specific cloud-based allhands server. You'll need the url of the cloud instance. 
+    4. Self-hosted: Choose this if you or someone in your group is running an allhands server on their own computer. If connecting to someone's server, you'll need their public IP address. 
+    5. localhost: Choose this setting if the server is running on your machine. 
 
 3. Outgoing Port: This is the port that you will use to *send data from your application* (i.e. Pd, Max, Ableton, etc) to an allhands network. The default is 7403 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
 
