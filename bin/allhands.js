@@ -34,8 +34,27 @@ const questions = [
     type: 'rawlist',
     name: 'serverType',
     message: 'Choose the server type (type the number + hit Enter)',
-    choices: ['Public', 'Cloud', 'Self-Hosted', 'localhost'],
+    choices: ['Public', 'Secret Handshake', 'Cloud', 'Self-Hosted', 'localhost'],
   },
+  {
+    type: 'input',
+    name: 'dap',
+    message: 'Type a name for the secret handshake. If someone in your group made one, type it here.',
+    validate(value) {
+      const pass = value.match(
+        /^[a-zA-Z0-9]+$/
+      );
+      if (pass) {
+        return true;
+      }
+
+      return 'please do not use spaces for the secret handshake. try again';
+    },
+    when(answers) {
+      return answers.serverType == 'Secret Handshake';
+    },
+  },
+  
   {
     type: 'input',
     name: 'cloudAddress',
@@ -115,7 +134,8 @@ let localWS = false;
 let thisNode = {
   name: null,
   privacy: true,
-  location: {}
+  location: {},
+  dap: 'none'
 }
 inquirer.prompt(questions).then((answers) => {
 
@@ -127,12 +147,16 @@ inquirer.prompt(questions).then((answers) => {
     } else if(answers.serverType == 'Self-Hosted'){
         host = `ws://${answers.selfHostAddress}:8081`
         console.log(host)
-    } else if(answers.serverType == 'Public'){
+    } else if(answers.serverType == 'Public' || answers.serverType == 'Secret Handshake'){
         host = `ws://allhandsjs.herokuapp.com/8081`
     } else if(answers.serverType == 'localhost'){
       host = `ws://localhost:8081`
     }
 
+    // if public room given, update its var
+    if(answers.dap){
+      thisNode.dap = answers.dap
+    }
     // configure local OSC UDP ports
     if(answers.outgoingPort == 'Custom'){
         localReceivePort = answers.customOutgoingPort
@@ -279,9 +303,11 @@ function tryConnect(){
 
                 // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
                 if(msg.addressPattern.split('/')[1] != name){
-                  // send via osc
+                  // check if this message belongs to our room or user isn't using a room 
+                  if(thisNode.dap == msg.dap){
+                    // send via osc
                     localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
-                        if (err) console.error(err);
+                      if (err) console.error(err);
                     }); 
                     if(printIncoming == true){
                         console.log(msg.addressPattern, msg.typeTagString)
@@ -293,6 +319,7 @@ function tryConnect(){
                       
                       let oscObject = {
                         cmd: "OSC",
+                        dap: thisNode.dap,
                         data: {},
                         date: Date.now(),
                       }
@@ -322,6 +349,8 @@ function tryConnect(){
                       // send it to local apps!        
                       localBroadcast(JSON.stringify(oscObject))
                     }
+                  }
+                    
                 }
 
 
@@ -381,6 +410,7 @@ function tryConnect(){
             message = {
                 // cmd allows us to send other types of messages, ask Michael for more info if curious!
                 cmd: 'OSC',
+                dap: thisNode.dap,
                 date: new Date().toUTCString(),
                 addressPattern: ap,
                 // this is the data!
