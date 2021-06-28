@@ -22,6 +22,7 @@
   "homepage": "https://github.com/michaelpalumbo/allhands#readme",
   "dependencies": {
     "cli-progress": "^3.9.0",
+    "delay": "^5.0.0",
     "inquirer": "^8.1.0",
     "node-osc": "^5.2.3",
     "public-ip": "^4.0.4",

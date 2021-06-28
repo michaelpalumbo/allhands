@@ -6,6 +6,8 @@ const ReconnectingWebSocket = require('reconnecting-websocket');
 const inquirer = require('inquirer');
 const publicIp = require('public-ip');
 var satelize = require('satelize');
+const delay = require('delay');
+
 let wss
 let ip
 (async () => {
@@ -134,101 +136,114 @@ let localWS = false;
 let thisNode = {
   name: null,
   privacy: true,
-  location: {},
   dap: 'none'
 }
-inquirer.prompt(questions).then((answers) => {
 
-  name = answers.name
-  thisNode.name = name
-    // configure server address
-    if(answers.serverType == 'Cloud'){
-        host = `ws://${answers.cloudAddress}/8081`
-    } else if(answers.serverType == 'Self-Hosted'){
-        host = `ws://${answers.selfHostAddress}:8081`
-        console.log(host)
-    } else if(answers.serverType == 'Public' || answers.serverType == 'Secret Handshake'){
-        host = `ws://allhandsjs.herokuapp.com/8081`
-    } else if(answers.serverType == 'localhost'){
-      host = `ws://localhost:8081`
-    }
+const nameTakenPrompt = [
+  {
+    type: 'rawlist',
+    name: 'nameTakenChoice',
+    message: 'Your chosen name is in use by someone else on the network, choose next action',
+    choices: ['Change Name (Default)', 'Keep Name (and collide data, get all experimental)'],
+  },
+  
+];
+function login(){
+  inquirer.prompt(questions).then((answers) => {
 
-    // if public room given, update its var
-    if(answers.dap){
-      thisNode.dap = answers.dap
-    }
-    // configure local OSC UDP ports
-    if(answers.outgoingPort == 'Custom'){
-        localReceivePort = answers.customOutgoingPort
-    }
-    if(answers.incomingPort == 'Custom'){
-        localSendPort = answers.customIncomingPort
-    }
-    // set outgoing data logging
-    if(answers.logOutgoing == 'Yes'){
-        printOutgoing = true
-    }
-    // set incoming data logging
-    if(answers.logIncoming == 'Yes'){
-        printIncoming = true
-    }
+    name = answers.name
+    thisNode.name = name
+      // configure server address
+      if(answers.serverType == 'Cloud'){
+          host = `ws://${answers.cloudAddress}/8081`
+      } else if(answers.serverType == 'Self-Hosted'){
+          host = `ws://${answers.selfHostAddress}:8081`
+          console.log(host)
+      } else if(answers.serverType == 'Public' || answers.serverType == 'Secret Handshake'){
+          host = `ws://allhandsjs.herokuapp.com/8081`
+      } else if(answers.serverType == 'localhost'){
+        host = `ws://localhost:8081`
+      }
 
-    // Run local ws server to pass all data via JSON
-    if(answers.transmitJSON == 'Yes'){
-      localWS = true
-        localWebsocket()
-    }
+      // if public room given, update its var
+      if(answers.dap){
+        thisNode.dap = answers.dap
+      }
+      // configure local OSC UDP ports
+      if(answers.outgoingPort == 'Custom'){
+          localReceivePort = answers.customOutgoingPort
+      }
+      if(answers.incomingPort == 'Custom'){
+          localSendPort = answers.customIncomingPort
+      }
+      // set outgoing data logging
+      if(answers.logOutgoing == 'Yes'){
+          printOutgoing = true
+      }
+      // set incoming data logging
+      if(answers.logIncoming == 'Yes'){
+          printIncoming = true
+      }
 
-    // opt-in to tracking and sharing GPS data
-    if(answers.transmitJSON == 'Yes'){
-      thisNode.privacy = false
-      
-      satelize.satelize({ip: ip}, function(err, payload) {
+      // Run local ws server to pass all data via JSON
+      if(answers.transmitJSON == 'Yes'){
+        localWS = true
+          localWebsocket()
+      }
 
-        // no need to keep track of the ip
+      // opt-in to tracking and sharing GPS data
+      if(answers.transmitJSON == 'Yes'){
+        thisNode.privacy = false
         
-        delete payload.ip
-        delete payload.continent_code
-        delete payload.continent.de
-        delete payload.continent.es
-        delete payload.continent.fr
-        delete payload.continent.ja
-        delete payload.continent['pt-BR']
-        delete payload.continent.ru
-        delete payload.continent['zh-CN']
-        delete payload.country_code
-        delete payload.country.de
-        delete payload.country.es
-        delete payload.country.fr
-        delete payload.country.ja
-        delete payload.country['pt-BR']
-        delete payload.country.ru
-        delete payload.country['zh-CN']
+        satelize.satelize({ip: ip}, function(err, payload) {
 
-        ip = null
+          // no need to keep track of the ip
+          
+          delete payload.ip
+          delete payload.continent_code
+          delete payload.continent.de
+          delete payload.continent.es
+          delete payload.continent.fr
+          delete payload.continent.ja
+          delete payload.continent['pt-BR']
+          delete payload.continent.ru
+          delete payload.continent['zh-CN']
+          delete payload.country_code
+          delete payload.country.de
+          delete payload.country.es
+          delete payload.country.fr
+          delete payload.country.ja
+          delete payload.country['pt-BR']
+          delete payload.country.ru
+          delete payload.country['zh-CN']
+
+          ip = null
+          
+          thisNode['location'] = payload
+          
+          
+        });
+
+        // ipLocation(ip, function (err, data) {
+        //   console.log(err,data)
+        //   // thisNode.lon = data.longitude
+        //   // thisNode.lat = data.latitude
+        // })
         
-        thisNode.location = payload
+
+
+
         
-        
-      });
-
-      // ipLocation(ip, function (err, data) {
-      //   console.log(err,data)
-      //   // thisNode.lon = data.longitude
-      //   // thisNode.lat = data.latitude
-      // })
-      
 
 
-
-      
-
-
-    }
+      }
 
 
-    tryConnect()
-});
+      tryConnect()
+  });
+}
+
+login()
 
 function tryConnect(){
 
@@ -288,16 +303,37 @@ function tryConnect(){
     });
     // on close:
     ws.addEventListener('close', () => {
-        console.log("server connection closed");
-        // start the progress bar with a total value of 200 and start value of 0
-        herokuWakeProgress.start(100, 0);
-        // localSend.close();
-        // localReceive.close();
+        console.log("server connection closed, retrying...");
     });
     // handle messages
     ws.addEventListener('message', (data) => {
         let msg = JSON.parse(data.data);
         switch (msg.cmd){
+          // if name is taken by someone else in the network, the server will prompt user for what to do next
+          case 'nameTaken':
+            console.log(data.data)
+
+            inquirer.prompt(nameTakenPrompt).then((answers) => {
+              if(answers.nameTakenChoice == 'Change Name (Default)'){
+                
+                (async () => {
+                  ws.close()
+                
+                  await delay(1000);
+                
+                  // Executed 100 milliseconds later
+                  login()
+                })();              
+                
+
+                // close ws connect and restart login prompt
+              } else {
+                // send message to server and have server assign a unique ID to this instance of the name so that when they quit they are removed from the locations object
+
+              }
+              console.log(answers.nameTakenChoice)
+            })
+          break
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
 
