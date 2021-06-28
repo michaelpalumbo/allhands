@@ -160,7 +160,7 @@ function login(){
           host = `ws://${answers.selfHostAddress}:8081`
           console.log(host)
       } else if(answers.serverType == 'Public' || answers.serverType == 'Secret Handshake'){
-          host = `ws://allhandsjs.herokuapp.com/8081`
+          host = `ws://allhands-stable.herokuapp.com/8081`
       } else if(answers.serverType == 'localhost'){
         host = `ws://localhost:8081`
       }
