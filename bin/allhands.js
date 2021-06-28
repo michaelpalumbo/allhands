@@ -160,7 +160,7 @@ function login(){
           host = `ws://${answers.selfHostAddress}:8081`
           console.log(host)
       } else if(answers.serverType == 'Public' || answers.serverType == 'Secret Handshake'){
-          host = `ws://allhandsjs.herokuapp.com/8081`
+          host = `ws://allhands-stable.herokuapp.com/8081`
       } else if(answers.serverType == 'localhost'){
         host = `ws://localhost:8081`
       }
@@ -329,9 +329,15 @@ function tryConnect(){
                 // close ws connect and restart login prompt
               } else {
                 // send message to server and have server assign a unique ID to this instance of the name so that when they quit they are removed from the locations object
-
+                      // send thisNode object to the server for tracking
+                let handShake = JSON.stringify({
+                  cmd: 'doppelganger',
+                  date: Date.now(),
+                  data: thisNode
+                })
+                ws.send(handShake)
               }
-              console.log(answers.nameTakenChoice)
+              
             })
           break
             // in case you want to receive other data and route it elsewhere
