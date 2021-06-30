@@ -1,4 +1,5 @@
 <h1 align="center">Welcome to allhands 👋</h1>
+<h1>IMPORTANT: Please install this package globally, ignore the [npm i allhands] command to the right of this page. Instructions below.</h1> 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.0.43-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/michaelpalumbo/allhands#readme" target="_blank">
