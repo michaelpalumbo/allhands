@@ -66,7 +66,7 @@ allhands is meant to work alongside other programs that can send/receive OSC dat
 👤 **Michael Palumbo**
 
 Consider sending me a tip to support this work:
-[Paypal](https://www.paypal.com/paypalme/my/profile)
+[Paypal](paypal.me/mjpalumbo)
 
 * Website: [www.palumbomichael.com](www.palumbomichael.com)
 * Github: [@michaelpalumbo](https://github.com/michaelpalumbo)
