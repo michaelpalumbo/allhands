@@ -74,6 +74,9 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 ## Show your support
 
+Send me a tip to support this work:
+[Paypal](https://www.paypal.com/paypalme/my/profile)
+
 Give a ⭐️ if this project helped you!
 
 ## 📝 License
