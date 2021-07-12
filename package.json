@@ -23,12 +23,13 @@
   "dependencies": {
     "cli-progress": "^3.9.0",
     "delay": "^5.0.0",
-    "inquirer": "^8.1.0",
+    "inquirer": "^8.1.1",
+    "lodash.merge": "^4.6.2",
     "node-osc": "^5.2.3",
     "public-ip": "^4.0.4",
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",
     "satelize": "^0.2.0",
-    "ws": "^7.4.4"
+    "ws": "^7.5.3"
   }
 }
