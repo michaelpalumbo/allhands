@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to allhands 👋</h1>
-<h1>IMPORTANT: Please install this package globally, ignore the [npm i allhands] command to the right of this page. Instructions below.</h1> 
+<h1>IMPORTANT: You MUST install this package globally, ignore the [npm i allhands] command to the right of this page. Instructions below.</h1> 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.43-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.68-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/michaelpalumbo/allhands#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -39,10 +39,11 @@ In a terminal window, type the following and hit enter:
 allhands
 ```
 
-Next you'll be prompted with some configuration:
+Next you'll be prompted to either [1] create or edit a user configuration, or [2...] to choose an existing one. Choosing an existing configuration will launch allhands with those settings right away. If you choose to create or edit a config, you'll be prompted the following:
 
-1. Enter your name. 
-2. Choose the server type. 
+1. Enter a name for the config file (enter an existing name to edit that file)
+2. Enter your name. 
+3. Choose the server type. 
 
     1. Public: This will connect you to the main allhands network. Use this if you want to send and receive controller data to/from everyone else connected :)
     2. Secret Handshake: Useful for ensembles, connect only to others who have the secret handshake name, like a private chat room. 
@@ -50,13 +51,13 @@ Next you'll be prompted with some configuration:
     4. Self-hosted: Choose this if you or someone in your group is running an allhands server on their own computer. If connecting to someone's server, you'll need their public IP address. 
     5. localhost: Choose this setting if the server is running on your machine. 
 
-3. Outgoing Port: This is the port that you will use to *send data from your application* (i.e. Pd, Max, Ableton, etc) to an allhands network. The default is 7403 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
+4. Outgoing Port: This is the port that you will use to *send data from your application* (i.e. Pd, Max, Ableton, etc) to an allhands network. The default is 7403 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
 
-4. Incoming Port: This is the port that your application should listen on for data coming from an allhands network. The default is 7404 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
+5. Incoming Port: This is the port that your application should listen on for data coming from an allhands network. The default is 7404 and the address should be either localhost or 127.0.0.1 (whichever your program prefers).
 
-5. Print Incoming Data: If you want to display controller data coming in from someone else, choose *Yes*
+6. Print Incoming Data: If you want to display controller data coming in from someone else, choose *Yes*
 
-6. Print Outgoing Data: If you want to display your outgoing controller data (sent from whichever application you're using, i.e. pd, ableton, etc), choose *Yes*
+7. Print Outgoing Data: If you want to display your outgoing controller data (sent from whichever application you're using, i.e. pd, ableton, etc), choose *Yes*
 
 
 allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to a server, you should open your preferred program and try sending/receiving data. Example code for puredata, max/msp, etc, can be found at https://github.com/michaelpalumbo/allhands-examples
