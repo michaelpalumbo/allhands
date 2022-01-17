@@ -12,8 +12,7 @@ const delay = require('delay');
 const Conf = require('conf');
 const config = new Conf();
 // config.delete('a')
-// config.delete('configFileName')
-configChoiceList = ['Create New (or Change) Config File']
+configChoiceList = ['Create New (or Edit) Config File']
 // update the configuration filename list for the prompt, assuming a user has already set one or more up
 
 let host;
@@ -48,7 +47,7 @@ const configQuestion = [
     name: 'createNewConfig',
     message: "Enter a name for this new configuration (or type existing name to change settings) + hit Enter.",
     when(answers) {
-      return answers.configChoice == 'Create New (or Change) Config File';
+      return answers.configChoice == 'Create New (or Edit) Config File';
     },
   }
 ]
@@ -59,7 +58,7 @@ let configFileName = null
 // now prompt for config file choice
 function chooseConfig(){
   inquirer.prompt(configQuestion).then((answers) => {
-    if(answers.configChoice === 'Create New Config'){
+    if(answers.configChoice === 'Create New (or Edit) Config File'){
       configFileName = answers.createNewConfig
       config.set(configFileName, {})
       console.log('\nCreating new configuration named: ' + configFileName + '\n\n')
