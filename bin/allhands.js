@@ -21,7 +21,7 @@ let printIncoming = false;
 let printOutgoing = false;
 let localReceivePort = 7403
 let localSendPort = 7404
-let localWS = false;
+let localWSstate = false;
 let thisNode = {
   name: null,
   shareGPSData: true,
@@ -72,7 +72,7 @@ function chooseConfig(){
       printOutgoing = connectSettings.printOutgoing
       localReceivePort = connectSettings.localReceivePort
       localSendPort = connectSettings.localSendPort
-      localWS = connectSettings.localWS
+      localWSstate = connectSettings.localWSstate
       thisNode = connectSettings.thisNode
       tryConnect()
     }
@@ -250,10 +250,10 @@ function login(){
 
     // Run local ws server to pass all data via JSON
     if(answers.transmitJSON == 'Yes'){
-      localWS = true
+      localWSstate = true
       localWebsocket()
     }
-    config.set(configFileName + '.localWS', localWS)
+    config.set(configFileName + '.localWSstate', localWSstate)
 
     // opt-in to tracking and sharing GPS data
     if(answers.transmitJSON == 'Yes'){
@@ -404,7 +404,7 @@ function tryConnect(){
                       console.log(msg.addressPattern, msg.typeTagString)
                   }   
                   // if the local ws server is enabled at startup, pack the OSC message as a json object
-                  if(localWS == true){
+                  if(localWSstate == true){
                     let apSplit = msg.addressPattern.split('/')
                     apSplit.shift()
                     
@@ -457,7 +457,7 @@ function tryConnect(){
           break
 
           case "network":
-            if(localWS == true){
+            if(localWSstate == true){
               localBroadcast(data.data)
             }
             
@@ -470,7 +470,7 @@ function tryConnect(){
             break;
           case "pong":
             console.log(data.data)
-            if(localWS == true){
+            if(localWSstate == true){
               localBroadcast(data.data)
             }
           break
@@ -528,14 +528,30 @@ function localWebsocket(){
 
   wss.on('connection', function connection(localWS) {
     console.log('local websocket connected to an app on this machine')
+    localWS.on('message', function message(data) {
+      // send incoming JSON control data out to allhands network
+      ws2allhands(data)
+    });
   });
 }
 
-
+// local websocket send
 function localBroadcast(msg){
   wss.clients.forEach(function each(client) {
   if (client.readyState === WebSocket.OPEN) {
       client.send(msg);
   }
   });
+}
+
+function ws2allhands(msg){
+  msg = JSON.parse(msg)
+  msg['dap'] = thisNode.dap;
+  msg['cmd'] = 'OSC';
+  msg['date'] = new Date().toUTCString();
+  msg.addressPattern = '/name' + msg.addressPattern
+  ws.send(JSON.stringify(message))
+    if(printOutgoing == true){
+        console.log(msg.addressPattern, msg.typeTagString)
+    }  
 }
