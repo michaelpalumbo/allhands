@@ -1,6 +1,6 @@
 {
   "name": "allhands",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
   "preferGlobal": true,
   "scripts": {
