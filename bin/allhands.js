@@ -28,6 +28,7 @@ let thisNode = {
   dap: 'none'
 }
 
+let ws
 let wss
 
 (async () => {
@@ -256,7 +257,7 @@ function login(){
     config.set(configFileName + '.localWSstate', localWSstate)
 
     // opt-in to tracking and sharing GPS data
-    if(answers.transmitJSON == 'Yes'){
+    if(answers.shareGPS == 'Yes'){
       thisNode.shareGPSData = false
       config.set(configFileName + '.thisNode.shareGPSData', thisNode.shareGPSData)
 
@@ -401,7 +402,7 @@ function tryConnect(){
                     if (err) console.error(err);
                   }); 
                   if(printIncoming == true){
-                      console.log(msg.addressPattern, msg.typeTagString)
+                      console.log('incoming: ', msg.addressPattern, msg.typeTagString)
                   }   
                   // if the local ws server is enabled at startup, pack the OSC message as a json object
                   if(localWSstate == true){
@@ -513,7 +514,7 @@ function tryConnect(){
             ws.send(JSON.stringify(message))
         // }
         if(printOutgoing == true){
-            console.log(ap, msg)
+            console.log('outgoing: ', ap, msg)
         }  
     } else {
         // if incoming OSC message does not have an address pattern, refuse to handle it
@@ -528,10 +529,24 @@ function localWebsocket(){
 
   wss.on('connection', function connection(localWS) {
     console.log('local websocket connected to an app on this machine')
+    //TODO: Need to figure out how to send on 'ws' (the allhands ws) within this function. 
+    /*
     localWS.on('message', function message(data) {
+      
       // send incoming JSON control data out to allhands network
-      ws2allhands(data)
+      msg = JSON.parse(data)
+      console.log(msg)
+      msg.dap = thisNode.dap;
+      msg.cmd = 'OSC';
+      msg.date = new Date().toUTCString();
+      msg.addressPattern = '/' + name + msg.addressPattern
+      console.log(msg)
+      ws.send(JSON.stringify(msg))
+        if(printOutgoing == true){
+            console.log('outgoing: ', msg.addressPattern, msg.typeTagString)
+        }  
     });
+    */ 
   });
 }
 
@@ -544,14 +559,3 @@ function localBroadcast(msg){
   });
 }
 
-function ws2allhands(msg){
-  msg = JSON.parse(msg)
-  msg['dap'] = thisNode.dap;
-  msg['cmd'] = 'OSC';
-  msg['date'] = new Date().toUTCString();
-  msg.addressPattern = '/name' + msg.addressPattern
-  ws.send(JSON.stringify(message))
-    if(printOutgoing == true){
-        console.log(msg.addressPattern, msg.typeTagString)
-    }  
-}
