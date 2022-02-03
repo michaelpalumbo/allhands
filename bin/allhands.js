@@ -5,7 +5,7 @@ const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 const inquirer = require('inquirer');
 const publicIp = require('public-ip');
-var satelize = require('satelize');
+let satelize = require('satelize');
 const delay = require('delay');
 
 //userconfig
@@ -222,7 +222,7 @@ function login(){
       host = `ws://localhost:8081`
     }
     config.set(configFileName + '.host', host)
-    // if public room given, update its var
+    // if public room given, update its variable
     if(answers.dap){
       thisNode.dap = answers.dap
       config.set(configFileName + '.thisNode.dap', dap)
@@ -417,13 +417,13 @@ function tryConnect(){
                     }
                     
                     // create a nested path from the addressPattern 
-                    var createNestedObject = function( base, names, value ) {
+                    let createNestedObject = function( base, names, value ) {
                         // If a value is given, remove the last name and keep it for later:
-                        var lastName = arguments.length === 3 ? names.pop() : false;
+                        let lastName = arguments.length === 3 ? names.pop() : false;
                     
                         // Walk the hierarchy, creating new objects where needed.
                         // If the lastName was removed, then the last object is not set yet:
-                        for( var i = 0; i < names.length; i++ ) {
+                        for( let i = 0; i < names.length; i++ ) {
                             base = base[ names[i] ] = base[ names[i] ] || {};
                         }
                     
