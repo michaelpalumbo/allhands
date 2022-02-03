@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 const publicIp = require('public-ip');
 let satelize = require('satelize');
 const delay = require('delay');
-
+const fs = require('fs')
 //userconfig
 const Conf = require('conf');
 const config = new Conf();
@@ -80,7 +80,23 @@ function chooseConfig(){
   });
 }
 
-chooseConfig()
+if(process.argv[2] === '-c' && process.argv[3]){
+  console.log('Running with config file', process.argv[3])
+  let connectSettings = JSON.parse(fs.readFileSync(process.argv[3]))
+  console.log(connectSettings)
+  host = connectSettings.host
+  name = connectSettings.name
+  printIncoming = connectSettings.printIncoming
+  printOutgoing = connectSettings.printOutgoing
+  localReceivePort = connectSettings.localReceivePort
+  localSendPort = connectSettings.localSendPort
+  localWSstate = connectSettings.localWSstate
+  thisNode = connectSettings.thisNode
+  tryConnect()
+} else {
+  chooseConfig()
+}
+
 
 // if newconfig chosen, we'll use these questions:
 const questions = [
