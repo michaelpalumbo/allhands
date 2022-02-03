@@ -74,6 +74,9 @@ function chooseConfig(){
       localReceivePort = connectSettings.localReceivePort
       localSendPort = connectSettings.localSendPort
       localWSstate = connectSettings.localWSstate
+      if(localWSstate === true){
+        localWebsocket()
+      }
       thisNode = connectSettings.thisNode
       tryConnect()
     }
@@ -92,6 +95,9 @@ if(process.argv[2] === '-c' && process.argv[3]){
   localSendPort = connectSettings.localSendPort
   localWSstate = connectSettings.localWSstate
   thisNode = connectSettings.thisNode
+  if(localWSstate === true){
+    localWebsocket()
+  }
   tryConnect()
 } else {
   chooseConfig()
@@ -267,8 +273,7 @@ function login(){
 
     // Run local ws server to pass all data via JSON
     if(answers.transmitJSON == 'Yes'){
-      localWSstate = true
-      localWebsocket()
+      localWSstate = true      
     }
     config.set(configFileName + '.localWSstate', localWSstate)
 
@@ -531,14 +536,10 @@ function tryConnect(){
 
             // echo local OSC to ws clients
             if(localWSstate === true){
-              let obj = {}; 
-              createNestedObject( obj, ap, msg )
-              // add nested path to outgoing osc object
-              oscObject.data = obj    
               // send it to local apps!        
-              localBroadcast(JSON.stringify(oscObject))
+              localBroadcast(JSON.stringify(message))
             }
-            
+
         if(printOutgoing == true){
             console.log('outgoing: ', ap, msg)
         }  
@@ -552,7 +553,7 @@ function tryConnect(){
 
 function localWebsocket(){
   wss = new WebSocket.Server({ port: 8080 });
-
+  console.log(wss)
   wss.on('connection', function connection(localWS) {
     console.log('local websocket connected to an app on this machine')
     //TODO: Need to figure out how to send on 'ws' (the allhands ws) within this function. 
