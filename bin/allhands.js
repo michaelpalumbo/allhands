@@ -528,7 +528,17 @@ function tryConnect(){
         // package data for the web, send it!
         // if(ws){
             ws.send(JSON.stringify(message))
-        // }
+
+            // echo local OSC to ws clients
+            if(localWSstate === true){
+              let obj = {}; 
+              createNestedObject( obj, ap, msg )
+              // add nested path to outgoing osc object
+              oscObject.data = obj    
+              // send it to local apps!        
+              localBroadcast(JSON.stringify(oscObject))
+            }
+            
         if(printOutgoing == true){
             console.log('outgoing: ', ap, msg)
         }  
