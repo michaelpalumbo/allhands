@@ -247,7 +247,7 @@ function login(){
     // if public room given, update its variable
     if(answers.dap){
       thisNode.dap = answers.dap
-      config.set(configFileName + '.thisNode.dap', dap)
+      config.set(configFileName + '.thisNode.dap', thisNode.dap)
     }
     // configure local OSC UDP ports
     if(answers.outgoingPort == 'Custom'){
