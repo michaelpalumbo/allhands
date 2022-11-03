@@ -1,6 +1,6 @@
 {
   "name": "allhands",
-  "version": "0.0.74",
+  "version": "0.0.75",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
   "preferGlobal": true,
   "scripts": {
@@ -25,7 +25,7 @@
     "conf": "^10.1.1",
     "delay": "^5.0.0",
     "inquirer": "^8.1.1",
-    "lodash.merge": "4.12.12",
+    "log-update": "^5.0.1",
     "node-osc": "^5.2.3",
     "osc": "^2.4.3",
     "public-ip": "^4.0.4",
