@@ -11,6 +11,7 @@ const fs = require('fs')
 //userconfig
 const Conf = require('conf');
 const config = new Conf();
+const osc = require('osc')
 // config.delete('a')
 configChoiceList = ['Create New (or Edit) Config File']
 // update the configuration filename list for the prompt, assuming a user has already set one or more up
@@ -273,7 +274,8 @@ function login(){
 
     // Run local ws server to pass all data via JSON
     if(answers.transmitJSON == 'Yes'){
-      localWSstate = true      
+      localWSstate = true   
+      console.log('Local WS running on port 9090')   
     }
     config.set(configFileName + '.localWSstate', localWSstate)
 
@@ -552,7 +554,7 @@ function tryConnect(){
 }
 
 function localWebsocket(){
-  wss = new WebSocket.Server({ port: 8080 });
+  wss = new WebSocket.Server({ port: 9090 });
   console.log(wss)
   wss.on('connection', function connection(localWS) {
     console.log('local websocket connected to an app on this machine')
