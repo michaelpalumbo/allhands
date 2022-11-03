@@ -27,6 +27,7 @@
     "inquirer": "^8.1.1",
     "lodash.merge": "^4.6.2",
     "node-osc": "^5.2.3",
+    "osc": "^2.4.3",
     "public-ip": "^4.0.4",
     "readme-md-generator": "^1.0.0",
     "reconnecting-websocket": "^4.4.0",

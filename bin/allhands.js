@@ -274,7 +274,8 @@ function login(){
 
     // Run local ws server to pass all data via JSON
     if(answers.transmitJSON == 'Yes'){
-      localWSstate = true      
+      localWSstate = true   
+      console.log('Local WS running on port 9090')   
     }
     config.set(configFileName + '.localWSstate', localWSstate)
 
@@ -553,7 +554,7 @@ function tryConnect(){
 }
 
 function localWebsocket(){
-  wss = new WebSocket.Server({ port: 8080 });
+  wss = new WebSocket.Server({ port: 9090 });
   console.log(wss)
   wss.on('connection', function connection(localWS) {
     console.log('local websocket connected to an app on this machine')
