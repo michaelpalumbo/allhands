@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to allhands 👋</h1>
-<h1>IMPORTANT: You MUST install this package globally, ignore the [npm i allhands] command to the right of this page. Instructions below.</h1> 
+<h3>IMPORTANT: You MUST install this package globally, ignore the [npm i allhands] command to the right of this page. Instructions below.</h1> 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.68-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.79-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/michaelpalumbo/allhands#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -14,6 +14,8 @@
 </p>
 
 > With allhands, you can send Open Sound Control (OSC) data over the web, without needing to know the destination IP address(es) of each person you are collaborating with. Simply install allhands as a global package, run it, and then from your chosen application (i.e. Max/MSP, pd, Ableton, Touchdesigner, etc) send OSC data to port 7403 and listen on port 7404. 
+
+allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to a server, you should open your preferred program and try sending/receiving data. Example code for puredata, max/msp, etc, can be found at https://github.com/michaelpalumbo/allhands-examples
 
 Cross-platform, tested on OSX, Windows, Linux. 
 
@@ -59,8 +61,7 @@ Next you'll be prompted to either [1] create or edit a user configuration, or [2
 
 7. Print Outgoing Data: If you want to display your outgoing controller data (sent from whichever application you're using, i.e. pd, ableton, etc), choose *Yes*
 
-
-allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to a server, you should open your preferred program and try sending/receiving data. Example code for puredata, max/msp, etc, can be found at https://github.com/michaelpalumbo/allhands-examples
+8. Transmit JSON data locally: If you want to send/receive JSON data using allhands, set this to yes during configuration at startup. It will start a local WS server on port 9090. 
 
 ## Author
 
