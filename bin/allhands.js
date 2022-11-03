@@ -11,6 +11,7 @@ const fs = require('fs')
 //userconfig
 const Conf = require('conf');
 const config = new Conf();
+const osc = require('osc')
 // config.delete('a')
 configChoiceList = ['Create New (or Edit) Config File']
 // update the configuration filename list for the prompt, assuming a user has already set one or more up
