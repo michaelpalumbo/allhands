@@ -24,6 +24,7 @@
     "cli-progress": "^3.9.0",
     "conf": "^10.1.1",
     "delay": "^5.0.0",
+    "esm": "^3.2.25",
     "inquirer": "^8.1.1",
     "log-update": "^5.0.1",
     "node-osc": "^5.2.3",

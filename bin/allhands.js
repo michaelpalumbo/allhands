@@ -252,11 +252,11 @@ function login(){
     }
     // configure local OSC UDP ports
     if(answers.outgoingPort == 'Custom'){
-        localReceivePort = answers.customOutgoingPort
+      localReceivePort = answers.customOutgoingPort
     }
     config.set(configFileName + '.localReceivePort', localReceivePort)
     if(answers.incomingPort == 'Custom'){
-        localSendPort = answers.customIncomingPort
+      localSendPort = answers.customIncomingPort
     }
     config.set(configFileName + '.localSendPort', localSendPort)
 
@@ -362,7 +362,7 @@ function tryConnect(){
       let finalCount = 100 - progCount
       herokuWakeProgress.update(finalCount);
       herokuWakeProgress.stop();
-      console.log (`connected to an allhands network!`)
+      console.log (`\n\nconnected to an allhands network!`)
 
       console.log('\nlisten for OSC messages from allhands on port ' + localSendPort+ '\nsend OSC to allhands on port ' + localReceivePort)
     
