@@ -4,8 +4,8 @@ const { Client, Server } = require('node-osc');
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
 const inquirer = require('inquirer');
-const publicIp = require('public-ip');
-let satelize = require('satelize');
+// const publicIp = require('public-ip');
+// let satelize = require('satelize');
 const delay = require('delay');
 const fs = require('fs')
 //userconfig
@@ -25,16 +25,16 @@ let localSendPort = 7404
 let localWSstate = false;
 let thisNode = {
   name: null,
-  shareGPSData: true,
+  // shareGPSData: true, 
   dap: 'none'
 }
 
 let ws
 let wss
 
-(async () => {
-  ip = await publicIp.v4()
-})();
+// (async () => {
+//   ip = await publicIp.v4()
+// })();
 
 // first ask for config file
 const configQuestion = [
@@ -209,12 +209,12 @@ const questions = [
     message: 'Transmit JSON data locally?',
     choices: ['No (Default)', 'Yes'],
   },
-  {
-    type: 'rawlist',
-    name: 'shareGPS',
-    message: 'Opt-in to track and share GPS data with network?',
-    choices: ['No (Default)', 'Yes'],
-  },
+  // {
+  //   type: 'rawlist',
+  //   name: 'shareGPS',
+  //   message: 'Opt-in to track and share GPS data with network?',
+  //   choices: ['No (Default)', 'Yes'],
+  // },
 ];
 
 const nameTakenPrompt = [
@@ -279,6 +279,7 @@ function login(){
     }
     config.set(configFileName + '.localWSstate', localWSstate)
 
+    /* experimental removing of this feature, since no one has seemed to want to use it, and the dependency public-ip is causing a dynamic import bug
     // opt-in to tracking and sharing GPS data
     if(answers.shareGPS == 'Yes'){
       thisNode.shareGPSData = false
@@ -318,6 +319,7 @@ function login(){
     } else {
       config.set(configFileName + '.thisNode.shareGPSData', false)
     }
+    */
     tryConnect()
 
   });
