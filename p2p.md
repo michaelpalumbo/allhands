@@ -1,3 +1,11 @@
+## to install and run this with a friend, ask them to clone, then do:
+
+```shell 
+git fetch origin
+git checkout p2p
+npm install
+```
+
 ## testing the signalling server on one of our machines
 ```shell
 node ./bin/signalling.js
