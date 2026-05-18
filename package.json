@@ -3,6 +3,7 @@
   "version": "0.0.81",
   "description": "This app acts as a bridge between two computers over the web, enables very fast transmission of controller data.",
   "preferGlobal": true,
+  "type": "module",
   "scripts": {
     "test": "node ./bin/tester.js",
     "start": "node ./bin/allhands.js",
