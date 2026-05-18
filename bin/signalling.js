@@ -24,11 +24,11 @@ wss.on('connection', (ws) => {
       myId = msg.id;
       peers.set(myId, ws);
       console.log(`[+] Peer registered: ${myId} (${peers.size} connected)`);
-      ws.send(JSON.stringify({ type: 'registered', id: myId }));
+      ws.send(JSON.stringify({ cmd: 'registered', id: myId }));
       for (const [id] of peers) {
-        if (id !== myId) ws.send(JSON.stringify({ type: 'peer-joined', id }));
+        if (id !== myId) ws.send(JSON.stringify({ cmd: 'peer-joined', id }));
       }
-      broadcast({ type: 'peer-joined', id: myId }, myId);
+      broadcast({ cmd: 'peer-joined', id: myId }, myId);
       return;
     }
 

@@ -1,19 +1,31 @@
 #!/usr/bin/env node
-const cliProgress = require('cli-progress');
-const { Client, Server } = require('node-osc');
-const WebSocket = require('ws');
-const ReconnectingWebSocket = require('reconnecting-websocket');
-const inquirer = require('inquirer');
-// const publicIp = require('public-ip');
-// let satelize = require('satelize');
-const delay = require('delay');
-const fs = require('fs')
-//userconfig
-const Conf = require('conf');
+// const cliProgress = require('cli-progress');
+// const { Client, Server } = require('node-osc');
+// const WebSocket = require('ws');
+// const ReconnectingWebSocket = require('reconnecting-websocket');
+// const inquirer = require('inquirer');
+// // const publicIp = require('public-ip');
+// // let satelize = require('satelize');
+// const delay = require('delay');
+// const fs = require('fs')
+// //userconfig
+// const Conf = require('conf');
+// const config = new Conf();
+// const osc = require('osc')
+import cliProgress from 'cli-progress';
+import { Client, Server } from 'node-osc';
+import pkg from 'ws';
+const WebSocket = pkg;
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import inquirer from 'inquirer';
+import delay from 'delay';
+import fs from 'fs';
+import Conf from 'conf';
 const config = new Conf();
-const osc = require('osc')
+import osc from 'osc';
+
 // config.delete('a')
-configChoiceList = ['Create New (or Edit) Config File']
+let configChoiceList = ['Create New (or Edit) Config File']
 // update the configuration filename list for the prompt, assuming a user has already set one or more up
 
 let host;
@@ -328,7 +340,7 @@ function login(){
 function tryConnect(){
   let ws; // keep this here
 
-  localSend = new Client('127.0.0.1', localSendPort);
+  let localSend = new Client('127.0.0.1', localSendPort);
 
   // run the app in client mode
   // ***** Websocket ******* //
@@ -383,6 +395,7 @@ function tryConnect(){
   // handle messages
   ws.addEventListener('message', (data) => {
       let msg = JSON.parse(data.data);
+  
       switch (msg.cmd){
         // if name is taken by someone else in the network, the server will prompt user for what to do next
         case 'nameTaken':
@@ -421,7 +434,7 @@ function tryConnect(){
               // prevent data loopback from server broadcast (i.e. we don't ewant to receive our own)
               if(msg.addressPattern.split('/')[1] != name){
                 // check if this message belongs to our room or user isn't using a room 
-                if(thisNode.dap == msg.dap){
+                if((thisNode.dap || 'none') == (msg.dap || 'none')){
                   // send via osc
                   localSend.send(msg.addressPattern, msg.typeTagString, (err) => {
                     if (err) console.error(err);
@@ -520,11 +533,11 @@ function tryConnect(){
     if(msg[0].charAt(0) === '/'){
         
         // get the address pattern
-        ap = '/' + name + msg[0]
+        let ap = '/' + name + msg[0]
         // trim the address pattern
         msg.shift()
         // construct object to send over websocket
-        message = {
+        let message = {
             // cmd allows us to send other types of messages, ask Michael for more info if curious!
             cmd: 'OSC',
             dap: thisNode.dap,
@@ -533,6 +546,7 @@ function tryConnect(){
             // this is the data!
             typeTagString: msg,
         }
+        
         // inform user
         // package data for the web, send it!
         // if(ws){
