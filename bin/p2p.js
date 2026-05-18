@@ -1,13 +1,11 @@
 // peer.js
-// Usage: node peer.js <your-name> <signal-server-url>
+// Usage: node peer.js <your-name> [signal-server-url]
 // Example: node peer.js alice ws://localhost:8080
 //          node peer.js bob   ws://localhost:8080
-// Or over the internet (if signal server is hosted):
-//          node peer.js alice ws://your-server.com:8080
 
-const nodeDataChannel = require('node-datachannel');
-const WebSocket = require('ws');
-const readline = require('readline');
+import nodeDataChannel from 'node-datachannel';
+import WebSocket from 'ws';
+import readline from 'readline';
 
 const myId = process.argv[2];
 const signalingUrl = process.argv[3] || 'ws://localhost:8080';
@@ -40,7 +38,6 @@ ws.on('message', (data) => {
 
     case 'peer-joined':
       console.log(`[signal] Peer joined: ${msg.id}`);
-      // Whoever comes second initiates (alphabetical tiebreak for determinism)
       if (myId > msg.id) {
         console.log(`[signal] I'm the caller, initiating to ${msg.id}...`);
         initiateTo(msg.id);
@@ -95,7 +92,7 @@ function createPeerConnection(remoteId) {
 }
 
 function setupDataChannel(remoteId, dc) {
-  const entry = peers.get(remoteId) || {};
+  const entry = peers.get(remoteId) ?? {};
   entry.dc = dc;
   peers.set(remoteId, entry);
 
@@ -108,13 +105,8 @@ function setupDataChannel(remoteId, dc) {
     rl.prompt(true);
   });
 
-  dc.onClosed(() => {
-    console.log(`[webrtc] Data channel closed with ${remoteId}`);
-  });
-
-  dc.onError((e) => {
-    console.error(`[webrtc] Data channel error with ${remoteId}:`, e);
-  });
+  dc.onClosed(() => console.log(`[webrtc] Data channel closed with ${remoteId}`));
+  dc.onError((e) => console.error(`[webrtc] Data channel error with ${remoteId}:`, e));
 }
 
 function initiateTo(remoteId) {
@@ -138,13 +130,11 @@ function handleOffer(remoteId, sdp) {
 
 function handleAnswer(remoteId, sdp) {
   console.log(`[webrtc] Received answer from ${remoteId}`);
-  const entry = peers.get(remoteId);
-  if (entry?.pc) entry.pc.setRemoteDescription(sdp, 'answer');
+  peers.get(remoteId)?.pc?.setRemoteDescription(sdp, 'answer');
 }
 
 function handleCandidate(remoteId, candidate, mid) {
-  const entry = peers.get(remoteId);
-  if (entry?.pc) entry.pc.addRemoteCandidate(candidate, mid);
+  peers.get(remoteId)?.pc?.addRemoteCandidate(candidate, mid);
 }
 
 // ── CLI ────────────────────────────────────────────────────────────────────
@@ -159,7 +149,8 @@ rl.on('line', (line) => {
   let sent = 0;
   for (const [id, { dc }] of peers) {
     if (dc) {
-      try { dc.sendMessage(text); sent++; } catch (e) { console.error(`Failed to send to ${id}:`, e.message); }
+      try { dc.sendMessage(text); sent++; }
+      catch (e) { console.error(`Failed to send to ${id}:`, e.message); }
     }
   }
 
