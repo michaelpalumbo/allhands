@@ -5,7 +5,11 @@ import WebSocket from 'ws';
 import readline from 'readline';
 import { Client, Server } from 'node-osc';
 
-const myId = process.argv[2];
+const myId = process.env.AH_NAME;
+
+const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
+const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
+
 const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
 
 if (!myId) {
@@ -13,8 +17,8 @@ if (!myId) {
   process.exit(1);
 }
 
-const LOCAL_RECEIVE_PORT = 7403;  // inbound OSC from local apps
-const LOCAL_SEND_PORT    = 7404;  // outbound OSC to local apps
+// const LOCAL_RECEIVE_PORT = 7403;  // inbound OSC from local apps
+// const LOCAL_SEND_PORT    = 7404;  // outbound OSC to local apps
 
 // nodeDataChannel.initLogger('Warning'); // uncomment for debug logs
 
