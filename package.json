@@ -5,7 +5,8 @@
   "preferGlobal": true,
   "scripts": {
     "test": "node ./bin/tester.js",
-    "start": "node ./bin/allhands.js"
+    "start": "node ./bin/allhands.js",
+    "p2p": "node ./bin/p2p.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "esm": "^3.2.25",
     "inquirer": "^8.1.1",
     "log-update": "^5.0.1",
+    "node-datachannel": "^0.32.3",
     "node-osc": "^5.2.3",
     "osc": "^2.4.3",
     "readme-md-generator": "^1.0.0",
