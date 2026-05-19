@@ -4,6 +4,7 @@ import nodeDataChannel from 'node-datachannel';
 import WebSocket from 'ws';
 import readline from 'readline';
 import { Client, Server } from 'node-osc';
+import cliProgress from 'cli-progress';
 
 const myId = process.env.AH_NAME;
 
@@ -56,6 +57,9 @@ localReceive.on('message', (msg) => {
   // Broadcast to all connected peers over WebRTC
   broadcastToPeers(JSON.stringify(message));
 });
+
+// FIRST, WAKE UP THE SERVER
+await connectWithRetry(signalingUrl);
 
 // ── Signaling ──────────────────────────────────────────────────────────────
 const ws = new WebSocket(signalingUrl);
@@ -208,3 +212,32 @@ rl.on('close', () => {
   console.log('\nBye!');
   process.exit(0);
 });
+
+
+// -----
+
+// wake the server first, then connect
+async function connectWithRetry(url) {
+  const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+  bar.start(100, 0);
+  let progress = 0;
+
+  while (true) {
+    try {
+        await new Promise((resolve, reject) => {
+            const testWs = new WebSocket(url);
+            const timeout = setTimeout(() => { testWs.terminate(); reject(new Error('timeout')); }, 2000);
+            testWs.on('open', () => { clearTimeout(timeout); testWs.close(); resolve(); });
+            testWs.on('error', (e) => { clearTimeout(timeout); reject(e); });
+        });
+        bar.update(100);
+        bar.stop();
+        console.log('\nServer awake, connecting... (typically takes up to 20seconds)');
+        return;
+        } catch (e) {
+        progress = Math.min(progress + 3, 90);
+        bar.update(progress);
+        await new Promise(r => setTimeout(r, 1000));
+        }
+    }
+}
