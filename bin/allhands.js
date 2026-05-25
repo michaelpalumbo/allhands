@@ -44,22 +44,11 @@ if (mode === 'P2P') {
     },
     // {
     //   type: 'rawlist',
-    //   name: 'sendPort',
-    //   message: 'Do you want to print incoming and outgoing messages?',
-    //   choices: ['Yes', 'No']
-    // },
-    // {
-    //   type: 'rawlist',
-    //   name: 'printIncoming',
-    //   message: 'Display incoming messages from peers?',
-    //   choices: ['No (Default)', 'Yes']
-    // },
-    // {
-    //   type: 'rawlist',
-    //   name: 'printOutgoing',
-    //   message: 'Display outgoing local messages?',
-    //   choices: ['No (Default)', 'Yes']
+    //   name: 'timestampFormat',
+    //   message: 'Timestamp format',
+    //   choices: ['UTC', 'hh:mm:ss:mmm']
     // }
+    
   ]);
 
   // normalize answers
@@ -67,6 +56,7 @@ if (mode === 'P2P') {
   process.env.AH_NAME          = answers.name;
   process.env.AH_SEND_PORT     = answers.sendPort === 'Custom' ? answers.customSendPort : '7403';
   process.env.AH_RECEIVE_PORT  = answers.receivePort === 'Custom' ? answers.customReceivePort : '7404';
+  // process.env.AH_TIMESTAMP_FORMAT = answers.timestampFormat;
 
   await import('./p2p.js');
 
