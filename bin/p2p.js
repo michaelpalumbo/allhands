@@ -152,7 +152,7 @@ function setupDataChannel(remoteId, dc) {
       const senderName = msg.addressPattern.split('/')[1];
       if (senderName === myId) return;
 
-      console.log(`[incoming] ${remoteId} → ${msg.addressPattern}`, msg.typeTagString);
+      console.log(`[incoming] ${msg.addressPattern}`, msg.typeTagString);
 
       // if(printEnabled){
       //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
