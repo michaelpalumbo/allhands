@@ -11,7 +11,16 @@ const myId = process.env.AH_NAME;
 const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
 const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
 
-const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
+// const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
+const signalingUrl = 'ws://allhands-stable.herokuapp.com'
+
+let printEnabled = false
+
+if(process.argv[2] == 'print'){
+  printEnabled = true
+}
+
+
 
 if (!myId) {
   console.error('Usage: node peer.js <your-name> [signal-server-url]');
@@ -46,7 +55,9 @@ localReceive.on('message', (msg) => {
   // Prepend our name to the address pattern so receivers know who sent it
   const ap = '/' + myId + addressPattern;
   const typeTagString = msg.slice(1);
-
+  if(printEnabled){
+    console.log('outgoing:', ap, typeTagString)
+  }
   const message = {
     cmd: 'OSC',
     date: new Date().toUTCString(),
@@ -101,6 +112,7 @@ ws.on('close', () => console.log('[signal] Disconnected'));
 ws.on('error', (e) => console.error('[signal] Error:', e.message));
 
 function send(msg) {
+
   ws.send(JSON.stringify(msg));
 }
 
@@ -142,6 +154,9 @@ function setupDataChannel(remoteId, dc) {
 
       console.log(`[osc] ${remoteId} → ${msg.addressPattern}`, msg.typeTagString);
 
+      if(printEnabled){
+        console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
+      }
       // Forward to local apps via OSC
       localSend.send(msg.addressPattern, ...msg.typeTagString, (err) => {
         if (err) console.error('[osc] Send error:', err);
