@@ -9,6 +9,18 @@ import cliProgress from 'cli-progress';
 const myId = process.env.AH_NAME;
 const AP_columnPadding = 40
 
+const c = {
+  reset:   '\x1b[0m',
+  dim:     '\x1b[2m',
+  cyan:    '\x1b[36m',
+  green:   '\x1b[32m',
+  yellow:  '\x1b[33m',
+  magenta: '\x1b[35m',
+  red:     '\x1b[31m',
+  white:   '\x1b[37m',
+};
+
+
 const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
 const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
 
@@ -57,7 +69,8 @@ localReceive.on('message', (msg) => {
   const ap = '/' + myId + addressPattern;
   const typeTagString = msg.slice(1);
   if(printEnabled){
-    console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
+    // console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
+    console.log(`${c.magenta}[outgoing]${c.reset} ${c.cyan}${ap.padEnd(AP_columnPadding)}${c.reset}`, typeTagString);
   }
   const message = {
     cmd: 'OSC',
@@ -153,7 +166,9 @@ function setupDataChannel(remoteId, dc) {
       const senderName = msg.addressPattern.split('/')[1];
       if (senderName === myId) return;
 
-      console.log(`[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
+      // console.log(`[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
+
+      console.log(`${c.green}[incoming] ${c.reset} ${c.green}${msg.addressPattern.padEnd(AP_columnPadding)}${c.reset}`, msg.typeTagString);
 
       // if(printEnabled){
       //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
