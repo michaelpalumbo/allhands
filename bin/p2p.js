@@ -24,6 +24,18 @@ const c = {
 const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
 const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
 
+const timestampFormat = process.env.AH_TIMESTAMP_FORMAT;
+
+function getTimestamp() {
+  if (timestampFormat === 'UTC') return new Date().toUTCString();
+  const d = new Date();
+  const hh  = String(d.getHours()).padStart(2, '0');
+  const mm  = String(d.getMinutes()).padStart(2, '0');
+  const ss  = String(d.getSeconds()).padStart(2, '0');
+  const mmm = String(d.getMilliseconds()).padStart(3, '0');
+  return `${hh}:${mm}:${ss}:${mmm}`;
+}
+
 // const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
 const signalingUrl = 'ws://allhands-stable.herokuapp.com'
 
@@ -70,7 +82,7 @@ localReceive.on('message', (msg) => {
   const typeTagString = msg.slice(1);
   if(printEnabled){
     // console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
-    console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)} ${typeTagString}${c.reset}`);
+    console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)}`, typeTagString);
 
   }
   const message = {
@@ -168,8 +180,11 @@ function setupDataChannel(remoteId, dc) {
       if (senderName === myId) return;
 
       // console.log(`[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
+      const now = new Date();
+      const timestamp = `[${now.toTimeString().split(' ')[0]}.${String(now.getMilliseconds()).padStart(3, '0')}]`;
 
-      console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)} ${msg.typeTagString}${c.reset}`);
+
+      console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
 
 
       // if(printEnabled){
