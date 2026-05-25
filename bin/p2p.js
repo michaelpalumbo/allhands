@@ -7,6 +7,7 @@ import { Client, Server } from 'node-osc';
 import cliProgress from 'cli-progress';
 
 const myId = process.env.AH_NAME;
+const AP_columnPadding = 40
 
 const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
 const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
@@ -56,7 +57,7 @@ localReceive.on('message', (msg) => {
   const ap = '/' + myId + addressPattern;
   const typeTagString = msg.slice(1);
   if(printEnabled){
-    console.log('[outgoing]', ap, typeTagString)
+    console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
   }
   const message = {
     cmd: 'OSC',
@@ -152,7 +153,7 @@ function setupDataChannel(remoteId, dc) {
       const senderName = msg.addressPattern.split('/')[1];
       if (senderName === myId) return;
 
-      console.log(`[incoming] ${msg.addressPattern}`, msg.typeTagString);
+      console.log(`[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
 
       // if(printEnabled){
       //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
