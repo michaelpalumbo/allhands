@@ -29,7 +29,7 @@ If on OSX 10.15+, and using zsh as your terminal, you'll need to make sure that 
 Open a terminal window, type the following and hit enter.
 
 ```shell
-npm install --location=global allhandsjs
+npm install --location=global allhands
 ```
 
 > If you get an error when installing related to permissions, visit this [tutorial for how to install packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
