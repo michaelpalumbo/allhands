@@ -14,9 +14,9 @@ const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
 // const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
 const signalingUrl = 'ws://allhands-stable.herokuapp.com'
 
-let printEnabled = false
+let printEnabled = true
 
-if(process.argv[2] == 'print'){
+if(process.argv[2] == 'Yes'){
   printEnabled = true
 }
 

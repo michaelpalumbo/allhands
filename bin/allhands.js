@@ -44,6 +44,12 @@ if (mode === 'P2P') {
     },
     // {
     //   type: 'rawlist',
+    //   name: 'sendPort',
+    //   message: 'Do you want to print incoming and outgoing messages?',
+    //   choices: ['Yes', 'No']
+    // },
+    // {
+    //   type: 'rawlist',
     //   name: 'printIncoming',
     //   message: 'Display incoming messages from peers?',
     //   choices: ['No (Default)', 'Yes']
