@@ -56,7 +56,7 @@ localReceive.on('message', (msg) => {
   const ap = '/' + myId + addressPattern;
   const typeTagString = msg.slice(1);
   if(printEnabled){
-    console.log('outgoing:', ap, typeTagString)
+    console.log('[outgoing]', ap, typeTagString)
   }
   const message = {
     cmd: 'OSC',
@@ -152,11 +152,11 @@ function setupDataChannel(remoteId, dc) {
       const senderName = msg.addressPattern.split('/')[1];
       if (senderName === myId) return;
 
-      console.log(`[osc] ${remoteId} → ${msg.addressPattern}`, msg.typeTagString);
+      console.log(`[incoming] ${remoteId} → ${msg.addressPattern}`, msg.typeTagString);
 
-      if(printEnabled){
-        console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
-      }
+      // if(printEnabled){
+      //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
+      // }
       // Forward to local apps via OSC
       localSend.send(msg.addressPattern, ...msg.typeTagString, (err) => {
         if (err) console.error('[osc] Send error:', err);
