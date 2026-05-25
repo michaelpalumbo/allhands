@@ -70,7 +70,8 @@ localReceive.on('message', (msg) => {
   const typeTagString = msg.slice(1);
   if(printEnabled){
     // console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
-    console.log(`${c.magenta}[outgoing]${c.reset} ${c.cyan}${ap.padEnd(AP_columnPadding)}${c.reset}`, typeTagString);
+    console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)} ${typeTagString}${c.reset}`);
+
   }
   const message = {
     cmd: 'OSC',
@@ -168,7 +169,8 @@ function setupDataChannel(remoteId, dc) {
 
       // console.log(`[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
 
-      console.log(`${c.green}[incoming] ${c.reset} ${c.green}${msg.addressPattern.padEnd(AP_columnPadding)}${c.reset}`, msg.typeTagString);
+      console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)} ${msg.typeTagString}${c.reset}`);
+
 
       // if(printEnabled){
       //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
