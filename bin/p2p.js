@@ -68,6 +68,10 @@ localReceive.on('listening', () => {
   console.log(`[osc] Receiving on port ${LOCAL_RECEIVE_PORT}, sending to port ${LOCAL_SEND_PORT}`);
 });
 
+localReceive.on('error', (err) => {
+  console.log(`Malformed OSC message received, ignoring. Reason: ${err.message}`);
+});
+
 localReceive.on('message', (msg) => {
   const addressPattern = msg[0];
 
