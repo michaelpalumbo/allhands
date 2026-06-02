@@ -3,7 +3,7 @@
 import nodeDataChannel from 'node-datachannel';
 import WebSocket from 'ws';
 import readline from 'readline';
-import { Client, Server } from 'node-osc';
+import { Bundle, Client, Server } from 'node-osc';
 import cliProgress from 'cli-progress';
 
 const myId = process.env.AH_NAME;
@@ -72,7 +72,7 @@ localReceive.on('error', (err) => {
   console.log(`Malformed OSC message received, ignoring. Reason: ${err.message}`);
 });
 
-localReceive.on('message', (msg) => {
+function handleLocalMessage(msg){
   const addressPattern = msg[0];
 
   // OSC messages must start with /
@@ -98,6 +98,17 @@ localReceive.on('message', (msg) => {
 
   // Broadcast to all connected peers over WebRTC
   broadcastToPeers(JSON.stringify(message));
+}
+
+// handle OSC Bundles (hack). i think this actually makes more sense because that way other users receiving, if they can't parse bundles they're ok?
+localReceive.on('bundle', (bundle) => {
+  bundle.elements.forEach((msg) => {
+    handleLocalMessage(msg); 
+  });
+});
+
+localReceive.on('message', (msg) => {
+  handleLocalMessage(msg)
 });
 
 // FIRST, WAKE UP THE SERVER
