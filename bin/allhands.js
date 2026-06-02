@@ -42,12 +42,12 @@ if (mode === 'P2P') {
       message: 'Enter custom receive port',
       when: (a) => a.receivePort === 'Custom'
     },
-    // {
-    //   type: 'rawlist',
-    //   name: 'timestampFormat',
-    //   message: 'Timestamp format',
-    //   choices: ['UTC', 'hh:mm:ss:mmm']
-    // }
+    {
+      type: 'rawlist',
+      name: 'timestamp',
+      message: 'Insert sender\'s timestamp into message?',
+      choices: ['No (Default)', 'Before Type Tag String', 'After Type Tag String']
+    },
     
   ]);
 
@@ -56,7 +56,7 @@ if (mode === 'P2P') {
   process.env.AH_NAME          = answers.name;
   process.env.AH_SEND_PORT     = answers.sendPort === 'Custom' ? answers.customSendPort : '7403';
   process.env.AH_RECEIVE_PORT  = answers.receivePort === 'Custom' ? answers.customReceivePort : '7404';
-  // process.env.AH_TIMESTAMP_FORMAT = answers.timestampFormat;
+  process.env.AH_TIMESTAMP_POSITION = answers.timestamp;
 
   await import('./p2p.js');
 

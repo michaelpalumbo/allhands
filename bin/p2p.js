@@ -23,18 +23,20 @@ const c = {
 
 const LOCAL_RECEIVE_PORT = Number(process.env.AH_SEND_PORT);
 const LOCAL_SEND_PORT    = Number(process.env.AH_RECEIVE_PORT);
+const AH_TIMESTAMP_POSITION = process.env.AH_TIMESTAMP_POSITION
+AH_TIMESTAMP_POSITION
 
-const timestampFormat = process.env.AH_TIMESTAMP_FORMAT;
+// const timestampFormat = process.env.AH_TIMESTAMP_FORMAT;
 
-function getTimestamp() {
-  if (timestampFormat === 'UTC') return new Date().toUTCString();
-  const d = new Date();
-  const hh  = String(d.getHours()).padStart(2, '0');
-  const mm  = String(d.getMinutes()).padStart(2, '0');
-  const ss  = String(d.getSeconds()).padStart(2, '0');
-  const mmm = String(d.getMilliseconds()).padStart(3, '0');
-  return `${hh}:${mm}:${ss}:${mmm}`;
-}
+// function getTimestamp() {
+//   if (timestampFormat === 'UTC') return new Date().toUTCString();
+//   const d = new Date();
+//   const hh  = String(d.getHours()).padStart(2, '0');
+//   const mm  = String(d.getMinutes()).padStart(2, '0');
+//   const ss  = String(d.getSeconds()).padStart(2, '0');
+//   const mmm = String(d.getMilliseconds()).padStart(3, '0');
+//   return `${hh}:${mm}:${ss}:${mmm}`;
+// }
 
 // const signalingUrl = process.argv[3] || 'ws://allhands-stable.herokuapp.com';
 const signalingUrl = 'ws://allhands-stable.herokuapp.com'
@@ -84,14 +86,26 @@ function handleLocalMessage(msg){
   // Prepend our name to the address pattern so receivers know who sent it
   const ap = '/' + myId + addressPattern;
   const typeTagString = msg.slice(1);
+  const outgoingDate = String(Date.now())
   if(printEnabled){
-    // console.log('[outgoing]', ap.padEnd(AP_columnPadding), typeTagString)
-    console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)}`, typeTagString);
+    
+
+    switch (AH_TIMESTAMP_POSITION){
+        case "Before Type Tag String":
+          console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)}`, outgoingDate, typeTagString);
+        break;
+        case "After Type Tag String":
+          console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)}`, typeTagString, outgoingDate);
+        break;
+
+        default:    
+          console.log(`${c.magenta}[outgoing] ${ap.padEnd(AP_columnPadding)}`, typeTagString);
+      }
 
   }
   const message = {
     cmd: 'OSC',
-    date: new Date().toUTCString(),
+    date: outgoingDate,
     addressPattern: ap,
     typeTagString,
   };
@@ -199,16 +213,37 @@ function setupDataChannel(remoteId, dc) {
       const timestamp = `[${now.toTimeString().split(' ')[0]}.${String(now.getMilliseconds()).padStart(3, '0')}]`;
 
 
-      console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);
+      switch (AH_TIMESTAMP_POSITION){
+        case "Before Type Tag String":
+          // Forward to local apps via OSC
+          localSend.send(msg.addressPattern, msg.date, ...msg.typeTagString, (err) => {
+            if (err) console.error('[osc] Send error:', err);
+          });  
+          
+          console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.date, msg.typeTagString);
+        break;
+        case "After Type Tag String":
+          // Forward to local apps via OSC
+          localSend.send(msg.addressPattern, ...msg.typeTagString, msg.date, (err) => {
+            if (err) console.error('[osc] Send error:', err);
+          });  
+          console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString, msg.date);
+        break;
+
+        default:    
+          // Forward to local apps via OSC
+          localSend.send(msg.addressPattern, ...msg.typeTagString, (err) => {
+            if (err) console.error('[osc] Send error:', err);
+          });
+          console.log(`${c.green}[incoming] ${msg.addressPattern.padEnd(AP_columnPadding)}`, msg.typeTagString);   
+      }
+      
 
 
       // if(printEnabled){
       //   console.log('incoming:', msg.addressPattern, ...msg.typeTagString)
       // }
-      // Forward to local apps via OSC
-      localSend.send(msg.addressPattern, ...msg.typeTagString, (err) => {
-        if (err) console.error('[osc] Send error:', err);
-      });
+
     } else {
       // Plain chat message
       console.log(`\n[${remoteId}]: ${raw}`);
